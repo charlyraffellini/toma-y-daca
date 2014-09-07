@@ -1,0 +1,8 @@
+language: java
+
+install: mvn clean install
+
+script: echo $GAE_PASS | mvn appengine:update -Pupdate
+
+jdk:
+    - oraclejdk7

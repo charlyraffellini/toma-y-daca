@@ -1,0 +1,16 @@
+.classpath
+.project
+.settings
+.springBeans
+target
+target/*
+dependency-reduced-pom.xml
+
+# Eclipse
+.settings
+.project
+.classpath
+
+# Idea
+*.iml
+.idea
