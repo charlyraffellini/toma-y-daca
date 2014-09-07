@@ -6,3 +6,9 @@ script: echo $GAE_PASS | mvn appengine:update -Pupdate
 
 jdk:
     - oraclejdk7
+
+# whitelist
+branches:
+  only:
+    - master
+    - staging
