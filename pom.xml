@@ -126,7 +126,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>${appengine.version}</version>
                 <configuration>
-                    <appId>toma-y-daca</appId>
+                    <appId>staging-toma-y-daca</appId>
                     <version>1-war</version>
                     <email>del0al99@gmail.com</email>
                     <oauth2>false</oauth2>
