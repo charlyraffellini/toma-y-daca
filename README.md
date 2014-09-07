@@ -12,6 +12,11 @@ La aplicación se levanta con `mvn appengine:devserver -Pdevserver` en el entorn
 El **profile devserver** appendea al **GAE plugin** los **jvmFlags** para que se levante el servidor de debug escuchando el puerto 8000.
 Como les escupirá la consola al aplicación escucha el puerto 8080.
 
+##### Links de interes:
+[Configurar idea para debuggear nuestro código](http://stackoverflow.com/questions/18684618/how-can-i-debug-a-java-google-app-engine-app-in-idea-while-using-the-gae-maven-p) tener en cuenta que la parte de los jvmFlags ya están puestos en el **profile devserver**.
+[El issue que me salvó](http://code.google.com/p/maven-gae-plugin/issues/detail?id=42) explica lo del las properties **jvmFlag** de la configuración del plugin de appengine.
+[Documentación oficial del plugin para maven appengine](https://developers.google.com/appengine/docs/java/tools/maven?hl=es)
+
 ### Entorno de Producción
 
 Para _deployar_ hay que correr `mvn appengine:update -Pupdate`. Pero esto lo debe hacer el servidor de CI.
