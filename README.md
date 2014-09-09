@@ -1,4 +1,7 @@
-Master: [![Build Status](https://travis-ci.org/charlyraffellini/toma-y-daca.svg?branch=master)](https://travis-ci.org/charlyraffellini/toma-y-daca)         |         Staging: [![Build Status](https://travis-ci.org/charlyraffellini/toma-y-daca.svg?branch=staging)](https://travis-ci.org/charlyraffellini/toma-y-daca)
+[Master](http://toma-y-daca.appspot.com/): [![Build Status](https://travis-ci.org/charlyraffellini/toma-y-daca.svg?branch=master)](https://travis-ci.org/charlyraffellini/toma-y-daca)
+
+
+[Staging](http://staging-toma-y-daca.appspot.com/): [![Build Status](https://travis-ci.org/charlyraffellini/toma-y-daca.svg?branch=staging)](https://travis-ci.org/charlyraffellini/toma-y-daca)
 
 # Este es el TP de los pibes del grupo 3 de TACS del segundo cuatrimestre de 2014.
 
