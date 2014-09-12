@@ -5,8 +5,14 @@ install: mvn clean install
 script:
   - "echo 'adentro...'"
   - "echo $TRAVIS_PULL_REQUEST"
-  - "[ ${TRAVIS_PULL_REQUEST} = 'false' ] && { echo $GAE_PASS | mvn appengine:update -Pupdate } || { echo $TRAVIS_PULL_REQUEST; };"
-
+  - "
+if [ ${TRAVIS_PULL_REQUEST} = 'false' ];
+then
+  echo $GAE_PASS | mvn appengine:update -Pupdate;
+else
+  echo $TRAVIS_PULL_REQUEST;
+fi
+"
 jdk:
     - oraclejdk7
 
