@@ -2,7 +2,10 @@ language: java
 
 install: mvn clean install
 
-script: "[ ${TRAVIS_PULL_REQUEST} != 'false' ] && { echo $GAE_PASS | mvn appengine:update -Pupdate } || { echo $TRAVIS_PULL_REQUEST; mvn clean test; };"
+script:
+  - "echo 'adentro...'"
+  - "echo $TRAVIS_PULL_REQUEST"
+  - "[ ${TRAVIS_PULL_REQUEST} = 'false' ] && { echo $GAE_PASS | mvn appengine:update -Pupdate } || { echo $TRAVIS_PULL_REQUEST; };"
 
 jdk:
     - oraclejdk7
