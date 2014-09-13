@@ -7,6 +7,8 @@ import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
 import models.Fruta;
+import ninja.session.Session;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,9 @@ public class FrutaController {
     @Inject
     FrutasBag bag;
 
-    public Result getAllFrutas(){
+    public Result getAllFrutas(Session session){
+
+        session.put("caracteristica", "valor");
 
         List<Fruta> frutas = new ArrayList<Fruta>();
         frutas.add(new Fruta("banana", "yelow"));
