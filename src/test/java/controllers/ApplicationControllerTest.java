@@ -16,6 +16,7 @@
 
 package controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import ninja.NinjaTest;
 
@@ -28,21 +29,15 @@ public class ApplicationControllerTest extends NinjaTest {
     public void setup() {
         
         ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
-        
     }
 
-    //@Test TODO: Comento este test porque con los cambios que estoy haciendo no tine sentido, pero como ejemplo lo dejo
-    //TODO: Si molesta borralo
+    @Test
     public void testThatHomepageWorks() {
-
         // /redirect will send a location: redirect in the headers
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
 
-        // If the redirect has worked we must see the following text
-        // from the index screen:
-        assertTrue(result.contains("Hello to the blog example!"));
-        assertTrue(result.contains("My second post"));
-
+        assertEquals("\"Por el momento soy solo una API... muy pronto importantes cambios\"", result);
     }
-
 }
+
+
