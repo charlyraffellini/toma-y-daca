@@ -26,6 +26,6 @@ public class CookiesTest extends NinjaTest {
 
         String value = ninjaTestBrowser.getCookieWithName("NINJA_SESSION").getValue();
 
-        assertFalse(!value.contains("caracteristica"));
+        assertFalse(value.contains("caracteristica"));
     }
 }
