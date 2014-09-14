@@ -1,6 +1,7 @@
 package controllers;
 
 import ninja.NinjaTest;
+import ninja.session.Session;
 import org.apache.http.HttpResponse;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import java.util.IdentityHashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CookiesTest extends NinjaTest {
@@ -24,9 +26,6 @@ public class CookiesTest extends NinjaTest {
 
         String value = ninjaTestBrowser.getCookieWithName("NINJA_SESSION").getValue();
 
-        //TODO: caundo las cookies queden encriptadas este test tine que fallar
-        assertTrue(value.contains("caracteristica"));
+        assertFalse(!value.contains("caracteristica"));
     }
-
-
 }
