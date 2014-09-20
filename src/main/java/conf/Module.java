@@ -22,6 +22,7 @@ import ninja.appengine.AppEngineModule;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
+import ninja.session.Session;
 
 @Singleton
 public class Module extends AbstractModule {
@@ -33,7 +34,7 @@ public class Module extends AbstractModule {
         bind(Objectify.class).toProvider(ObjectifyProvider.class);
         bind(FrutasBag.class);
         install(new AppEngineModule());        
-        
+        bind(Session.class).to(EncryptedSession.class);
     }
 
 }
