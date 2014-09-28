@@ -17,6 +17,9 @@
 package conf;
 
 import models.FrutasBag;
+import models.homes.ItemHome;
+import models.homes.UserHome;
+import models.integrations.MeliApi;
 import ninja.appengine.AppEngineModule;
 
 import com.google.inject.AbstractModule;
@@ -35,6 +38,19 @@ public class Module extends AbstractModule {
         bind(FrutasBag.class);
         install(new AppEngineModule());        
         bind(Session.class).to(EncryptedSession.class);
+
+        ///////////////////////////////////////////////////////////////////////
+        // Apis
+        ///////////////////////////////////////////////////////////////////////
+        bind(MeliApi.class);
+
+        ///////////////////////////////////////////////////////////////////////
+        // Homes
+        ///////////////////////////////////////////////////////////////////////
+        bind(ItemHome.class);
+        bind(UserHome.class);
+
+
     }
 
 }
