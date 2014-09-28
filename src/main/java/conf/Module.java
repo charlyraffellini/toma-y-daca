@@ -32,25 +32,22 @@ public class Module extends AbstractModule {
     
 
     protected void configure() {
-        
         bind(StartupActions.class);
         bind(Objectify.class).toProvider(ObjectifyProvider.class);
         bind(FrutasBag.class);
+        this.bindHomes();
+        this.bindApis();
         install(new AppEngineModule());        
         bind(Session.class).to(EncryptedSession.class);
+    }
 
-        ///////////////////////////////////////////////////////////////////////
-        // Apis
-        ///////////////////////////////////////////////////////////////////////
+    private void bindApis() {
         bind(MeliApi.class);
+    }
 
-        ///////////////////////////////////////////////////////////////////////
-        // Homes
-        ///////////////////////////////////////////////////////////////////////
+    private void bindHomes() {
         bind(ItemHome.class);
         bind(UserHome.class);
-
-
     }
 
 }

@@ -6,4 +6,9 @@ package models.integrations;
 public class Listing {
     public String description;
     public String picture;
+
+    public Listing(String description, String picture) {
+        this.description = description;
+        this.picture = picture;
+    }
 }

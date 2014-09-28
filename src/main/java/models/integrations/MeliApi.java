@@ -6,6 +6,6 @@ package models.integrations;
 public class MeliApi {
 
     public Listing getListing(String listingId){
-        return null;
+        return new Listing("Una descripcion", "Un link de foto");
     }
 }

@@ -2,7 +2,8 @@ package models.homes;
 
 import models.domain.DomainObject;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
 
 /**
  * Created by Palumbo on 27/09/2014.
@@ -10,20 +11,20 @@ import java.util.List;
 public class Home<TEntity extends DomainObject> {
 
     private int nextId = 1;
-    private List<TEntity> entities;
+    private HashMap<Integer, TEntity> entities = new HashMap<>();
 
     public int create(TEntity entity) {
         int id = nextId;
         nextId ++;
 
         entity.id = id;
-        entities.add(id, entity);
+        entities.put(id, entity);
 
         return id;
     }
 
-    public List<TEntity> getAll() {
-        return entities;
+    public Collection<TEntity> getAll() {
+        return entities.values();
     }
 
     public TEntity get(int entityId) {
@@ -31,7 +32,7 @@ public class Home<TEntity extends DomainObject> {
     }
 
     public void update(TEntity entity) {
-        entities.set(entity.id, entity);
+        entities.put(entity.id, entity);
     }
 
     public void delete(TEntity entity) {
