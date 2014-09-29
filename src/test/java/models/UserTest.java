@@ -45,10 +45,9 @@ public class UserTest {
     @Test
     public void testCanSendATradeRequestToAFriend(){
         Item friendItem = new Item(friend, "Friend Item", "Img1");
-        UserWithItem friendWithItem = this.friend.getWithItem(friendItem);
         Item userItem = new Item(user, "User Item", "Img2");
 
-        TradeRequest tradeRequest = this.user.sendTrade(userItem, friendWithItem);
+        TradeRequest tradeRequest = this.user.sendTrade(userItem, friend, friendItem);
 
         UserWithItem sender = tradeRequest.sender;
         assertEquals(user, sender.user);
@@ -61,18 +60,16 @@ public class UserTest {
     @Test(expected = NotFriendUserException.class)
     public void testCanNotSendATradeRequestToANoFriendUser(){
         Item noFriendItem = new Item(noFriend, "Friend Item", "Img1");
-        UserWithItem noFriendWithItem = this.noFriend.getWithItem(noFriendItem);
         Item userItem = new Item(user, "User Item", "Img2");
 
-        this.user.sendTrade(userItem, noFriendWithItem);
+        this.user.sendTrade(userItem, noFriend, noFriendItem);
     }
 
     @Test(expected = UserDoesntHaveItemException.class)
     public void testCanNotSendATradeRequestFromANotOwnerItem(){
         Item friendItem = new Item(friend, "Friend Item", "Img1");
-        UserWithItem friendWithItem = this.friend.getWithItem(friendItem);
         Item noUserItem = new Item(noFriend, "User Item", "Img2");
 
-        this.user.sendTrade(noUserItem, friendWithItem);
+        this.user.sendTrade(noUserItem, friend, friendItem);
     }
 }

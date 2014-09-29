@@ -17,10 +17,10 @@ public class User extends DomainObject{
         this.friends.add(user);
     }
 
-    public TradeRequest sendTrade(Item item, UserWithItem friendWithItem) {
-        this.validateFriend(friendWithItem.user);
+    public TradeRequest sendTrade(Item item, User friend, Item friendItem) {
+        this.validateFriend(friend);
 
-        return new TradeRequest(this.getWithItem(item), friendWithItem);
+        return new TradeRequest(this.getWithItem(item), friend.getWithItem(friendItem));
     }
 
     public UserWithItem getWithItem(Item item) {

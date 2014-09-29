@@ -7,7 +7,6 @@ import homes.UserHome;
 import models.domain.Item;
 import models.domain.TradeRequest;
 import models.domain.User;
-import models.domain.UserWithItem;
 import models.homes.TradeRequestHome;
 import ninja.Result;
 import ninja.Results;
@@ -31,10 +30,9 @@ public class TradesController extends WebApiController{
     public Result sendTradeRequest(TradeCreateDTO tradeCreateDTO){
         User friend = this.userHome.get(tradeCreateDTO.friendId);
         Item friendItem = this.itemHome.get(tradeCreateDTO.friendItemId);
-        UserWithItem friendWithItem = friend.getWithItem(friendItem);
-
         Item userItem = this.itemHome.get(tradeCreateDTO.userItemId);
-        TradeRequest tradeRequest = this.getUser().sendTrade(userItem, friendWithItem);
+
+        TradeRequest tradeRequest = this.getUser().sendTrade(userItem, friend, friendItem);
 
         int id = this.tradeHome.create(tradeRequest);
 

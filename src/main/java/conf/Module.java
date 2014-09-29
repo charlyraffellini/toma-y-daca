@@ -60,8 +60,7 @@ public class Module extends AbstractModule {
     }
 
     private List<TradeRequest> createTrades(List<User> users, List<Item> items) {
-        UserWithItem friendWithItem = users.get(1).getWithItem(items.get(1));
-        TradeRequest aTrade = users.get(0).sendTrade(items.get(0), friendWithItem);
+        TradeRequest aTrade = users.get(0).sendTrade(items.get(0), users.get(1), items.get(1));
         return Arrays.asList(aTrade);
     }
 
