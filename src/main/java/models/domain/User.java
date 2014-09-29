@@ -1,6 +1,7 @@
 package models.domain;
 
-import models.domain.exceptions.NotUserFriendException;
+import models.domain.exceptions.NotFriendUserException;
+import models.domain.exceptions.UserDoesntHaveItemException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,8 +17,25 @@ public class User extends DomainObject{
         this.friends.add(user);
     }
 
+    public TradeRequest sendTradeRequest(Item item, UserWithItem friendWithItem) {
+        this.validateFriend(friendWithItem.user);
+
+        return new TradeRequest(this.getWithItem(item), friendWithItem);
+    }
+
+    public UserWithItem getWithItem(Item item) {
+        this.validateItem(item);
+
+        return new UserWithItem(this, item);
+    }
+
     public void validateFriend(User friend) {
         if (!friends.contains(friend))
-            throw new NotUserFriendException(friend);
+            throw new NotFriendUserException(friend);
+    }
+
+    public void validateItem(Item item) {
+        if (!item.hasOwner(this))
+            throw new UserDoesntHaveItemException(this, item);
     }
 }
