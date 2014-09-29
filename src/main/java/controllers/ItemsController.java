@@ -12,6 +12,8 @@ import ninja.Result;
 import ninja.Results;
 import ninja.session.Session;
 
+import java.util.Collection;
+
 /**
  * Created by Palumbo on 27/09/2014.
  */
@@ -33,6 +35,14 @@ public class ItemsController {
         int id = this.itemHome.create(item);
 
         return Results.json().render(id);
+    }
+
+    public Result getAllItems(Session session) {
+        User user = this.getUser(session);
+
+        Collection<Item> items = this.itemHome.getAllItemsOf(user);
+
+        return Results.json().render(items);
     }
 
     private User getUser(Session session) {

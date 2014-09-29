@@ -51,6 +51,7 @@ public class Routes implements ApplicationRoutes {
         // Items
         ///////////////////////////////////////////////////////////////////////
         router.POST().route("/items").with(ItemsController.class, "createItem");
+        router.GET().route("/items").with(ItemsController.class, "getAllItems");
 
 
 
