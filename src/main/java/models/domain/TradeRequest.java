@@ -8,7 +8,6 @@ public class TradeRequest {
     public final UserWithItem receiver;
 
     public TradeRequest(UserWithItem sender, UserWithItem receiver) {
-
         this.sender = sender;
         this.receiver = receiver;
     }
