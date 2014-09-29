@@ -5,6 +5,6 @@ package dtos;
  */
 public class TradeCreateDTO {
     public int friendId;
-    public int friendItem;
-    public int userItem;
+    public int friendItemId;
+    public int userItemId;
 }

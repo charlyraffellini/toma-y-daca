@@ -48,7 +48,7 @@ public class UserTest {
         UserWithItem friendWithItem = this.friend.getWithItem(friendItem);
         Item userItem = new Item(user, "User Item", "Img2");
 
-        TradeRequest tradeRequest = this.user.sendTradeRequest(userItem, friendWithItem);
+        TradeRequest tradeRequest = this.user.sendTrade(userItem, friendWithItem);
 
         UserWithItem sender = tradeRequest.sender;
         assertEquals(user, sender.user);
@@ -64,7 +64,7 @@ public class UserTest {
         UserWithItem noFriendWithItem = this.noFriend.getWithItem(noFriendItem);
         Item userItem = new Item(user, "User Item", "Img2");
 
-        this.user.sendTradeRequest(userItem, noFriendWithItem);
+        this.user.sendTrade(userItem, noFriendWithItem);
     }
 
     @Test(expected = UserDoesntHaveItemException.class)
@@ -73,6 +73,6 @@ public class UserTest {
         UserWithItem friendWithItem = this.friend.getWithItem(friendItem);
         Item noUserItem = new Item(noFriend, "User Item", "Img2");
 
-        this.user.sendTradeRequest(noUserItem, friendWithItem);
+        this.user.sendTrade(noUserItem, friendWithItem);
     }
 }

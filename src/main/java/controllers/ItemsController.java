@@ -24,7 +24,7 @@ public class ItemsController extends WebApiController{
     private ItemHome itemHome;
 
     @Inject
-    protected ItemsController(MeliApi meliApi, ItemHome itemHome, Session session, UserHome userHome) {
+    public ItemsController(Session session, UserHome userHome, MeliApi meliApi, ItemHome itemHome) {
         super(session, userHome);
         this.meliApi = meliApi;
         this.itemHome = itemHome;

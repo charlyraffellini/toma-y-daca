@@ -17,7 +17,7 @@ public class User extends DomainObject{
         this.friends.add(user);
     }
 
-    public TradeRequest sendTradeRequest(Item item, UserWithItem friendWithItem) {
+    public TradeRequest sendTrade(Item item, UserWithItem friendWithItem) {
         this.validateFriend(friendWithItem.user);
 
         return new TradeRequest(this.getWithItem(item), friendWithItem);
