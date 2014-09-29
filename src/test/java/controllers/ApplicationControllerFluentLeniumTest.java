@@ -36,8 +36,6 @@ public class ApplicationControllerFluentLeniumTest extends NinjaFluentLeniumTest
         
         goTo(getServerAddress() + "/");
         
-        System.out.println("title: " + title());
-        
         assertTrue(title().contains("Home page"));
         
         click("#login");
