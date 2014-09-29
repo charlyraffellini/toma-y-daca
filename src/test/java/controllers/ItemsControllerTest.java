@@ -1,8 +1,8 @@
 package controllers;
 
 import dtos.ItemCreateDTO;
+import homes.ItemHome;
 import ninja.NinjaTest;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -12,17 +12,13 @@ import static org.junit.Assert.assertEquals;
  */
 public class ItemsControllerTest extends NinjaTest {
 
-    @Before
-    public void setup() {
-        ninjaTestBrowser.makeRequest(getServerAddress() + "setup");
-    }
-
     @Test
     public void testPostAnItemReturnItsId() {
+        int nextId = this.getInjector().getProvider(ItemHome.class).get().getNextId();
 
         String response = ninjaTestBrowser.postJson(getServerAddress()
                 + "items", new ItemCreateDTO());
 
-        assertEquals("1", response);
+        assertEquals(String.valueOf(nextId), response);
     }
 }
