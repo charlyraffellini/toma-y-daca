@@ -2,7 +2,7 @@ package dao;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import models.User;
+import models.cosas_de_mas.User;
 
 import com.googlecode.objectify.Objectify;
 

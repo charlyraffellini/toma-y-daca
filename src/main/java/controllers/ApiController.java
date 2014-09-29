@@ -16,14 +16,13 @@
 
 package controllers;
 
-import models.ArticleDto;
-import models.ArticlesDto;
+import models.cosas_de_mas.ArticleDto;
+import models.cosas_de_mas.ArticlesDto;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.SecureFilter;
 import ninja.appengine.AppEngineFilter;
-import ninja.params.PathParam;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;

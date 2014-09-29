@@ -5,8 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
-import models.Article;
-import models.User;
+import models.cosas_de_mas.Article;
+import models.cosas_de_mas.User;
 
 import org.junit.Test;
 

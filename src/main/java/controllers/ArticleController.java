@@ -1,7 +1,7 @@
 package controllers;
 
-import models.Article;
-import models.ArticleDto;
+import models.cosas_de_mas.Article;
+import models.cosas_de_mas.ArticleDto;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;

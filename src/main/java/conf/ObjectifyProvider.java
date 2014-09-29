@@ -3,8 +3,8 @@ package conf;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import models.Article;
-import models.User;
+import models.cosas_de_mas.Article;
+import models.cosas_de_mas.User;
 
 public class ObjectifyProvider implements Provider<Objectify> {
     

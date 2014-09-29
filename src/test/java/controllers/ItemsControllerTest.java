@@ -1,6 +1,6 @@
 package controllers;
 
-import models.dtos.ItemCreateDTO;
+import dtos.ItemCreateDTO;
 import ninja.NinjaTest;
 import org.junit.Before;
 import org.junit.Test;

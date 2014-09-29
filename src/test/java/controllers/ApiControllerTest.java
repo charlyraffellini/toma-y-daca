@@ -24,8 +24,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Map;
 
-import models.ArticleDto;
-import models.ArticlesDto;
+import models.cosas_de_mas.ArticleDto;
+import models.cosas_de_mas.ArticlesDto;
 import ninja.NinjaTest;
 
 import org.junit.Before;

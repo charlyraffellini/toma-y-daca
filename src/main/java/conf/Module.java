@@ -16,9 +16,9 @@
 
 package conf;
 
-import models.FrutasBag;
-import models.homes.ItemHome;
-import models.homes.UserHome;
+import homes.ItemHome;
+import homes.UserHome;
+import models.cosas_de_mas.FrutasBag;
 import models.integrations.MeliApi;
 import ninja.appengine.AppEngineModule;
 
