@@ -10,6 +10,7 @@ import models.integrations.Listing;
 import models.integrations.MeliApi;
 import ninja.Result;
 import ninja.Results;
+import ninja.params.PathParam;
 import ninja.session.Session;
 
 import java.util.Collection;
@@ -45,8 +46,20 @@ public class ItemsController {
         return Results.json().render(items);
     }
 
+    public Result getFriendItems(Session session, @PathParam("userId") int friendId) {
+        User user = this.getUser(session);
+        User friend = this.userHome.get(friendId);
+
+        user.validateFriend(friend);
+
+        Collection<Item> items = this.itemHome.getAllItemsOf(friend);
+
+        return Results.json().render(items);
+    }
+
     private User getUser(Session session) {
-        return new User(); //this.userHome.get(Integer.parseInt(session.getId()));
+        int userId = 1; //Integer.parseInt(session.get("userId"));
+        return this.userHome.get(userId);
     }
 
 }

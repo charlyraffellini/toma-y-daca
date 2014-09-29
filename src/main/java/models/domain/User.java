@@ -1,5 +1,7 @@
 package models.domain;
 
+import models.domain.exceptions.NotUserFriendException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,9 +10,14 @@ import java.util.Collection;
  */
 public class User extends DomainObject{
 
-    private Collection<User> users = new ArrayList<>();
+    private Collection<User> friends = new ArrayList<>();
 
     public void addFriend(User user) {
-        this.users.add(user);
+        this.friends.add(user);
+    }
+
+    public void validateFriend(User friend) {
+        if (!friends.contains(friend))
+            throw new NotUserFriendException(friend);
     }
 }
