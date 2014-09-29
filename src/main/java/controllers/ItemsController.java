@@ -18,17 +18,20 @@ import java.util.Collection;
 /**
  * Created by Palumbo on 27/09/2014.
  */
-public class ItemsController {
+public class ItemsController extends WebApiController{
+
+    private MeliApi meliApi;
+    private ItemHome itemHome;
 
     @Inject
-    MeliApi meliApi;
-    @Inject
-    ItemHome itemHome;
-    @Inject
-    UserHome userHome;
+    protected ItemsController(MeliApi meliApi, ItemHome itemHome, Session session, UserHome userHome) {
+        super(session, userHome);
+        this.meliApi = meliApi;
+        this.itemHome = itemHome;
+    }
 
-    public Result createItem(Session session, ItemCreateDTO itemCreateDTO) {
-        User user = this.getUser(session);
+    public Result createItem(ItemCreateDTO itemCreateDTO) {
+        User user = this.getUser();
 
         Listing listing = this.meliApi.getListing(itemCreateDTO.meliId);
 
@@ -39,15 +42,15 @@ public class ItemsController {
     }
 
     public Result getAllItems(Session session) {
-        User user = this.getUser(session);
+        User user = this.getUser();
 
         Collection<Item> items = this.itemHome.getAllItemsOf(user);
 
         return Results.json().render(items);
     }
 
-    public Result getFriendItems(Session session, @PathParam("userId") int friendId) {
-        User user = this.getUser(session);
+    public Result getFriendItems(@PathParam("userId") int friendId) {
+        User user = this.getUser();
         User friend = this.userHome.get(friendId);
 
         user.validateFriend(friend);
@@ -56,10 +59,4 @@ public class ItemsController {
 
         return Results.json().render(items);
     }
-
-    private User getUser(Session session) {
-        int userId = 1; //Integer.parseInt(session.get("userId"));
-        return this.userHome.get(userId);
-    }
-
 }
