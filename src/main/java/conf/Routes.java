@@ -60,6 +60,7 @@ public class Routes implements ApplicationRoutes {
         // Trades
         ///////////////////////////////////////////////////////////////////////
         router.POST().route("/trade").with(TradesController.class, "sendTradeRequest");
+        router.PUT().route("/trade/{tradeId}").with(TradesController.class, "executeTradeRequest");
 
 
 
