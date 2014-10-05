@@ -17,10 +17,8 @@
 package conf;
 
 import com.google.inject.Inject;
-
 import controllers.*;
 import ninja.AssetsController;
-import ninja.Results;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
@@ -53,11 +51,19 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/items").with(ItemsController.class, "createItem");
         router.GET().route("/items").with(ItemsController.class, "getAllItems");
 
-
         ///////////////////////////////////////////////////////////////////////
         // Friends
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/user/friends/{userId}/items").with(ItemsController.class, "getFriendItems");
+
+        ///////////////////////////////////////////////////////////////////////
+        // Trades
+        ///////////////////////////////////////////////////////////////////////
+        router.POST().route("/trade").with(TradesController.class, "sendTradeRequest");
+
+
+
+
 
 
         ///////////////////////////////////////////////////////////////////////
