@@ -14,4 +14,8 @@ public class Item extends DomainObject {
         this.description = description;
         this.picture = picture;
     }
+
+    public boolean hasOwner(User user) {
+        return owner == user;
+    }
 }
