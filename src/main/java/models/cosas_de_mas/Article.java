@@ -1,4 +1,4 @@
-package models;
+package models.cosas_de_mas;
 
 import java.util.Date;
 import java.util.List;

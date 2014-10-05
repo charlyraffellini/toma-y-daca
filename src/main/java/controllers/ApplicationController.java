@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import conf.ObjectifyProvider;
 import dao.ArticleDao;
-import models.Article;
+import models.cosas_de_mas.Article;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineEnvironment;

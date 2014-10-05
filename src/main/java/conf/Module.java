@@ -16,7 +16,10 @@
 
 package conf;
 
-import models.FrutasBag;
+import homes.ItemHome;
+import homes.UserHome;
+import models.cosas_de_mas.FrutasBag;
+import models.integrations.MeliApi;
 import ninja.appengine.AppEngineModule;
 
 import com.google.inject.AbstractModule;
@@ -29,12 +32,22 @@ public class Module extends AbstractModule {
     
 
     protected void configure() {
-        
         bind(StartupActions.class);
         bind(Objectify.class).toProvider(ObjectifyProvider.class);
         bind(FrutasBag.class);
+        this.bindHomes();
+        this.bindApis();
         install(new AppEngineModule());        
         bind(Session.class).to(EncryptedSession.class);
+    }
+
+    private void bindApis() {
+        bind(MeliApi.class);
+    }
+
+    private void bindHomes() {
+        bind(ItemHome.class);
+        bind(UserHome.class);
     }
 
 }

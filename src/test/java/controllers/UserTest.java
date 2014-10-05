@@ -2,7 +2,7 @@ package controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import models.User;
+import models.cosas_de_mas.User;
 
 import org.junit.Test;
 

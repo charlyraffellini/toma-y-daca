@@ -1,4 +1,4 @@
-package models;
+package models.cosas_de_mas;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;

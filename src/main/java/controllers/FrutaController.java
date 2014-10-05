@@ -1,12 +1,12 @@
 package controllers;
 
 import com.google.inject.Inject;
-import models.FrutasBag;
+import models.cosas_de_mas.FrutasBag;
 import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
-import models.Fruta;
+import models.cosas_de_mas.Fruta;
 import ninja.session.Session;
 
 import java.util.ArrayList;

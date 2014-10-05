@@ -46,7 +46,15 @@ public class Routes implements ApplicationRoutes {
         if (!ninjaProperties.isProd()) {
             router.GET().route("/setup").with(ApplicationController.class, "setup");
         }
-        
+
+        ///////////////////////////////////////////////////////////////////////
+        // Items
+        ///////////////////////////////////////////////////////////////////////
+        router.POST().route("/items").with(ItemsController.class, "createItem");
+
+
+
+
         ///////////////////////////////////////////////////////////////////////
         // Login / Logout
         ///////////////////////////////////////////////////////////////////////
@@ -87,6 +95,10 @@ public class Routes implements ApplicationRoutes {
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/.*").with(ApplicationController.class, "justAnApi");//.with(ApplicationController.class, "index");
+
+
+
+
     }
 
 }

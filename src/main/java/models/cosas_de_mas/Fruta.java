@@ -1,4 +1,4 @@
-package models;
+package models.cosas_de_mas;
 
 /**
  * Created by charly on 9/2/14.
