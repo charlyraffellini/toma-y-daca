@@ -16,16 +16,21 @@
 
 package conf;
 
-import homes.ItemHome;
-import homes.UserHome;
-import models.cosas_de_mas.FrutasBag;
-import models.integrations.MeliApi;
-import ninja.appengine.AppEngineModule;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.googlecode.objectify.Objectify;
+import homes.Home;
+import homes.ItemHome;
+import homes.UserHome;
+import models.cosas_de_mas.FrutasBag;
+import models.domain.*;
+import models.homes.TradeRequestHome;
+import models.integrations.MeliApi;
+import ninja.appengine.AppEngineModule;
 import ninja.session.Session;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Singleton
 public class Module extends AbstractModule {
@@ -46,8 +51,40 @@ public class Module extends AbstractModule {
     }
 
     private void bindHomes() {
-        bind(ItemHome.class);
-        bind(UserHome.class);
+        List<User> users = this.createUsers();
+        List<Item> items = this.createItems(users);
+        List<TradeRequest> trades = this.createTrades(users, items);
+        bind(UserHome.class).toInstance(this.createHomeExample(new UserHome(), users));
+        bind(ItemHome.class).toInstance(this.createHomeExample(new ItemHome(), items));
+        bind(TradeRequestHome.class).toInstance(this.createHomeExample(new TradeRequestHome(), trades));
+    }
+
+    private List<TradeRequest> createTrades(List<User> users, List<Item> items) {
+        TradeRequest aTrade = users.get(0).sendTrade(items.get(0), users.get(1), items.get(1));
+        return Arrays.asList(aTrade);
+    }
+
+    private List<User> createUsers() {
+        User aUser = new User();
+        User otherUser = new User();
+        aUser.addFriend(otherUser);
+
+        return Arrays.asList(aUser, otherUser);
+    }
+
+    private List<Item> createItems(List<User> users) {
+        Item item1 = new Item(users.get(0), "Item 1", "asd");
+        Item item2 = new Item(users.get(1), "Item 2", "dsa");
+
+        return Arrays.asList(item1, item2);
+    }
+
+    private <THome extends Home<TEntity>, TEntity extends DomainObject> THome createHomeExample(THome home, List<TEntity> entities) {
+        for (TEntity entity : entities) {
+            home.create(entity);
+        }
+
+        return home;
     }
 
 }

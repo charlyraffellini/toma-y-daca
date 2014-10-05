@@ -10,22 +10,28 @@ import models.integrations.Listing;
 import models.integrations.MeliApi;
 import ninja.Result;
 import ninja.Results;
+import ninja.params.PathParam;
 import ninja.session.Session;
+
+import java.util.Collection;
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
-public class ItemsController {
+public class ItemsController extends WebApiController{
+
+    private MeliApi meliApi;
+    private ItemHome itemHome;
 
     @Inject
-    MeliApi meliApi;
-    @Inject
-    ItemHome itemHome;
-    @Inject
-    UserHome userHome;
+    public ItemsController(Session session, UserHome userHome, MeliApi meliApi, ItemHome itemHome) {
+        super(session, userHome);
+        this.meliApi = meliApi;
+        this.itemHome = itemHome;
+    }
 
-    public Result createItem(Session session, ItemCreateDTO itemCreateDTO) {
-        User user = this.getUser(session);
+    public Result createItem(ItemCreateDTO itemCreateDTO) {
+        User user = this.getUser();
 
         Listing listing = this.meliApi.getListing(itemCreateDTO.meliId);
 
@@ -35,8 +41,22 @@ public class ItemsController {
         return Results.json().render(id);
     }
 
-    private User getUser(Session session) {
-        return new User(); //this.userHome.get(Integer.parseInt(session.getId()));
+    public Result getAllItems(Session session) {
+        User user = this.getUser();
+
+        Collection<Item> items = this.itemHome.getAllItemsOf(user);
+
+        return Results.json().render(items);
     }
 
+    public Result getFriendItems(@PathParam("userId") int friendId) {
+        User user = this.getUser();
+        User friend = this.userHome.get(friendId);
+
+        user.validateFriend(friend);
+
+        Collection<Item> items = this.itemHome.getAllItemsOf(friend);
+
+        return Results.json().render(items);
+    }
 }
