@@ -54,20 +54,17 @@ public class Module extends AbstractModule {
         List<User> users = this.createUsers();
         List<Item> items = this.createItems(users);
         List<TradeRequest> trades = this.createTrades(users, items);
+
         bind(UserHome.class).toInstance(this.createHomeExample(new UserHome(), users));
         bind(ItemHome.class).toInstance(this.createHomeExample(new ItemHome(), items));
         bind(TradeRequestHome.class).toInstance(this.createHomeExample(new TradeRequestHome(), trades));
-    }
-
-    private List<TradeRequest> createTrades(List<User> users, List<Item> items) {
-        TradeRequest aTrade = users.get(0).sendTrade(items.get(0), users.get(1), items.get(1));
-        return Arrays.asList(aTrade);
     }
 
     private List<User> createUsers() {
         User aUser = new User();
         User otherUser = new User();
         aUser.addFriend(otherUser);
+        otherUser.addFriend(aUser);
 
         return Arrays.asList(aUser, otherUser);
     }
@@ -77,6 +74,11 @@ public class Module extends AbstractModule {
         Item item2 = new Item(users.get(1), "Item 2", "dsa");
 
         return Arrays.asList(item1, item2);
+    }
+
+    private List<TradeRequest> createTrades(List<User> users, List<Item> items) {
+        TradeRequest aTrade = users.get(1).sendTrade(items.get(1), users.get(0), items.get(0));
+        return Arrays.asList(aTrade);
     }
 
     private <THome extends Home<TEntity>, TEntity extends DomainObject> THome createHomeExample(THome home, List<TEntity> entities) {
