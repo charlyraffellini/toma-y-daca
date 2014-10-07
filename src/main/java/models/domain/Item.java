@@ -18,4 +18,8 @@ public class Item extends DomainObject {
     public boolean hasOwner(User user) {
         return owner == user;
     }
+
+    public void changeOwnerTo(User user) {
+        this.owner = user;
+    }
 }

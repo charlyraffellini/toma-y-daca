@@ -13,6 +13,7 @@ public class Home<TEntity extends DomainObject> {
     private int nextId = 1;
 
     private HashMap<Integer, TEntity> entities = new HashMap<>();
+
     public int create(TEntity entity) {
         int id = nextId;
         nextId ++;
@@ -36,10 +37,10 @@ public class Home<TEntity extends DomainObject> {
     }
 
     public void delete(TEntity entity) {
-        entities.remove(entity);
+        entities.remove(entity.id);
     }
 
     public int getNextId() {
         return nextId;
-    } // TODO: Este método habría que borrarlo cuando se implemente la persistencia
+    } // TODO: Este método y field habría que borrarlo cuando se implemente la persistencia
 }
