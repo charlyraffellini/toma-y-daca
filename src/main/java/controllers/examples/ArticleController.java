@@ -1,4 +1,4 @@
-package controllers;
+package controllers.examples;
 
 import models.cosas_de_mas.Article;
 import models.cosas_de_mas.ArticleDto;

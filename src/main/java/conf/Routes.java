@@ -18,6 +18,7 @@ package conf;
 
 import com.google.inject.Inject;
 import controllers.*;
+import controllers.examples.*;
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;

@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package controllers;
+package controllers.examples;
 
-import static org.junit.Assert.assertTrue;
-
-import java.util.Map;
-
+import com.google.common.collect.Maps;
 import ninja.NinjaTest;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.common.collect.Maps;
+import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
 
 public class LoginLogoutControllerTest extends NinjaTest {
     

@@ -1,19 +1,9 @@
 package controllers;
 
-import com.google.gson.GsonBuilder;
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Key;
-import com.google.inject.Module;
 import dtos.ItemCreateDTO;
 import homes.ItemHome;
 import ninja.NinjaTest;
-import ninja.session.Session;
-import org.apache.http.HttpResponse;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,8 +16,11 @@ public class ItemsControllerTest extends NinjaTest {
     public void testPostAnItemReturnItsId() {
         int nextId = ninjaTestServer.getInjector().getProvider(ItemHome.class).get().getNextId();
 
+        ItemCreateDTO dto = new ItemCreateDTO();
+        dto.meliId = "MLA524730552";
+
         String response = ninjaTestBrowser.postJson(getServerAddress()
-                + "items", new ItemCreateDTO());
+                + "items", dto);
 
         assertEquals(String.valueOf(nextId), response);
     }

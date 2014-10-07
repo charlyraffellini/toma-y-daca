@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package controllers;
+package controllers.examples;
 
 import models.cosas_de_mas.ArticleDto;
 import models.cosas_de_mas.ArticlesDto;
@@ -35,6 +35,7 @@ import etc.LoggedInUser;
 public class ApiController {
     
     @Inject
+    public
     ArticleDao articleDao;
     
     public Result getArticlesJson() {

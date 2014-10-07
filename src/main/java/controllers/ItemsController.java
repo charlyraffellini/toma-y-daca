@@ -7,7 +7,7 @@ import homes.UserHome;
 import models.domain.Item;
 import models.domain.User;
 import models.integrations.Listing;
-import models.integrations.MeliApi;
+import models.integrations.ListingsApi;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.PathParam;
@@ -20,20 +20,20 @@ import java.util.Collection;
  */
 public class ItemsController extends WebApiController{
 
-    private MeliApi meliApi;
+    private ListingsApi listingsApi;
     private ItemHome itemHome;
 
     @Inject
-    public ItemsController(Session session, UserHome userHome, MeliApi meliApi, ItemHome itemHome) {
+    public ItemsController(Session session, UserHome userHome, ListingsApi listingsApi, ItemHome itemHome) {
         super(session, userHome);
-        this.meliApi = meliApi;
+        this.listingsApi = listingsApi;
         this.itemHome = itemHome;
     }
 
     public Result createItem(ItemCreateDTO itemCreateDTO) {
         User user = this.getUser();
 
-        Listing listing = this.meliApi.getListing(itemCreateDTO.meliId);
+        Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
 
         Item item = new Item(user, listing.description, listing.picture);
         int id = this.itemHome.create(item);

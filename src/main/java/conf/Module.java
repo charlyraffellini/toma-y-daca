@@ -25,7 +25,7 @@ import homes.UserHome;
 import models.cosas_de_mas.FrutasBag;
 import models.domain.*;
 import models.homes.TradeRequestHome;
-import models.integrations.MeliApi;
+import models.integrations.ListingsApi;
 import ninja.appengine.AppEngineModule;
 import ninja.session.Session;
 
@@ -47,7 +47,7 @@ public class Module extends AbstractModule {
     }
 
     private void bindApis() {
-        bind(MeliApi.class);
+        bind(ListingsApi.class);
     }
 
     private void bindHomes() {
