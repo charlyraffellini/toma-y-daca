@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package controllers;
+package controllers.examples;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import dao.ArticleDao;
 import ninja.Result;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import dao.ArticleDao;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApiControllerMockTest {

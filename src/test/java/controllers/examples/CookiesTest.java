@@ -1,16 +1,13 @@
-package controllers;
+package controllers.examples;
 
 import ninja.NinjaTest;
-import ninja.session.Session;
 import org.apache.http.HttpResponse;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.IdentityHashMap;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class CookiesTest extends NinjaTest {
 

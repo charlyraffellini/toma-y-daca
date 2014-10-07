@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package controllers;
+package controllers.examples;
 
 import static org.junit.Assert.assertTrue;
 import ninja.NinjaFluentLeniumTest;
 
 import org.junit.Before;
-import org.junit.Test;
 
 public class ApplicationControllerFluentLeniumTest extends NinjaFluentLeniumTest {
     

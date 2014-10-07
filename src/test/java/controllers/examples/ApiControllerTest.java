@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package controllers;
+package controllers.examples;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.examples;
 
 import org.junit.After;
 import org.junit.Before;
