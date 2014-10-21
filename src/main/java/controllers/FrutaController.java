@@ -1,4 +1,4 @@
-package controllers.examples;
+package controllers;
 
 import com.google.inject.Inject;
 import models.cosas_de_mas.FrutasBag;

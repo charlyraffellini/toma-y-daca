@@ -18,7 +18,6 @@ package conf;
 
 import com.google.inject.Inject;
 import controllers.*;
-import controllers.examples.*;
 import ninja.AssetsController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
@@ -74,6 +73,9 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/login").with(LoginLogoutController.class, "login");
         router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
         router.GET().route("/logout").with(LoginLogoutController.class, "logout");
+
+				router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
+				router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
         
         ///////////////////////////////////////////////////////////////////////
         // Create new article

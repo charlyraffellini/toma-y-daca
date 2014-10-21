@@ -16,6 +16,7 @@
 
 package controllers.examples;
 
+import controllers.ApiController;
 import dao.ArticleDao;
 import ninja.Result;
 import org.junit.Before;
