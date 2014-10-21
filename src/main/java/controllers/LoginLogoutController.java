@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package controllers.examples;
+package controllers;
 
 import ninja.Context;
 import ninja.FilterWith;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package controllers.examples;
+package controllers;
 
 import models.cosas_de_mas.ArticleDto;
 import models.cosas_de_mas.ArticlesDto;
