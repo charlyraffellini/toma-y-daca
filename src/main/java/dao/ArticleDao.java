@@ -1,14 +1,12 @@
 package dao;
 
 import java.util.List;
-import java.util.Map;
 
-import models.Article;
-import models.ArticleDto;
-import models.ArticlesDto;
-import models.User;
+import models.cosas_de_mas.Article;
+import models.cosas_de_mas.ArticleDto;
+import models.cosas_de_mas.ArticlesDto;
+import models.cosas_de_mas.User;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;

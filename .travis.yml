@@ -20,4 +20,8 @@ jdk:
 branches:
   only:
     - master
+<<<<<<< HEAD
     - staging
+=======
+    - staging
+>>>>>>> 66a71aa0960f5faa31e9c40e066b5c4c760271e2
