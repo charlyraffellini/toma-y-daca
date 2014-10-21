@@ -16,6 +16,7 @@
 
 package controllers.examples;
 
+import controllers.ApplicationController;
 import ninja.NinjaRouterTest;
 
 import org.junit.Test;

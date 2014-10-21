@@ -16,6 +16,7 @@
 
 package controllers;
 
+import com.google.inject.Provider;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -27,6 +28,22 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import dao.UserDao;
+import org.apache.oltu.oauth2.client.OAuthClient;
+import org.apache.oltu.oauth2.client.URLConnectionClient;
+import org.apache.oltu.oauth2.client.request.OAuthBearerClientRequest;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
+import org.apache.oltu.oauth2.client.response.GitHubTokenResponse;
+import org.apache.oltu.oauth2.client.response.OAuthAuthzResponse;
+import org.apache.oltu.oauth2.client.response.OAuthResourceResponse;
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.OAuthProviderType;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.common.message.types.GrantType;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
@@ -70,6 +87,87 @@ public class LoginLogoutController {
         
     }
 
+		@Inject
+		Provider<HttpServletRequest> httpServletRequestProvider;
+		@Inject
+		Provider<HttpServletResponse> httpServletResponseProvider;
+
+
+		/**
+		 * Start of oauth2 autentication
+		 * <p>
+		 * Redirect to facebook login url with
+		 * mandatory query string parameters
+		 * For more information see: https://cwiki.apache.org/confluence/display/OLTU/OAuth+2.0+Client+Quickstart
+		 * <p>
+		 *
+		 * @return Result
+		 */
+		public Result faceLogin(){
+				OAuthClientRequest request;
+				try {
+						request = OAuthClientRequest
+							.authorizationProvider(OAuthProviderType.FACEBOOK)
+							.setClientId("1479249045698079")
+							.setRedirectURI("http://localhost:8080/face")
+							.buildQueryMessage();
+				} catch (OAuthSystemException e) {
+						throw new RuntimeException(e.getMessage());
+				}
+
+					return Results.redirect(request.getLocationUri());
+		}
+
+		public Result faceReturn(){
+
+			OAuthAuthzResponse oar = null;
+			String accessToken;
+			Long expiresIn;
+			String me;
+
+			try {
+				oar = OAuthAuthzResponse.oauthCodeAuthzResponse(httpServletRequestProvider.get());
+				String code = oar.getCode();
+				OAuthClientRequest request = OAuthClientRequest
+					.tokenProvider(OAuthProviderType.FACEBOOK)
+					.setGrantType(GrantType.AUTHORIZATION_CODE)
+					.setClientId("1479249045698079")
+					.setClientSecret("61dfe815137e0ed8ed8133a71331347b")
+					.setRedirectURI("http://localhost:8080/face")
+					.setCode(code)
+					.buildQueryMessage();
+
+				//create OAuth client that uses custom http client under the hood
+				OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+
+				//Facebook is not fully compatible with OAuth 2.0 draft 10, access token response is
+				//application/x-www-form-urlencoded, not json encoded so we use dedicated response class for that
+				//Custom response classes are an easy way to deal with oauth providers that introduce modifications to
+				//OAuth 2.0 specification
+				GitHubTokenResponse oAuthResponse = oAuthClient.accessToken(request, GitHubTokenResponse.class);
+
+				accessToken = oAuthResponse.getAccessToken();
+				expiresIn = oAuthResponse.getExpiresIn();
+
+				OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me")
+					.setAccessToken(accessToken).buildQueryMessage();
+
+				OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+				me = resourceResponse.getBody();
+
+			} catch (OAuthProblemException e) {
+				throw new RuntimeException(e.getMessage());
+			} catch (OAuthSystemException e) {
+				throw new RuntimeException(e.getMessage());
+			}
+
+			Map<String, String> stuffs = new HashMap<String, String>();
+			stuffs.put("access_token", accessToken);
+			stuffs.put("me", me);
+
+			return Results.json().render(stuffs);
+		}
+
     ///////////////////////////////////////////////////////////////////////////
     // Logout
     ///////////////////////////////////////////////////////////////////////////
@@ -82,5 +180,6 @@ public class LoginLogoutController {
         return Results.redirect("/");
 
     }
+
 
 }
