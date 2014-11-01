@@ -14,6 +14,7 @@ import ninja.params.PathParam;
 import ninja.session.Session;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Federico on 01/11/14.
@@ -28,7 +29,7 @@ public class UserController extends WebApiController{
 
     public Result getAllUsers(Session session){
 
-        User[] users = this.getUsers();
+        List<User> users = this.getUsers();
         return Results.json().render(users);
 
     }

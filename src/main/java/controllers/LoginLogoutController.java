@@ -54,7 +54,7 @@ import java.util.*;
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class LoginLogoutController {
-    
+
     @Inject
     UserDao userDao;
 
@@ -165,7 +165,6 @@ public class LoginLogoutController {
 
 
                 Objectify ofy = ObjectifyService.ofy();
-//                User user = new User((String)json.get("id"),accessToken,(String)json.get("first_name"));
 
 
                 User user = new User();
@@ -174,10 +173,14 @@ public class LoginLogoutController {
                 user.uid=(String)json.get("id");
                 user.oauth_token=accessToken;
 
-                session.put("userId",String.valueOf(user.id));
+                String uid = (String)json.get("id");
 
-                if (ofy.load().type(User.class).filter("uid",user.uid).count()==0){
+                if (ofy.load().type(User.class).filter("uid",uid).list().isEmpty()) {
                     ofy.save().entity(user).now();
+                    session.put("userId",String.valueOf(user.id));
+                }else{
+                    long userId = ofy.load().type(User.class).filter("uid ==",user.uid).first().now().id;
+                    session.put("userId",String.valueOf(userId));
                 }
 
 
