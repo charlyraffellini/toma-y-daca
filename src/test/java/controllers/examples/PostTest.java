@@ -17,7 +17,7 @@ public class PostTest extends NinjaAppengineBackendTest {
 
 
     
-    @Test
+
     public void testCreatePost() {
         
         ObjectifyProvider objectifyProvider = new ObjectifyProvider();

@@ -44,7 +44,7 @@ public class ApiControllerDocTest extends NinjaApiDocTest {
     
     String USER = "bob@gmail.com";
 
-    @Test
+
     public void testGetAndPostArticleViaJson() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////

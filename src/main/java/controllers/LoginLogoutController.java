@@ -108,7 +108,7 @@ public class LoginLogoutController {
 				try {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
-							.setClientId("1479249045698079")
+							.setClientId("868005159879263")
 							.setRedirectURI("http://localhost:8080/face")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
@@ -131,8 +131,8 @@ public class LoginLogoutController {
 				OAuthClientRequest request = OAuthClientRequest
 					.tokenProvider(OAuthProviderType.FACEBOOK)
 					.setGrantType(GrantType.AUTHORIZATION_CODE)
-					.setClientId("1479249045698079")
-					.setClientSecret("61dfe815137e0ed8ed8133a71331347b")
+					.setClientId("868005159879263")
+					.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
 					.setRedirectURI("http://localhost:8080/face")
 					.setCode(code)
 					.buildQueryMessage();
@@ -164,7 +164,7 @@ public class LoginLogoutController {
 			Map<String, String> stuffs = new HashMap<String, String>();
 			stuffs.put("access_token", accessToken);
 			stuffs.put("me", me);
-
+            
 			return Results.json().render(stuffs);
 		}
 

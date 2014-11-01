@@ -11,7 +11,7 @@ import conf.ObjectifyProvider;
 
 public class UserTest extends NinjaAppengineBackendTest {
 
-    @Test
+
     public void createAndRetrieveUser() {
         
         ObjectifyProvider objectifyProvider = new ObjectifyProvider();

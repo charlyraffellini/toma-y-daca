@@ -5,6 +5,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import models.cosas_de_mas.Article;
 import models.cosas_de_mas.User;
+import models.domain.Item;
+import models.domain.TradeRequest;
 
 public class ObjectifyProvider implements Provider<Objectify> {
     
@@ -34,7 +36,9 @@ public class ObjectifyProvider implements Provider<Objectify> {
     static {
 
         ObjectifyService.register(User.class);
-        ObjectifyService.register(Article.class);
+//        ObjectifyService.register(Item.class);
+//        ObjectifyService.register(TradeRequest.class);
+
 
         setup();
     }

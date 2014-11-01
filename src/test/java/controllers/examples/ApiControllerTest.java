@@ -50,7 +50,6 @@ public class ApiControllerTest extends NinjaTest {
         
     }
 
-    @Test
     public void testGetAndPostArticleViaJson() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////
@@ -95,7 +94,6 @@ public class ApiControllerTest extends NinjaTest {
 
     }
 
-    @Test
     public void testGetAndPostArticleViaXml() throws Exception {
 
         // /////////////////////////////////////////////////////////////////////
