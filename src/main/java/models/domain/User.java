@@ -1,5 +1,8 @@
 package models.domain;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import models.domain.exceptions.NotFriendUserException;
 import models.domain.exceptions.UserDoesntHaveItemException;
 
@@ -9,9 +12,30 @@ import java.util.Collection;
 /**
  * Created by Palumbo on 27/09/2014.
  */
+
+@Entity
+@Index
 public class User extends DomainObject{
 
+    @Id
+
+    public long id;
+    @Index public String uid;
+    public String oauth_token;
+    public String fullname;
+    public boolean isAdmin;
+
     private Collection<User> friends = new ArrayList<>();
+
+    public User(String uid,String oauth_token, String fullname) {
+        this.uid = uid;
+        this.oauth_token=oauth_token;
+        this.fullname = fullname;
+    }
+
+    public User(){
+
+    }
 
     public void addFriend(User user) {
         this.friends.add(user);

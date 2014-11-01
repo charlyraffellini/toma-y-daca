@@ -1,8 +1,12 @@
 package controllers;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 import homes.UserHome;
 import models.domain.User;
 import ninja.session.Session;
+
+import java.util.List;
 
 /**
  * Created by Palumbo on 29/09/2014.
@@ -16,9 +20,14 @@ public abstract class WebApiController {
         this.userHome = userHome;
     }
 
-    protected User getUser() { //TODO: Poner este método en la Session.
-        int userId = 1; //Integer.parseInt(this.session.get("userId"));
+    protected User getUser() { //TODO: Poner este metodo en la Session.
+//        int userId = 3;
+        int userId = (int)Integer.parseInt(session.get("userId"));
         return this.userHome.get(userId);
     }
 
+    protected List<User> getUsers() { //TODO: Poner este metodo en la Session.
+        Objectify ofy = ObjectifyService.ofy();
+        return ofy.load().type(User.class).list();
+    }
 }
