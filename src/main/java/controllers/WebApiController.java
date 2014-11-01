@@ -21,4 +21,17 @@ public abstract class WebApiController {
         return this.userHome.get(userId);
     }
 
+    protected User[] getUsers() { //TODO: Poner este método en la Session.
+        int[] userIDs = new int[2]; //Integer.parseInt(this.session.get("userId"));
+        userIDs[0]=1;
+        userIDs[1]=2;
+
+        User[] users = new User[userIDs.length];
+        for (int i = 0; i < userIDs.length; i++) {
+            users[i] = this.userHome.get(userIDs[i]);
+        }
+
+
+        return users;
+    }
 }
