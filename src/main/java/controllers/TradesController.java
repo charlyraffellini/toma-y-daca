@@ -29,21 +29,21 @@ public class TradesController extends WebApiController{
         this.tradeHome = tradeHome;
     }
 
-    public Result sendTradeRequest(TradeCreateDTO tradeCreateDTO){
+    public Result sendTradeRequest(TradeCreateDTO tradeCreateDTO, Session session){
         User friend = this.userHome.get(tradeCreateDTO.friendId);
         Item friendItem = this.itemHome.get(tradeCreateDTO.friendItemId);
         Item userItem = this.itemHome.get(tradeCreateDTO.userItemId);
 
-        TradeRequest tradeRequest = this.getUser().sendTrade(userItem, friend, friendItem);
+        TradeRequest tradeRequest = this.getUser(session).sendTrade(userItem, friend, friendItem);
 
         int id = this.tradeHome.create(tradeRequest);
 
         return Results.json().render(id);
     }
 
-    public Result executeTradeRequest(@PathParam("tradeId") int tradeId, TradeExecuteDTO tradeExecuteDTO){
+    public Result executeTradeRequest(@PathParam("tradeId") int tradeId, TradeExecuteDTO tradeExecuteDTO, Session session){
         TradeRequest trade = this.tradeHome.get(tradeId);
-        trade.validateOwner(this.getUser());
+        trade.validateOwner(this.getUser(session));
 
         if (tradeExecuteDTO.response == "accepted")
             trade.accept();
