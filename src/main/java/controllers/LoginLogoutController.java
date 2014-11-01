@@ -178,11 +178,9 @@ public class LoginLogoutController {
                 if (ofy.load().type(User.class).filter("uid",uid).list().isEmpty()) {
                     ofy.save().entity(user).now();
                     session.put("userId",String.valueOf(user.id));
-                    session.put("test","true");
                 }else{
                     long userId = ofy.load().type(User.class).filter("uid ==",user.uid).first().now().id;
                     session.put("userId",String.valueOf(userId));
-                    session.put("test","else");
                 }
 
 

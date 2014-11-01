@@ -6,6 +6,8 @@ import homes.UserHome;
 import models.domain.User;
 import ninja.session.Session;
 
+import java.util.List;
+
 /**
  * Created by Palumbo on 29/09/2014.
  */
@@ -24,23 +26,8 @@ public abstract class WebApiController {
         return this.userHome.get(userId);
     }
 
-    protected User[] getUsers() { //TODO: Poner este metodo en la Session.
-        int[] userIDs = new int[10]; //Integer.parseInt(this.session.get("userId"));
-        for (int i = 0; i < 10; i++) {
-            userIDs[i]=i+1;
-        }
-
-
-
-        User[] users = new User[userIDs.length];
+    protected List<User> getUsers() { //TODO: Poner este metodo en la Session.
         Objectify ofy = ObjectifyService.ofy();
-        for (int i = 0; i < userIDs.length; i++) {
-//            users[i] = this.userHome.get(userIDs[i]);
-            users[i] = ofy.load().type(User.class).id(userIDs[i]).now();
-
-        }
-
-
-        return users;
+        return ofy.load().type(User.class).list();
     }
 }
