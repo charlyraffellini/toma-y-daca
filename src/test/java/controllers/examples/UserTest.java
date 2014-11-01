@@ -2,8 +2,9 @@ package controllers.examples;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import models.cosas_de_mas.User;
 
+
+import models.domain.User;
 import org.junit.Test;
 
 import com.googlecode.objectify.Objectify;
@@ -19,7 +20,7 @@ public class UserTest extends NinjaAppengineBackendTest {
         
         
         // Create a new user and save it
-        User user = new User("bob@gmail.com", "secret", "Bob");
+        User user = new User("4321", "secret", "Bob");
         ofy.save().entity(user).now();
         
 

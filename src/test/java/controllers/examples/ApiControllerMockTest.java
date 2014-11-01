@@ -17,7 +17,7 @@
 package controllers.examples;
 
 import controllers.ApiController;
-import dao.ArticleDao;
+
 import ninja.Result;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,38 +32,10 @@ import static org.mockito.Mockito.when;
 public class ApiControllerMockTest {
 
     @Mock
-    ArticleDao articleDao;
+
     
     ApiController apiController;
     
-    @Before
-    public void setupTest() {
-        apiController = new ApiController();
-        apiController.articleDao = articleDao;
-        
-    }
-    
 
-    @Test
-    public void testThatPostArticleReturnsOkWhenArticleDaoReturnsTrue() {
-
-        when(articleDao.postArticle(null, null)).thenReturn(true);
-        
-        Result result = apiController.postArticleJson(null, null);
-        
-        assertEquals(200, result.getStatusCode());
-
-    }
-    
-    @Test
-    public void testThatPostArticleReturnsNotFoundWhenArticleDaoReturnsFalse() {
-
-        when(articleDao.postArticle(null, null)).thenReturn(false);
-        
-        Result result = apiController.postArticleJson(null, null);
-        
-        assertEquals(404, result.getStatusCode());
-
-    }
 
 }

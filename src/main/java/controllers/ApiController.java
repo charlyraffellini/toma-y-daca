@@ -16,8 +16,7 @@
 
 package controllers;
 
-import models.cosas_de_mas.ArticleDto;
-import models.cosas_de_mas.ArticlesDto;
+
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
@@ -27,58 +26,12 @@ import ninja.appengine.AppEngineFilter;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import dao.ArticleDao;
+
 import etc.LoggedInUser;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class ApiController {
-    
-    @Inject
-    public
-    ArticleDao articleDao;
-    
-    public Result getArticlesJson() {
-        
-        ArticlesDto articlesDto = articleDao.getAllArticles();
-        
-        return Results.json().render(articlesDto);
-        
-    }
-    
-    public Result getArticlesXml() {
-        
-        ArticlesDto articlesDto = articleDao.getAllArticles();
-        
-        return Results.xml().render(articlesDto);
-        
-    }
-    
-    @FilterWith(SecureFilter.class)
-    public Result postArticleJson(@LoggedInUser String username,
-                              ArticleDto articleDto) {
-        
-        boolean succeeded = articleDao.postArticle(username, articleDto);
-        
-        if (!succeeded) {
-            return Results.notFound();
-        } else {
-            return Results.json();
-        }
-        
-    }
-    
-    @FilterWith(SecureFilter.class)
-    public Result postArticleXml(@LoggedInUser String username,
-                                 ArticleDto articleDto) {        
-        
-        boolean succeeded = articleDao.postArticle(username, articleDto);
-        
-        if (!succeeded) {
-            return Results.notFound();
-        } else {
-            return Results.xml();
-        }
-        
-    }
+
+
 }

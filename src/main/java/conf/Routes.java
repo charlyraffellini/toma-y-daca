@@ -73,25 +73,8 @@ public class Routes implements ApplicationRoutes {
 
 				router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
 				router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
-        
-        ///////////////////////////////////////////////////////////////////////
-        // Create new article
-        ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/article/new").with(ArticleController.class, "articleNew");
-        router.POST().route("/article/new").with(ArticleController.class, "articleNewPost");
-        
-        ///////////////////////////////////////////////////////////////////////
-        // Create new article
-        ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/article/{id}").with(ArticleController.class, "articleShow");
 
-        ///////////////////////////////////////////////////////////////////////
-        // Api for management of software
-        ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/api/{username}/articles.json").with(ApiController.class, "getArticlesJson");
-        router.GET().route("/api/{username}/articles.xml").with(ApiController.class, "getArticlesXml");
-        router.POST().route("/api/{username}/article.json").with(ApiController.class, "postArticleJson");
-        router.POST().route("/api/{username}/article.xml").with(ApiController.class, "postArticleXml");
+
  
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
@@ -100,8 +83,6 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/webjars/{fileName: .*}").with(AssetsController.class, "serveWebJars");
 
 
-        router.GET().route("/frutas").with(FrutaController.class, "getAllFrutas");
-        router.POST().route("/frutas").with(FrutaController.class, "postAFruta");
 
         ///////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page

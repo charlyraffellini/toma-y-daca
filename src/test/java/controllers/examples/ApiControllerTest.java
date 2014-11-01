@@ -24,8 +24,7 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Map;
 
-import models.cosas_de_mas.ArticleDto;
-import models.cosas_de_mas.ArticlesDto;
+
 import ninja.NinjaTest;
 
 import org.junit.Before;
@@ -50,98 +49,8 @@ public class ApiControllerTest extends NinjaTest {
         
     }
 
-    public void testGetAndPostArticleViaJson() throws Exception {
 
-        // /////////////////////////////////////////////////////////////////////
-        // Test initial data:
-        // /////////////////////////////////////////////////////////////////////
-        String response = ninjaTestBrowser.makeJsonRequest(getServerAddress()
-                + "api/bob@gmail.com/articles.json");
 
-        ArticlesDto articlesDto = getGsonWithLongToDateParsing().fromJson(
-                response, ArticlesDto.class);
-
-        assertEquals(3, articlesDto.articles.size());
-
-        // /////////////////////////////////////////////////////////////////////
-        // Post new article:
-        // /////////////////////////////////////////////////////////////////////
-        ArticleDto articleDto = new ArticleDto();
-        articleDto.content = "contentcontent";
-        articleDto.title = "new title new title";
-
-        response = ninjaTestBrowser.postJson(getServerAddress()
-                + "api/bob@gmail.com/article.json", articleDto);
-
-        assertTrue(response.contains("Error. Forbidden."));
-
-        doLogin();
-
-        response = ninjaTestBrowser.postJson(getServerAddress()
-                + "api/bob@gmail.com/article.json", articleDto);
-
-        assertFalse(response.contains("Error. Forbidden."));
-
-        // /////////////////////////////////////////////////////////////////////
-        // Fetch articles again => assert we got a new one ...
-        // /////////////////////////////////////////////////////////////////////
-        response = ninjaTestBrowser.makeJsonRequest(getServerAddress()
-                + "api/bob@gmail.com/articles.json");
-
-        articlesDto = getGsonWithLongToDateParsing().fromJson(response, ArticlesDto.class);
-        // one new result:
-        assertEquals(4, articlesDto.articles.size());
-
-    }
-
-    public void testGetAndPostArticleViaXml() throws Exception {
-
-        // /////////////////////////////////////////////////////////////////////
-        // Test initial data:
-        // /////////////////////////////////////////////////////////////////////
-        String response = ninjaTestBrowser.makeXmlRequest(getServerAddress()
-                + "api/bob@gmail.com/articles.xml");
-        
-        JacksonXmlModule module = new JacksonXmlModule();
-        // and then configure, for example:
-        module.setDefaultUseWrapper(false);
-        XmlMapper xmlMapper = new XmlMapper(module);
-        
-
-        ArticlesDto articlesDto = xmlMapper.readValue(response, ArticlesDto.class);
-
-        assertEquals(3, articlesDto.articles.size());
-
-        // /////////////////////////////////////////////////////////////////////
-        // Post new article:
-        // /////////////////////////////////////////////////////////////////////
-        ArticleDto articleDto = new ArticleDto();
-        articleDto.content = "contentcontent";
-        articleDto.title = "new title new title";
-
-        response = ninjaTestBrowser.postXml(getServerAddress()
-                + "api/bob@gmail.com/article.xml", articleDto);
-
-        assertTrue(response.contains("Error. Forbidden."));
-
-        doLogin();
-
-        response = ninjaTestBrowser.postXml(getServerAddress()
-                + "api/bob@gmail.com/article.xml", articleDto);
-
-        assertFalse(response.contains("Error. Forbidden."));
-
-        // /////////////////////////////////////////////////////////////////////
-        // Fetch articles again => assert we got a new one ...
-        // /////////////////////////////////////////////////////////////////////
-        response = ninjaTestBrowser.makeXmlRequest(getServerAddress()
-                + "api/bob@gmail.com/articles.xml");
-
-        articlesDto = xmlMapper.readValue(response, ArticlesDto.class);
-        // one new result:
-        assertEquals(4, articlesDto.articles.size());
-
-    }
 
     private Gson getGsonWithLongToDateParsing() {
         // Creates the json object which will manage the information received

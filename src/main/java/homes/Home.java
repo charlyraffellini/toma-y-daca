@@ -42,5 +42,5 @@ public class Home<TEntity extends DomainObject> {
 
     public int getNextId() {
         return nextId;
-    } // TODO: Este método y field habría que borrarlo cuando se implemente la persistencia
+    } // TODO: Este metodo y field habria que borrarlo cuando se implemente la persistencia
 }
