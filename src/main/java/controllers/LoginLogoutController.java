@@ -17,6 +17,7 @@
 package controllers;
 
 import com.google.inject.Provider;
+import models.domain.User;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -28,6 +29,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import dao.UserDao;
+import ninja.session.Session;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthBearerClientRequest;
@@ -40,19 +42,24 @@ import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
+import org.codehaus.jettison.json.JSONObject;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+
 @Singleton
 @FilterWith(AppEngineFilter.class)
 public class LoginLogoutController {
-    
+
     @Inject
     UserDao userDao;
-    
-    
+
+
+
     ///////////////////////////////////////////////////////////////////////////
     // Login
     ///////////////////////////////////////////////////////////////////////////
@@ -108,7 +115,7 @@ public class LoginLogoutController {
 				try {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
-							.setClientId("1479249045698079")
+							.setClientId("868005159879263")
 							.setRedirectURI("http://localhost:8080/face")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
@@ -118,7 +125,7 @@ public class LoginLogoutController {
 					return Results.redirect(request.getLocationUri());
 		}
 
-		public Result faceReturn(){
+		public Result faceReturn(Session session){
 
 			OAuthAuthzResponse oar = null;
 			String accessToken;
@@ -131,8 +138,8 @@ public class LoginLogoutController {
 				OAuthClientRequest request = OAuthClientRequest
 					.tokenProvider(OAuthProviderType.FACEBOOK)
 					.setGrantType(GrantType.AUTHORIZATION_CODE)
-					.setClientId("1479249045698079")
-					.setClientSecret("61dfe815137e0ed8ed8133a71331347b")
+					.setClientId("868005159879263")
+					.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
 					.setRedirectURI("http://localhost:8080/face")
 					.setCode(code)
 					.buildQueryMessage();
@@ -154,16 +161,46 @@ public class LoginLogoutController {
 
 				OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
 				me = resourceResponse.getBody();
+                JSONObject json = new JSONObject(me);
 
-			} catch (OAuthProblemException e) {
+
+                Objectify ofy = ObjectifyService.ofy();
+
+
+                User user = new User();
+                user.id = ofy.load().type(User.class).count();
+                user.fullname=(String)json.get("first_name")+" "+(String)json.get("last_name");
+                user.uid=(String)json.get("id");
+                user.oauth_token=accessToken;
+
+                String uid = (String)json.get("id");
+
+                if (ofy.load().type(User.class).filter("uid",uid).list().isEmpty()) {
+                    ofy.save().entity(user).now();
+                    session.put("userId",String.valueOf(user.id));
+                }else{
+                    long userId = ofy.load().type(User.class).filter("uid ==",user.uid).first().now().id;
+                    session.put("userId",String.valueOf(userId));
+                }
+
+
+
+            } catch (OAuthProblemException e) {
 				throw new RuntimeException(e.getMessage());
 			} catch (OAuthSystemException e) {
 				throw new RuntimeException(e.getMessage());
-			}
+			} catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
 
 			Map<String, String> stuffs = new HashMap<String, String>();
-			stuffs.put("access_token", accessToken);
+
+
+            String loggedIn = session.get("userId");
+            stuffs.put("loggedIn",loggedIn);
+            stuffs.put("access_token", accessToken);
 			stuffs.put("me", me);
+
 
 			return Results.json().render(stuffs);
 		}

@@ -1,8 +1,11 @@
 package models.domain;
 
+import com.googlecode.objectify.annotation.Entity;
+
 /**
  * Created by Palumbo on 27/09/2014.
  */
+@Entity
 public class Item extends DomainObject {
 
     public User owner;

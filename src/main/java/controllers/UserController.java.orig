@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+<<<<<<< HEAD
  * Created by jsorella on 01/11/2014.
  */
     public class UserController extends WebApiController{
@@ -35,13 +36,25 @@ import java.util.List;
 
             return Results.json().render(friends);
         }
-        
-        public Result getAllUsers(Session session){
+    }
 
-       	    List<User> users = this.getUsers();
-            return Results.json().render(users);
-        }
+
+=======
+ * Created by Federico on 01/11/14.
+ */
+public class UserController extends WebApiController{
+    @Inject
+    public UserController(Session session, UserHome userHome) {
+        super(session, userHome);
 
     }
 
 
+    public Result getAllUsers(Session session){
+
+        List<User> users = this.getUsers();
+        return Results.json().render(users);
+
+    }
+}
+>>>>>>> 8f296826162593400b4c13281b55174968faa0cf

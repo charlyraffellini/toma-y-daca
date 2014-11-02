@@ -22,7 +22,6 @@ import com.googlecode.objectify.Objectify;
 import homes.Home;
 import homes.ItemHome;
 import homes.UserHome;
-import models.cosas_de_mas.FrutasBag;
 import models.domain.*;
 import models.homes.TradeRequestHome;
 import models.integrations.ListingsApi;
@@ -39,11 +38,11 @@ public class Module extends AbstractModule {
     protected void configure() {
         bind(StartupActions.class);
         bind(Objectify.class).toProvider(ObjectifyProvider.class);
-        bind(FrutasBag.class);
+
         this.bindHomes();
         this.bindApis();
         install(new AppEngineModule());        
-        bind(Session.class).to(EncryptedSession.class);
+//        bind(Session.class).to(EncryptedSession.class); TODO: descomentar para que quede encriptada la sesion
     }
 
     private void bindApis() {

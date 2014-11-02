@@ -18,7 +18,16 @@ import java.util.List;
 @Index
 public class User extends DomainObject{
 
+<<<<<<< HEAD
     private List<User> friends;
+
+    public User()
+    {
+        this.friends = new ArrayList<User>();
+
+    }
+
+=======
     @Id
 
     public long id;
@@ -26,12 +35,9 @@ public class User extends DomainObject{
     public String oauth_token;
     public String fullname;
     public boolean isAdmin;
-    public User()
-    {
-        this.friends = new ArrayList<User>();
 
-    }
-
+    private Collection<User> friends = new ArrayList<>();
+>>>>>>> 8f296826162593400b4c13281b55174968faa0cf
 
     public User(String uid,String oauth_token, String fullname) {
         this.uid = uid;

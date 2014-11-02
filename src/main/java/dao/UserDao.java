@@ -2,7 +2,7 @@ package dao;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import models.cosas_de_mas.User;
+import models.domain.User;
 
 import com.googlecode.objectify.Objectify;
 
@@ -20,10 +20,7 @@ public class UserDao {
             
             if (user != null) {
                 
-                if (user.password.equals(password)) {
 
-                    return true;
-                }
                 
             }
 

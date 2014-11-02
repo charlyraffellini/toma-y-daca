@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by charly on 9/14/14.
@@ -16,7 +17,7 @@ public class EncryptedSessionTest extends NinjaTest {
         Session session = ninjaTestServer.getInjector().getInstance(Session.class);
 
         session.put("clave", "valor");
-        assertFalse(session.getData().containsKey("clave"));
+        assertTrue(session.getData().containsKey("clave"));//assertFalse(session.getData().containsKey("clave")); TODO: cuando volvamos a encriptar la session cambiar
     }
 
     @Test

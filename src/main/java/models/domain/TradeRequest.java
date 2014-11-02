@@ -1,10 +1,12 @@
 package models.domain;
 
+import com.googlecode.objectify.annotation.Entity;
 import models.domain.exceptions.TradeDoesntBelongToUser;
 
 /**
  * Created by Palumbo on 29/09/2014.
  */
+@Entity
 public class TradeRequest extends DomainObject{
     public final UserWithItem sender;
     public final UserWithItem receiver;
