@@ -1,6 +1,8 @@
 package controllers;
 
 import com.google.inject.Inject;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 import dtos.ItemCreateDTO;
 import homes.ItemHome;
 import homes.UserHome;
@@ -14,6 +16,7 @@ import ninja.params.PathParam;
 import ninja.session.Session;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Palumbo on 27/09/2014.
@@ -34,18 +37,17 @@ public class ItemsController extends WebApiController{
         User user = this.getUser(session);
 
         Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
-//        Listing listing = this.listingsApi.getListing("MLA527664161");
-
+        Objectify ofy = ObjectifyService.ofy();
         Item item = new Item(user, listing.description, listing.picture);
-        int id = this.itemHome.create(item);
-
-        return Results.json().render(id);
+        item.id = ofy.load().type(Item.class).count()+10;
+        ofy.save().entity(item).now();
+        return Results.json().render(item.id);
     }
 
     public Result getAllItems(Session session) {
         User user = this.getUser(session);
-
-        Collection<Item> items = this.itemHome.getAllItemsOf(user);
+        Objectify ofy = ObjectifyService.ofy();
+        List<Item> items = ofy.load().type(Item.class).list();
 
         return Results.json().render(items);
     }

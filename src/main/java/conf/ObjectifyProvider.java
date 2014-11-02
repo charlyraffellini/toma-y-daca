@@ -20,7 +20,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
     static {
 
         ObjectifyService.register(User.class);
-//        ObjectifyService.register(Item.class);
+        ObjectifyService.register(Item.class);
 //        ObjectifyService.register(TradeRequest.class);
 
 
