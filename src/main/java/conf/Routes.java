@@ -55,6 +55,7 @@ public class Routes implements ApplicationRoutes {
         // Friends
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/user/friends/{userId}/items").with(ItemsController.class, "getFriendItems");
+        router.GET().route("/friends/").with(UserController.class, "getAllFriends");
 
         ///////////////////////////////////////////////////////////////////////
         // Trades

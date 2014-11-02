@@ -12,7 +12,7 @@ public class Home<TEntity extends DomainObject> {
 
     private int nextId = 1;
 
-    private HashMap<Integer, TEntity> entities = new HashMap<>();
+    private HashMap<Integer, TEntity> entities = new HashMap();
 
     public int create(TEntity entity) {
         int id = nextId;

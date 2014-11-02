@@ -5,13 +5,21 @@ import models.domain.exceptions.UserDoesntHaveItemException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
 public class User extends DomainObject{
 
-    private Collection<User> friends = new ArrayList<>();
+    private List<User> friends;
+
+    public User()
+    {
+        this.friends = new ArrayList<User>();
+
+    }
+
 
     public void addFriend(User user) {
         this.friends.add(user);
@@ -38,4 +46,11 @@ public class User extends DomainObject{
         if (!item.hasOwner(this))
             throw new UserDoesntHaveItemException(this, item);
     }
+
+    public List<User> getAllFriends()
+    {
+        return this.friends;
+    }
+
+
 }
