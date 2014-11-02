@@ -31,7 +31,7 @@ import java.util.List;
 
 
         public Result getAllFriends() {
-            List<User> friends = getUser().getAllFriends();
+            List<User> friends = this.getUser().getAllFriends();
 
             return Results.json().render(friends);
         }

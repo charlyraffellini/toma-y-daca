@@ -21,7 +21,7 @@ public abstract class WebApiController {
     }
 
     protected User getUser() { //TODO: Poner este metodo en la Session.
-//        int userId = 3;
+       //int userId = 1;
         int userId = (int)Integer.parseInt(session.get("userId"));
         return this.userHome.get(userId);
     }

@@ -26,6 +26,8 @@ public class User extends DomainObject{
     public String oauth_token;
     public String fullname;
     public boolean isAdmin;
+
+
     public User()
     {
         this.friends = new ArrayList<User>();
@@ -37,10 +39,6 @@ public class User extends DomainObject{
         this.uid = uid;
         this.oauth_token=oauth_token;
         this.fullname = fullname;
-    }
-
-    public User(){
-
     }
 
     public void addFriend(User user) {
