@@ -1,46 +1,47 @@
 package homes;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.LoadType;
 import models.domain.DomainObject;
 
 import java.util.Collection;
-import java.util.HashMap;
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
-public class Home<TEntity extends DomainObject> {
+public abstract class Home<TEntity extends DomainObject> {
 
-    private int nextId = 1;
+    private final Objectify ofy;
 
-    private HashMap<Integer, TEntity> entities = new HashMap<>();
+    protected Home() {
+        this.ofy = ObjectifyService.ofy();
+    }
 
-    public int create(TEntity entity) {
-        int id = nextId;
-        nextId ++;
+    public long create(TEntity entity) {
+        long id = this.getLoader().count();
 
         entity.id = id;
-        entities.put(id, entity);
+        ofy.save().entity(entity).now();
 
         return id;
     }
 
     public Collection<TEntity> getAll() {
-        return entities.values();
+        return this.getLoader().list();
     }
 
     public TEntity get(int entityId) {
-        return entities.get(entityId);
+        return this.getLoader().filter("id ==",entityId).first().now();
     }
 
-    public void update(TEntity entity) {
-        entities.put(entity.id, entity);
+    public void update(TEntity entity) { ofy.save().entity(entity).now(); }
+
+    public void delete(TEntity entity) { ofy.delete().entity(entity).now(); }
+
+    private LoadType<TEntity> getLoader() {
+        return ofy.load().type(this.entityClass());
     }
 
-    public void delete(TEntity entity) {
-        entities.remove(entity.id);
-    }
-
-    public int getNextId() {
-        return nextId;
-    } // TODO: Este metodo y field habria que borrarlo cuando se implemente la persistencia
+    protected abstract Class<TEntity> entityClass();
 }

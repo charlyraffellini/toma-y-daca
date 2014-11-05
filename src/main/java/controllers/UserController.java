@@ -1,19 +1,11 @@
 package controllers;
 
 import com.google.inject.Inject;
-import dtos.ItemCreateDTO;
-import homes.ItemHome;
 import homes.UserHome;
-import models.domain.Item;
 import models.domain.User;
-import models.integrations.Listing;
-import models.integrations.ListingsApi;
 import ninja.Result;
 import ninja.Results;
-import ninja.params.PathParam;
-import ninja.session.Session;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,14 +13,11 @@ import java.util.List;
  */
 public class UserController extends WebApiController{
     @Inject
-    public UserController(Session session, UserHome userHome) {
-        super(session, userHome);
-
+    public UserController(UserHome userHome) {
+        super(userHome);
     }
 
-
-    public Result getAllUsers(Session session){
-
+    public Result getAllUsers(){
         List<User> users = this.getUsers();
         return Results.json().render(users);
 

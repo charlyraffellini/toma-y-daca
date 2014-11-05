@@ -22,4 +22,9 @@ public class ItemHome extends Home<Item> {
                 }
         );
     }
+
+    @Override
+    protected Class<Item> entityClass() {
+        return Item.class;
+    }
 }

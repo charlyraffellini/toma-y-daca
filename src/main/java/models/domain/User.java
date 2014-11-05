@@ -1,7 +1,6 @@
 package models.domain;
 
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import models.domain.exceptions.NotFriendUserException;
 import models.domain.exceptions.UserDoesntHaveItemException;
@@ -17,9 +16,6 @@ import java.util.Collection;
 @Index
 public class User extends DomainObject{
 
-    @Id
-
-    public long id;
     @Index public String uid;
     public String oauth_token;
     public String fullname;

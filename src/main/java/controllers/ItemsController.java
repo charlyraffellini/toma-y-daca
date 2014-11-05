@@ -24,34 +24,34 @@ public class ItemsController extends WebApiController{
     private ItemHome itemHome;
 
     @Inject
-    public ItemsController(Session session, UserHome userHome, ListingsApi listingsApi, ItemHome itemHome) {
-        super(session, userHome);
+    public ItemsController(UserHome userHome, ListingsApi listingsApi, ItemHome itemHome) {
+        super(userHome);
         this.listingsApi = listingsApi;
         this.itemHome = itemHome;
     }
 
-    public Result createItem(ItemCreateDTO itemCreateDTO) {
-        User user = this.getUser();
+    public Result createItem(ItemCreateDTO itemCreateDTO, Session session) {
+        User user = this.getUser(session);
 
         Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
 //        Listing listing = this.listingsApi.getListing("MLA527664161");
 
         Item item = new Item(user, listing.description, listing.picture);
-        int id = this.itemHome.create(item);
+        long id = this.itemHome.create(item);
 
         return Results.json().render(id);
     }
 
     public Result getAllItems(Session session) {
-        User user = this.getUser();
+        User user = this.getUser(session);
 
         Collection<Item> items = this.itemHome.getAllItemsOf(user);
 
         return Results.json().render(items);
     }
 
-    public Result getFriendItems(@PathParam("userId") int friendId) {
-        User user = this.getUser();
+    public Result getFriendItems(@PathParam("userId") int friendId, Session session) {
+        User user = this.getUser(session);
         User friend = this.userHome.get(friendId);
 
         user.validateFriend(friend);
