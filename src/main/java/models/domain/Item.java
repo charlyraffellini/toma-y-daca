@@ -1,13 +1,14 @@
 package models.domain;
 
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Index;
+import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.*;
+
+
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
-@Entity
-@Index
+
 public class Item extends DomainObject {
 
     public User owner;
@@ -19,6 +20,7 @@ public class Item extends DomainObject {
         this.description = description;
         this.picture = picture;
     }
+    public Item (){ }
 
     public boolean hasOwner(User user) {
         return owner == user;

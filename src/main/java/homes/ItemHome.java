@@ -1,6 +1,7 @@
 package homes;
 
 import com.google.common.base.Predicate;
+import models.domain.DomainObject;
 import models.domain.Item;
 import models.domain.User;
 import com.google.common.collect.Collections2;
@@ -10,8 +11,7 @@ import java.util.Collection;
 /**
  * Created by Palumbo on 27/09/2014.
  */
-public class ItemHome extends Home<Item> {
-
+public class ItemHome extends Home<Item, PersistentItem> {
     public Collection<Item> getAllItemsOf(final User user) {
         return Collections2.filter(this.getAll(),
                 new Predicate<Item>() {
@@ -24,7 +24,27 @@ public class ItemHome extends Home<Item> {
     }
 
     @Override
-    protected Class<Item> entityType() {
-        return Item.class;
+    protected PersistentItem transform(Item item) {
+        PersistentItem persItem = new PersistentItem();
+        persItem.description = item.description;
+        persItem.picture = item.picture;
+        persItem.ownerId = item.owner.id;
+        persItem.id = item.id;
+
+        return persItem;
+    }
+
+    @Override
+    protected Item transform(PersistentItem persistent) {
+        User user = this.ofy.load().type(User.class).id(persistent.ownerId).now();
+        Item item = new Item(user, persistent.description, persistent.picture);
+        item.id = persistent.id;
+        return item;
+    }
+
+    @Override
+    protected Class<PersistentItem> persistentType() {
+        return PersistentItem.class;
     }
 }
+

@@ -34,7 +34,6 @@ public class ItemsController extends WebApiController{
         User user = this.getUser(session);
 
         Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
-//        Listing listing = this.listingsApi.getListing("MLA527664161");
 
         Item item = new Item(user, listing.description, listing.picture);
         long id = this.itemHome.create(item);

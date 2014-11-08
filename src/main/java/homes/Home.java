@@ -1,8 +1,11 @@
 package homes;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import models.domain.DomainObject;
+import models.domain.User;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,33 +13,36 @@ import java.util.HashMap;
 /**
  * Created by Palumbo on 27/09/2014.
  */
-public abstract class Home<TEntity extends DomainObject> {
+public abstract class Home<TEntity extends DomainObject, TPersistent> {
 
-    private final Objectify ofy;
+    protected Objectify ofy;
 
-    private long nextId = 1;
     private HashMap<Long, TEntity> entities = new HashMap<>();
 
-    public Home() {
-        this.ofy = ObjectifyService.ofy();
+    public Home() {this.ofy = ObjectifyService.ofy();
+
     }
 
     public long create(TEntity entity) {
-        long id = nextId;
-        nextId ++;
+        entity.id = this.getNextId();
 
-        entity.id = id;
-        entities.put(id, entity);
+        this.ofy.save().entity(this.transform(entity)).now();
 
-        return id;
+        return entity.id;
     }
 
+
     public Collection<TEntity> getAll() {
-        return this.ofy.load().type(this.entityType()).list();
+        return Collections2.transform(this.ofy.load().type(this.persistentType()).list(), new Function<TPersistent, TEntity>() {
+            @Override
+            public TEntity apply(TPersistent entity) {
+                return transform(entity);
+            }
+        }) ;
     }
 
     public TEntity get(long entityId) {
-        return this.ofy.load().type(this.entityType()).filter("id", entityId).list().get(0);
+        return this.transform(this.ofy.load().type(this.persistentType()).filter("id", entityId).list().get(0));
     }
 
     public void update(TEntity entity) {
@@ -48,8 +54,11 @@ public abstract class Home<TEntity extends DomainObject> {
     }
 
     public long getNextId() {
-        return nextId;
-    } // TODO: Este metodo y field habria que borrarlo cuando se implemente la persistencia
+        return this.ofy.load().type(User.class).count() + 1;
+    }
 
-    protected abstract Class<TEntity> entityType();
+    protected abstract TPersistent transform(TEntity entity);
+    protected abstract TEntity transform(TPersistent persistent);
+    protected abstract Class<TPersistent> persistentType();
+
 }

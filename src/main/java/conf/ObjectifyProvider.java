@@ -3,6 +3,8 @@ package conf;
 import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import homes.PersistentItem;
+import models.domain.Item;
 import models.domain.User;
 
 public class ObjectifyProvider implements Provider<Objectify> {
@@ -16,7 +18,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
 
     static {
         ObjectifyService.register(User.class);
-//        ObjectifyService.register(Item.class);
+        ObjectifyService.register(PersistentItem.class);
 //        ObjectifyService.register(TradeRequest.class);
 
         setup();
@@ -32,7 +34,7 @@ public class ObjectifyProvider implements Provider<Objectify> {
         User user = ofy.load().type(User.class).first().now();
 
         //User bob = new User("123", "secret", "Bob");
-        //bob.id=1;
+        //bob.id = 1;
         //ofy.save().entity(bob).now();
 
         if (user == null) {
