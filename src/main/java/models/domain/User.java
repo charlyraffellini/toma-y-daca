@@ -16,22 +16,12 @@ import java.util.Collection;
 @Index
 public class User extends DomainObject{
 
-    @Index public String uid;
     public String oauth_token;
     public String fullname;
     public boolean isAdmin;
-
     private Collection<User> friends = new ArrayList<>();
 
-    public User(String uid,String oauth_token, String fullname) {
-        this.uid = uid;
-        this.oauth_token=oauth_token;
-        this.fullname = fullname;
-    }
-
-    public User(){
-
-    }
+    public User(){ }
 
     public void addFriend(User user) {
         this.friends.add(user);

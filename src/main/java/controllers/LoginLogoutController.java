@@ -168,18 +168,16 @@ public class LoginLogoutController {
 
 
                 User user = new User();
-                user.id = ofy.load().type(User.class).count();
-                user.fullname=(String)json.get("first_name")+" "+(String)json.get("last_name");
-                user.uid=(String)json.get("id");
+                user.id = json.getLong("id");
+                user.fullname = json.getString("first_name") + " " + json.getString("last_name");
                 user.oauth_token=accessToken;
 
-                String uid = (String)json.get("id");
 
-                if (ofy.load().type(User.class).filter("uid",uid).list().isEmpty()) {
+                if (ofy.load().type(User.class).filter("id", user.id).list().isEmpty()) {
                     ofy.save().entity(user).now();
                     session.put("userId",String.valueOf(user.id));
                 }else{
-                    long userId = ofy.load().type(User.class).filter("uid ==",user.uid).first().now().id;
+                    long userId = ofy.load().type(User.class).filter("id ==", user.id).first().now().id;
                     session.put("userId",String.valueOf(userId));
                 }
 
