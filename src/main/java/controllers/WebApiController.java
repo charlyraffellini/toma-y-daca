@@ -12,17 +12,14 @@ import java.util.List;
  * Created by Palumbo on 29/09/2014.
  */
 public abstract class WebApiController {
-    protected Session session;
     protected UserHome userHome;
 
-    protected WebApiController(Session session, UserHome userHome) {
-        this.session = session;
+    protected WebApiController(UserHome userHome) {
         this.userHome = userHome;
     }
 
-    protected User getUser() { //TODO: Poner este metodo en la Session.
-//        int userId = 3;
-        int userId = (int)Integer.parseInt(session.get("userId"));
+    protected User getUser(Session session) { //TODO: Poner este metodo en la Session.
+        long userId = Long.parseLong(session.get("userId"));
         return this.userHome.get(userId);
     }
 
