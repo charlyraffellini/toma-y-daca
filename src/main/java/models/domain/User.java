@@ -16,8 +16,7 @@ public class User extends DomainObject{
 
     public String oauth_token;
     public String fullname;
-    public boolean isAdmin;
-    private Collection<User> friends = new ArrayList<>();
+    public Collection<User> friends = new ArrayList<>();
 
     public User(){ }
 

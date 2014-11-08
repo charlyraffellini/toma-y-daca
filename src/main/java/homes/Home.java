@@ -46,7 +46,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public void update(TEntity entity) {
-        entities.put(entity.id, entity);
+        this.ofy.save().entity(this.transform(entity)).now();
     }
 
     public void delete(TEntity entity) {
