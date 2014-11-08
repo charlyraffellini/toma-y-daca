@@ -10,12 +10,12 @@ import java.util.HashMap;
  */
 public class Home<TEntity extends DomainObject> {
 
-    private int nextId = 1;
+    private long nextId = 1;
 
-    private HashMap<Integer, TEntity> entities = new HashMap<>();
+    private HashMap<Long, TEntity> entities = new HashMap<>();
 
-    public int create(TEntity entity) {
-        int id = nextId;
+    public long create(TEntity entity) {
+        long id = nextId;
         nextId ++;
 
         entity.id = id;
@@ -40,7 +40,7 @@ public class Home<TEntity extends DomainObject> {
         entities.remove(entity.id);
     }
 
-    public int getNextId() {
+    public long getNextId() {
         return nextId;
     } // TODO: Este metodo y field habria que borrarlo cuando se implemente la persistencia
 }

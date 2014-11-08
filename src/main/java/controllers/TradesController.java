@@ -36,7 +36,7 @@ public class TradesController extends WebApiController{
 
         TradeRequest tradeRequest = this.getUser().sendTrade(userItem, friend, friendItem);
 
-        int id = this.tradeHome.create(tradeRequest);
+        long id = this.tradeHome.create(tradeRequest);
 
         return Results.json().render(id);
     }
