@@ -1,11 +1,13 @@
 package models.domain;
 
 import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Index;
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
 @Entity
+@Index
 public class Item extends DomainObject {
 
     public User owner;

@@ -55,7 +55,6 @@ public class Routes implements ApplicationRoutes {
         // Friends
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/friends/{friendId}/items").with(ItemsController.class, "getFriendItems");
-        router.GET().route("/users").with(UserController.class,"getAllUsers");
 
         ///////////////////////////////////////////////////////////////////////
         // Trades
@@ -71,11 +70,16 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
         router.GET().route("/logout").with(LoginLogoutController.class, "logout");
 
-				router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
-				router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
+        router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
+        router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
+
+        ///////////////////////////////////////////////////////////////////////
+        // Users
+        ///////////////////////////////////////////////////////////////////////
+        router.GET().route("/users").with(UserController.class,"getAllUsers");
+        router.GET().route("/me").with(UserController.class,"getMe");
 
 
- 
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
         ///////////////////////////////////////////////////////////////////////    

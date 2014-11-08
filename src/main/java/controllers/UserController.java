@@ -18,9 +18,12 @@ public class UserController extends WebApiController{
         super(userHome);
     }
 
-
     public Result getAllUsers(Session session){
         List<User> users = this.getUsers();
         return Results.json().render(users);
+    }
+
+    public Result getMe(Session session){
+        return Results.json().render(this.getUser(session));
     }
 }
