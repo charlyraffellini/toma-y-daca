@@ -18,11 +18,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
 
     protected Objectify ofy;
 
-    private HashMap<Long, TEntity> entities = new HashMap<>();
-
-    public Home() {this.ofy = ObjectifyService.ofy();
-
-    }
+    public Home() { this.ofy = ObjectifyService.ofy(); }
 
     public long create(TEntity entity) {
         entity.id = this.getNextId();
@@ -52,7 +48,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public void delete(TEntity entity) {
-        entities.remove(entity.id);
+        this.ofy.delete().entity(this.transform(entity)).now();
     }
 
     public long getNextId() {

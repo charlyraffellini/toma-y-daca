@@ -12,4 +12,9 @@ public class DomainObject {
     @Id
     @Index
     public long id;
+
+    public DomainObject withId(int id) {
+        this.id = id;
+        return this;
+    }
 }

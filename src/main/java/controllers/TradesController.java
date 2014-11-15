@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import dtos.TradeCreateDTO;
 import dtos.TradeExecuteDTO;
 import homes.ItemHome;
+import homes.TradeHome;
 import homes.UserHome;
 import models.domain.Item;
 import models.domain.TradeRequest;
@@ -20,10 +21,10 @@ import ninja.session.Session;
 public class TradesController extends WebApiController{
 
     private ItemHome itemHome;
-    private TradeRequestHome tradeHome;
+    private TradeHome tradeHome;
 
     @Inject
-    public TradesController(UserHome userHome, ItemHome itemHome, TradeRequestHome tradeHome) {
+    public TradesController(UserHome userHome, ItemHome itemHome, TradeHome tradeHome) {
         super(userHome);
         this.itemHome = itemHome;
         this.tradeHome = tradeHome;
@@ -48,7 +49,11 @@ public class TradesController extends WebApiController{
         if (tradeExecuteDTO.response == "accepted")
             trade.accept();
 
+        this.itemHome.update(trade.receiverItem);
+        this.itemHome.update(trade.senderItem);
+
         this.tradeHome.delete(trade);
+
         return Results.json().render("ok");
     }
 }

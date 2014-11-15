@@ -2,7 +2,7 @@ package models.domain;
 
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.*;
-
+import models.domain.exceptions.UserDoesntHaveItemException;
 
 
 /**
@@ -28,5 +28,10 @@ public class Item extends DomainObject {
 
     public void changeOwnerTo(User user) {
         this.owner = user;
+    }
+
+    public void validateOwner(User user) {
+        if (!this.hasOwner(user))
+            throw new UserDoesntHaveItemException(user, this);
     }
 }

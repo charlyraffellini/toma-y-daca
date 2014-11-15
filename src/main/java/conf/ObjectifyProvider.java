@@ -4,8 +4,8 @@ import com.google.inject.Provider;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import homes.PersistentItem;
+import homes.PersistentTrade;
 import homes.PersistentUser;
-import models.domain.User;
 
 public class ObjectifyProvider implements Provider<Objectify> {
     
@@ -18,11 +18,8 @@ public class ObjectifyProvider implements Provider<Objectify> {
 
     static {
         ObjectifyService.register(PersistentUser.class);
-//        ObjectifyService.register(User.class);
         ObjectifyService.register(PersistentItem.class);
-
-
-//        ObjectifyService.register(TradeRequest.class);
+        ObjectifyService.register(PersistentTrade.class);
 
         setup();
     }

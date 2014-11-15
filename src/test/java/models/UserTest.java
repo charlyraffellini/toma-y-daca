@@ -3,7 +3,6 @@ package models;
 import models.domain.Item;
 import models.domain.TradeRequest;
 import models.domain.User;
-import models.domain.UserWithItem;
 import models.domain.exceptions.NotFriendUserException;
 import models.domain.exceptions.UserDoesntHaveItemException;
 import org.junit.Before;
@@ -17,9 +16,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class UserTest {
 
-    private User user = new User();
-    private User friend = new User();
-    private User noFriend = new User();
+    private User user = (User) new User().withId(1);
+    private User friend = (User) new User().withId(2);
+    private User noFriend = (User) new User().withId(3);
 
     @Before
     public void initializeUsers(){
@@ -31,17 +30,6 @@ public class UserTest {
         this.user.validateFriend(noFriend);
     }
 
-    @Test(expected = UserDoesntHaveItemException.class)
-    public void testCanValidateHisItems(){
-        this.user.validateItem(new Item(friend, "", ""));
-    }
-
-    @Test(expected = UserDoesntHaveItemException.class)
-    public void testCanNotGetAnOtherUsersItem(){
-        Item noFriendItem = new Item(noFriend, "Friend Item", "Img1");
-        this.friend.getWithItem(noFriendItem);
-    }
-
     @Test
     public void testCanSendATradeRequestToAFriend(){
         Item friendItem = new Item(friend, "Friend Item", "Img1");
@@ -49,12 +37,10 @@ public class UserTest {
 
         TradeRequest tradeRequest = this.user.sendTrade(userItem, friend, friendItem);
 
-        UserWithItem sender = tradeRequest.sender;
-        assertEquals(user, sender.user);
-        assertEquals(userItem, sender.item);
-        UserWithItem receiver = tradeRequest.receiver;
-        assertEquals(friend, receiver.user);
-        assertEquals(friendItem, receiver.item);
+        assertEquals(user, tradeRequest.senderUser);
+        assertEquals(userItem, tradeRequest.senderItem);
+        assertEquals(friend, tradeRequest.receiverUser);
+        assertEquals(friendItem, tradeRequest.receiverItem);
     }
 
     @Test(expected = NotFriendUserException.class)

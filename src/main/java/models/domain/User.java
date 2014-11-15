@@ -26,23 +26,14 @@ public class User extends DomainObject{
 
     public TradeRequest sendTrade(Item item, User friend, Item friendItem) {
         this.validateFriend(friend);
+        item.validateOwner(this);
+        friendItem.validateOwner(friend);
 
-        return new TradeRequest(this.getWithItem(item), friend.getWithItem(friendItem));
-    }
-
-    public UserWithItem getWithItem(Item item) {
-        this.validateItem(item);
-
-        return new UserWithItem(this, item);
+        return new TradeRequest(this, item, friend, friendItem);
     }
 
     public void validateFriend(User friend) {
         if (!friendIds.contains(friend.id))
             throw new NotFriendUserException(friend);
-    }
-
-    public void validateItem(Item item) {
-        if (!item.hasOwner(this))
-            throw new UserDoesntHaveItemException(this, item);
     }
 }
