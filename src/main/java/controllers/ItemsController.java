@@ -1,7 +1,10 @@
 package controllers;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
 import dtos.ItemCreateDTO;
+import dtos.ItemDTO;
 import homes.ItemHome;
 import homes.UserHome;
 import models.domain.Item;
@@ -46,7 +49,7 @@ public class ItemsController extends WebApiController{
 
         Collection<Item> items = this.itemHome.getAllItemsOf(user);
 
-        return Results.json().render(items);
+        return Results.json().render(this.transformItems(items));
     }
 
     public Result getFriendItems(@PathParam("userId") int friendId, Session session) {
@@ -57,6 +60,6 @@ public class ItemsController extends WebApiController{
 
         Collection<Item> items = this.itemHome.getAllItemsOf(friend);
 
-        return Results.json().render(items);
+        return Results.json().render(this.transformItems(items));
     }
 }

@@ -34,7 +34,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
 
 
     public Collection<TEntity> getAll() {
-        return Collections2.transform(this.ofy.load().type(this.persistentType()).list(), new Function<TPersistent, TEntity>() {
+        return Collections2.transform(this.getLoader().list(), new Function<TPersistent, TEntity>() {
             @Override
             public TEntity apply(TPersistent entity) {
                 return transform(entity);
@@ -43,11 +43,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public TEntity get(long entityId) {
-        Loader asdf =  ObjectifyService.ofy().load();
-        LoadType<TPersistent> asdfg = asdf.type(this.persistentType());
-        TPersistent asdfgh = asdfg.id(entityId).now();
-//        int count = asdfgh.list().size();
-//        TPersistent asd = asdfgh.list().get(0);
+        TPersistent asdfgh = this.getLoader().id(entityId).now();
         return this.transform(asdfgh);
     }
 
@@ -60,7 +56,11 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public long getNextId() {
-        return this.ofy.load().type(this.persistentType()).count() + 1;
+        return this.getLoader().count() + 1;
+    }
+
+    protected LoadType<TPersistent> getLoader(){
+        return this.ofy.load().type(this.persistentType());
     }
 
     protected abstract TPersistent transform(TEntity entity);

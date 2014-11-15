@@ -13,8 +13,8 @@ public class UserHome extends Home<User,PersistentUser> {
         persUser.id=user.id;
         persUser.oauth_token=user.oauth_token;
         persUser.fullname=user.fullname;
-        for (User friend : user.friends) {
-            persUser.friendIds.add(friend.id);
+        for (Long friend : user.friendIds) {
+            persUser.friendIds.add(friend);
         }
 
         return persUser;
@@ -27,7 +27,7 @@ public class UserHome extends Home<User,PersistentUser> {
         user.oauth_token=persistentUser.oauth_token;
         user.fullname=persistentUser.fullname;
         for (Long friendId : persistentUser.friendIds) {
-            user.addFriend(this.get(friendId));
+            user.addFriend(friendId);
         }
         return user;
     }

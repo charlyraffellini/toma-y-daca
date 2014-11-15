@@ -16,12 +16,12 @@ public class User extends DomainObject{
 
     public String oauth_token;
     public String fullname;
-    public Collection<User> friends = new ArrayList<>();
+    public Collection<Long> friendIds = new ArrayList<>();
 
     public User(){ }
 
-    public void addFriend(User user) {
-        this.friends.add(user);
+    public void addFriend(Long id) {
+        this.friendIds.add(id);
     }
 
     public TradeRequest sendTrade(Item item, User friend, Item friendItem) {
@@ -37,7 +37,7 @@ public class User extends DomainObject{
     }
 
     public void validateFriend(User friend) {
-        if (!friends.contains(friend))
+        if (!friendIds.contains(friend.id))
             throw new NotFriendUserException(friend);
     }
 

@@ -23,7 +23,7 @@ public class UserTest {
 
     @Before
     public void initializeUsers(){
-        user.addFriend(friend);
+        user.addFriend(friend.id);
     }
 
     @Test(expected = NotFriendUserException.class)
