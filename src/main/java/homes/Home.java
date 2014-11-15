@@ -4,8 +4,9 @@ import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.LoadType;
+import com.googlecode.objectify.cmd.Loader;
 import models.domain.DomainObject;
-import models.domain.User;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -42,7 +43,12 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public TEntity get(long entityId) {
-        return this.transform(this.ofy.load().type(this.persistentType()).filter("id", entityId).list().get(0));
+        Loader asdf =  ObjectifyService.ofy().load();
+        LoadType<TPersistent> asdfg = asdf.type(this.persistentType());
+        TPersistent asdfgh = asdfg.id(entityId).now();
+//        int count = asdfgh.list().size();
+//        TPersistent asd = asdfgh.list().get(0);
+        return this.transform(asdfgh);
     }
 
     public void update(TEntity entity) {
@@ -54,11 +60,11 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public long getNextId() {
-        return this.ofy.load().type(User.class).count() + 1;
+        return this.ofy.load().type(this.persistentType()).count() + 1;
     }
 
     protected abstract TPersistent transform(TEntity entity);
-    protected abstract TEntity transform(TPersistent persistent);
+    protected abstract TEntity  transform(TPersistent persistent);
     protected abstract Class<TPersistent> persistentType();
 
 }

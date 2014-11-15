@@ -3,16 +3,37 @@ package homes;
 import models.domain.User;
 
 /**
- * Created by Palumbo on 27/09/2014.
+ * Not Created by Palumbo on 27/09/2014.
  */
-public class UserHome extends Home<User, User> {
+public class UserHome extends Home<User,PersistentUser> {
+
     @Override
-    protected User transform(User persistent) {
-        return persistent;
+    protected PersistentUser transform(User user) {
+        PersistentUser persUser = new PersistentUser();
+        persUser.id=user.id;
+        persUser.oauth_token=user.oauth_token;
+        persUser.fullname=user.fullname;
+        for (User friend : user.friends) {
+            persUser.friendIds.add(friend.id);
+        }
+
+        return persUser;
     }
 
     @Override
-    protected Class<User> persistentType() {
-        return User.class;
+    protected User transform(PersistentUser persistentUser) {
+        User user = new User();
+        user.id=persistentUser.id;
+        user.oauth_token=persistentUser.oauth_token;
+        user.fullname=persistentUser.fullname;
+        for (Long friendId : persistentUser.friendIds) {
+            user.addFriend(this.get(friendId));
+        }
+        return user;
+    }
+
+    @Override
+    protected Class<PersistentUser> persistentType() {
+        return PersistentUser.class;
     }
 }

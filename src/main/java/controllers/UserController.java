@@ -8,6 +8,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.session.Session;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class UserController extends WebApiController{
     }
 
     public Result getAllUsers(Session session){
-        List<User> users = this.getUsers();
+        Collection<User> users = this.getUsers();
         return Results.json().render(users);
     }
 

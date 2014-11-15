@@ -17,6 +17,8 @@
 package controllers;
 
 import com.google.inject.Provider;
+import homes.PersistentUser;
+import homes.UserHome;
 import models.domain.User;
 import ninja.Context;
 import ninja.FilterWith;
@@ -57,6 +59,9 @@ public class LoginLogoutController {
 
     @Inject
     UserDao userDao;
+
+    @Inject
+    UserHome userHome;
 
 
 
@@ -173,14 +178,11 @@ public class LoginLogoutController {
                 user.oauth_token=accessToken;
 
 
-                if (ofy.load().type(User.class).filter("id", user.id).list().isEmpty()) {
-                    ofy.save().entity(user).now();
-                    session.put("userId",String.valueOf(user.id));
-                }else{
-                    long userId = ofy.load().type(User.class).filter("id ==", user.id).first().now().id;
-                    session.put("userId",String.valueOf(userId));
+                if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
+                    userHome.update(user);
                 }
 
+                session.put("userId",String.valueOf(user.id));
 
 
             } catch (OAuthProblemException e) {

@@ -6,6 +6,7 @@ import homes.UserHome;
 import models.domain.User;
 import ninja.session.Session;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,8 +24,8 @@ public abstract class WebApiController {
         return this.userHome.get(userId);
     }
 
-    protected List<User> getUsers() { //TODO: Poner este metodo en la Session.
+    protected Collection<User> getUsers() { //TODO: Poner este metodo en la Session.
         Objectify ofy = ObjectifyService.ofy();
-        return ofy.load().type(User.class).list();
+        return this.userHome.getAll();
     }
 }

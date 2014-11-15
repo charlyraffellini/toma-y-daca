@@ -23,7 +23,7 @@ public class Item extends DomainObject {
     public Item (){ }
 
     public boolean hasOwner(User user) {
-        return owner == user;
+        return owner.id == user.id;
     }
 
     public void changeOwnerTo(User user) {
