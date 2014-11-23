@@ -71,15 +71,17 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
         router.GET().route("/logout").with(LoginLogoutController.class, "logout");
 
-				router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
-				router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
+		router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
+		router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
 
-
+        router.GET().route("/spa").with(MainController.class, "spa");
+            router.GET().route("/searchItem").with(MainController.class, "searchItem");
+                router.GET().route("/selectItem").with(MainController.class, "selectItem");
  
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
         ///////////////////////////////////////////////////////////////////////    
-        router.GET().route("/assets/{fileName: .*}*").with(AssetsController.class, "serveStatic");
+        router.GET().route("/assets/{fileName: .*}*").with(AssetsController.class, "serve");
         router.GET().route("/webjars/{fileName: .*}").with(AssetsController.class, "serveWebJars");
 
 

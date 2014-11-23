@@ -7,17 +7,19 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 
-/**
- * Created by charly on 11/4/14.
- */
 @Singleton
 @FilterWith(AppEngineFilter.class)
-public class MeliListController {
+public class MainController {
 
-    public Result showList(Context context) {
-
+    public Result spa(Context context) {
         return Results.html();
-
     }
 
+    public Result searchItem(Context context){
+        return Results.html();
+    }
+
+    public Result selectItem(Context context){
+        return Results.html();
+    }
 }
