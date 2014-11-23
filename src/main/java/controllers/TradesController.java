@@ -46,8 +46,9 @@ public class TradesController extends WebApiController{
         TradeRequest trade = this.tradeHome.get(tradeId);
         trade.validateOwner(this.getUser(session));
 
-        if (tradeExecuteDTO.response == "accepted")
+        if (tradeExecuteDTO.response.equals("accepted")) {
             trade.accept();
+        }
 
         this.itemHome.update(trade.receiverItem);
         this.itemHome.update(trade.senderItem);
