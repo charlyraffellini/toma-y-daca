@@ -5,9 +5,11 @@ import com.google.common.collect.Collections2;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import dtos.ItemDTO;
+import dtos.TradeRequestDTO;
 import dtos.UserDTO;
 import homes.UserHome;
 import models.domain.Item;
+import models.domain.TradeRequest;
 import models.domain.User;
 import ninja.session.Session;
 
@@ -52,7 +54,7 @@ public abstract class WebApiController {
         return dto;
     }
 
-    protected Collection<UserDTO> transformUser(Collection<User> users) {
+    protected Collection<UserDTO> transformUsers(Collection<User> users) {
         return Collections2.transform(users, new Function<User, UserDTO>() {
             @Override
             public UserDTO apply(User user) {
@@ -65,6 +67,27 @@ public abstract class WebApiController {
         UserDTO dto = new UserDTO();
         dto.id = user.id;
         dto.fullname = user.fullname;
+        return dto;
+    }
+
+    protected Collection<TradeRequestDTO> transformTrades(Collection<TradeRequest> trades) {
+        return Collections2.transform(trades, new Function<TradeRequest, TradeRequestDTO>() {
+            @Override
+            public TradeRequestDTO apply(TradeRequest trade) {
+                return transform(trade);
+            }
+        });
+    }
+
+    protected TradeRequestDTO transform(TradeRequest trade) {
+        TradeRequestDTO dto = new TradeRequestDTO();
+
+        dto.senderUser = this.transform(trade.senderUser);
+        dto.senderItem = this.transform(trade.senderItem);
+
+        dto.receiverUser = this.transform(trade.receiverUser);
+        dto.receiverItem = this.transform(trade.receiverItem);
+
         return dto;
     }
 }

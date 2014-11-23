@@ -9,6 +9,7 @@ import homes.ItemHome;
 import homes.UserHome;
 import models.domain.Item;
 import models.domain.User;
+import models.integrations.FacebookAPI;
 import models.integrations.Listing;
 import models.integrations.ListingsApi;
 import ninja.Result;
@@ -25,12 +26,14 @@ public class ItemsController extends WebApiController{
 
     private ListingsApi listingsApi;
     private ItemHome itemHome;
+    private FacebookAPI facebookAPI;
 
     @Inject
-    public ItemsController(UserHome userHome, ListingsApi listingsApi, ItemHome itemHome) {
+    public ItemsController(UserHome userHome, ListingsApi listingsApi, ItemHome itemHome, FacebookAPI facebookAPI) {
         super(userHome);
         this.listingsApi = listingsApi;
         this.itemHome = itemHome;
+        this.facebookAPI = facebookAPI;
     }
 
     public Result createItem(ItemCreateDTO itemCreateDTO, Session session) {
@@ -40,6 +43,10 @@ public class ItemsController extends WebApiController{
 
         Item item = new Item(user, listing.description, listing.picture);
         long id = this.itemHome.create(item);
+
+        if (itemCreateDTO.wallPost) {
+            this.facebookAPI.postNewItem(user, item);
+        }
 
         return Results.json().render(id);
     }
@@ -64,7 +71,7 @@ public class ItemsController extends WebApiController{
     }
 
     public Result deleteItem(@PathParam("itemId") int itemId, Session session){
-        
+
         Item item = itemHome.get(itemId);
         itemHome.delete(item);
 

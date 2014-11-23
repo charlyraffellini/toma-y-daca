@@ -10,7 +10,6 @@ import ninja.session.Session;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Federico on 01/11/14.
@@ -39,13 +38,13 @@ public class UserController extends WebApiController{
             friends.add(this.userHome.get(friendId));
         }
 
-        return Results.json().render(this.transformUser(friends));
+        return Results.json().render(this.transformUsers(friends));
     }
 
     public Result getAllUsers(Session session){
         Collection<User> users = this.getUsers();
 
-        return Results.json().render(this.transformUser(users));
+        return Results.json().render(this.transformUsers(users));
     }
 
     public Result getMe(Session session){

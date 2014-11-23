@@ -122,6 +122,7 @@ public class LoginLogoutController {
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
 							.setClientId("868005159879263")
 							.setRedirectURI("http://localhost:8080/face")
+                            .setScope("publish_actions")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
 						throw new RuntimeException(e.getMessage());

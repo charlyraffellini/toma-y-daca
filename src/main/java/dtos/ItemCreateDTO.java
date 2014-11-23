@@ -5,4 +5,5 @@ package dtos;
  */
 public class ItemCreateDTO {
     public String meliId;
+    public boolean wallPost;
 }
