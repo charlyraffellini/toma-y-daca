@@ -50,6 +50,7 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         router.POST().route("/items").with(ItemsController.class, "createItem");
         router.GET().route("/items").with(ItemsController.class, "getAllItems");
+        router.DELETE().route("/items/{itemId}").with(ItemsController.class, "deleteItem");
 
         ///////////////////////////////////////////////////////////////////////
         // Friends

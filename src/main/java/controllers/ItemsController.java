@@ -52,7 +52,7 @@ public class ItemsController extends WebApiController{
         return Results.json().render(this.transformItems(items));
     }
 
-    public Result getFriendItems(@PathParam("userId") int friendId, Session session) {
+    public Result getFriendItems(@PathParam("friendId") long friendId, Session session) {
         User user = this.getUser(session);
         User friend = this.userHome.get(friendId);
 
@@ -61,5 +61,13 @@ public class ItemsController extends WebApiController{
         Collection<Item> items = this.itemHome.getAllItemsOf(friend);
 
         return Results.json().render(this.transformItems(items));
+    }
+
+    public Result deleteItem(@PathParam("itemId") int itemId, Session session){
+        
+        Item item = itemHome.get(itemId);
+        itemHome.delete(item);
+
+        return Results.json().render("ok");
     }
 }
