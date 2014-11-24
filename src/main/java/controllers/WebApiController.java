@@ -14,7 +14,6 @@ import models.domain.User;
 import ninja.session.Session;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Palumbo on 29/09/2014.
@@ -82,10 +81,7 @@ public abstract class WebApiController {
     protected TradeRequestDTO transform(TradeRequest trade) {
         TradeRequestDTO dto = new TradeRequestDTO();
 
-        dto.senderUser = this.transform(trade.senderUser);
         dto.senderItem = this.transform(trade.senderItem);
-
-        dto.receiverUser = this.transform(trade.receiverUser);
         dto.receiverItem = this.transform(trade.receiverItem);
 
         return dto;
