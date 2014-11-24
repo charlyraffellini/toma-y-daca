@@ -4,7 +4,7 @@
 <div>
     <li ng-repeat="item in items">
         [{{$index + 1}}] <img ng-src="{{item.thumbnail}}"/>  {{item.title}}
-        <a ui-sref="search-item.define-item">Crear Item</a>
+        <a ui-sref="search-item.define-item" ng-click="saveItem(item)">Crear Item</a>
     </li>
 
     <pagination ng-change="pageChanged()" total-items="totalItems" items-per-page="50" ng-model="currentPage" lass="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>

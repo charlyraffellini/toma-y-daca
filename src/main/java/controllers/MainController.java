@@ -22,4 +22,8 @@ public class MainController {
     public Result selectItem(Context context){
         return Results.html();
     }
+
+    public Result defineItem(Context context){
+        return Results.html();
+    }
 }

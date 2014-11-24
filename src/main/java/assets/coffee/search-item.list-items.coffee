@@ -4,7 +4,10 @@ app.config ($stateProvider) ->
 		templateUrl: "selectItem"
 		controller: 'search-item.list-itemsController'
 
-app.controller 'search-item.list-itemsController', ($scope, meliApi) ->
+app.factory "itemFound", ->
+	item: null
+
+app.controller 'search-item.list-itemsController', ($scope, meliApi, itemFound) ->
 	s = $scope
 	s.totalItems = 0
 	s.itemsPerPage = 50
@@ -19,8 +22,5 @@ app.controller 'search-item.list-itemsController', ($scope, meliApi) ->
 			s.totalItems = paging.total
 			s.items = results
 
-
-
-
-
-
+	s.saveItem = (item) =>
+		itemFound.item = item
