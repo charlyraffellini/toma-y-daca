@@ -16,7 +16,13 @@
 
 package controllers;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+import dao.UserDao;
+import dtos.LoginDTO;
 import homes.PersistentUser;
 import homes.UserHome;
 import models.domain.User;
@@ -26,11 +32,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
-import dao.UserDao;
 import ninja.session.Session;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -45,12 +46,9 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.codehaus.jettison.json.JSONObject;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 
 
 @Singleton
@@ -185,6 +183,13 @@ public class LoginLogoutController {
 
                 session.put("userId",String.valueOf(user.id));
 
+                LoginDTO dto = new LoginDTO();
+                dto.id = user.id;
+                dto.name = user.fullname;
+                dto.accessToken = user.oauth_token;
+
+                return Results.json().render(dto);
+
 
             } catch (OAuthProblemException e) {
 				throw new RuntimeException(e.getMessage());
@@ -193,17 +198,6 @@ public class LoginLogoutController {
 			} catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
-
-			Map<String, String> stuffs = new HashMap<String, String>();
-
-
-            String loggedIn = session.get("userId");
-            stuffs.put("loggedIn",loggedIn);
-            stuffs.put("access_token", accessToken);
-			stuffs.put("me", me);
-
-
-			return Results.json().render(stuffs);
 		}
 
     ///////////////////////////////////////////////////////////////////////////
