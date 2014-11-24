@@ -1,11 +1,15 @@
 package controllers;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
 import dtos.ItemCreateDTO;
+import dtos.ItemDTO;
 import homes.ItemHome;
 import homes.UserHome;
 import models.domain.Item;
 import models.domain.User;
+import models.integrations.FacebookAPI;
 import models.integrations.Listing;
 import models.integrations.ListingsApi;
 import ninja.Result;
@@ -22,41 +26,55 @@ public class ItemsController extends WebApiController{
 
     private ListingsApi listingsApi;
     private ItemHome itemHome;
+    private FacebookAPI facebookAPI;
 
     @Inject
-    public ItemsController(Session session, UserHome userHome, ListingsApi listingsApi, ItemHome itemHome) {
-        super(session, userHome);
+    public ItemsController(UserHome userHome, ListingsApi listingsApi, ItemHome itemHome, FacebookAPI facebookAPI) {
+        super(userHome);
         this.listingsApi = listingsApi;
         this.itemHome = itemHome;
+        this.facebookAPI = facebookAPI;
     }
 
-    public Result createItem(ItemCreateDTO itemCreateDTO) {
-        User user = this.getUser();
+    public Result createItem(ItemCreateDTO itemCreateDTO, Session session) {
+        User user = this.getUser(session);
 
         Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
 
         Item item = new Item(user, listing.description, listing.picture);
-        int id = this.itemHome.create(item);
+        long id = this.itemHome.create(item);
+
+        if (itemCreateDTO.wallPost) {
+            this.facebookAPI.postNewItem(user, item);
+        }
 
         return Results.json().render(id);
     }
 
     public Result getAllItems(Session session) {
-        User user = this.getUser();
+        User user = this.getUser(session);
 
         Collection<Item> items = this.itemHome.getAllItemsOf(user);
 
-        return Results.json().render(items);
+        return Results.json().render(this.transformItems(items));
     }
 
-    public Result getFriendItems(@PathParam("userId") int friendId) {
-        User user = this.getUser();
+    public Result getFriendItems(@PathParam("friendId") long friendId, Session session) {
+        User user = this.getUser(session);
         User friend = this.userHome.get(friendId);
 
         user.validateFriend(friend);
 
         Collection<Item> items = this.itemHome.getAllItemsOf(friend);
 
-        return Results.json().render(items);
+        return Results.json().render(this.transformItems(items));
+    }
+
+    public Result deleteItem(@PathParam("itemId") int itemId, Session session){
+
+        Item item = itemHome.get(itemId);
+        itemHome.delete(item);
+
+        return Results.json().render("ok");
     }
 }

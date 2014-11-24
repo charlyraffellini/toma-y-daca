@@ -50,21 +50,21 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         router.POST().route("/items").with(ItemsController.class, "createItem");
         router.GET().route("/items").with(ItemsController.class, "getAllItems");
+        router.DELETE().route("/items/{itemId}").with(ItemsController.class, "deleteItem");
 
         ///////////////////////////////////////////////////////////////////////
         // Friends
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/user/friends/{userId}/items").with(ItemsController.class, "getFriendItems");
+        router.GET().route("/friends").with(UserController.class, "getFriends");
+        router.POST().route("/friends").with(UserController.class, "addFriend");
+        router.GET().route("/friends/{friendId}/items").with(ItemsController.class, "getFriendItems");
 
         ///////////////////////////////////////////////////////////////////////
         // Trades
         ///////////////////////////////////////////////////////////////////////
-        router.POST().route("/trade").with(TradesController.class, "sendTradeRequest");
-        router.PUT().route("/trade/{tradeId}").with(TradesController.class, "executeTradeRequest");
-
-
-
-
+        router.GET().route("/trades").with(TradesController.class, "listTradeRequests");
+        router.POST().route("/trades").with(TradesController.class, "sendTradeRequest");
+        router.PUT().route("/trades/{tradeId}").with(TradesController.class, "executeTradeRequest");
 
 
         ///////////////////////////////////////////////////////////////////////
@@ -74,28 +74,16 @@ public class Routes implements ApplicationRoutes {
         router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
         router.GET().route("/logout").with(LoginLogoutController.class, "logout");
 
-				router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
-				router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
-        
-        ///////////////////////////////////////////////////////////////////////
-        // Create new article
-        ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/article/new").with(ArticleController.class, "articleNew");
-        router.POST().route("/article/new").with(ArticleController.class, "articleNewPost");
-        
-        ///////////////////////////////////////////////////////////////////////
-        // Create new article
-        ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/article/{id}").with(ArticleController.class, "articleShow");
+        router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
+        router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
 
         ///////////////////////////////////////////////////////////////////////
-        // Api for management of software
+        // Users
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/api/{username}/articles.json").with(ApiController.class, "getArticlesJson");
-        router.GET().route("/api/{username}/articles.xml").with(ApiController.class, "getArticlesXml");
-        router.POST().route("/api/{username}/article.json").with(ApiController.class, "postArticleJson");
-        router.POST().route("/api/{username}/article.xml").with(ApiController.class, "postArticleXml");
- 
+        router.GET().route("/users").with(UserController.class,"getAllUsers");
+        router.GET().route("/me").with(UserController.class,"getMe");
+
+
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
         ///////////////////////////////////////////////////////////////////////    
@@ -103,8 +91,6 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/webjars/{fileName: .*}").with(AssetsController.class, "serveWebJars");
 
 
-        router.GET().route("/frutas").with(FrutaController.class, "getAllFrutas");
-        router.POST().route("/frutas").with(FrutaController.class, "postAFruta");
 
         ///////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page

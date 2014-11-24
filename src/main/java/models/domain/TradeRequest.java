@@ -1,17 +1,27 @@
 package models.domain;
 
+import com.googlecode.objectify.annotation.Entity;
 import models.domain.exceptions.TradeDoesntBelongToUser;
+import models.domain.exceptions.UserDoesntHaveItemException;
 
 /**
  * Created by Palumbo on 29/09/2014.
  */
+@Entity
 public class TradeRequest extends DomainObject{
-    public final UserWithItem sender;
-    public final UserWithItem receiver;
+    public User senderUser;
+    public Item senderItem;
 
-    public TradeRequest(UserWithItem sender, UserWithItem receiver) {
-        this.sender = sender;
-        this.receiver = receiver;
+    public User receiverUser;
+    public Item receiverItem;
+
+    public TradeRequest(){}
+
+    public TradeRequest(User senderUser, Item senderItem, User receiverUser, Item receiverItem) {
+        this.receiverUser = receiverUser;
+        this.receiverItem = receiverItem;
+        this.senderUser = senderUser;
+        this.senderItem = senderItem;
     }
 
     public void accept() {
@@ -20,17 +30,17 @@ public class TradeRequest extends DomainObject{
     }
 
     private void changeItems() {
-        this.sender.item.changeOwnerTo(this.receiver.user);
-        this.receiver.item.changeOwnerTo(this.sender.user);
+        this.senderItem.changeOwnerTo(this.receiverUser);
+        this.receiverItem.changeOwnerTo(this.senderUser);
     }
 
     private void validate() {
-        this.sender.validate();
-        this.receiver.validate();
+        this.receiverItem.validateOwner(this.receiverUser);
+        this.senderItem.validateOwner(this.senderUser);
     }
 
     public void validateOwner(User user) {
-        if (this.receiver.user != user)
+        if (this.receiverUser.id != user.id)
             throw new TradeDoesntBelongToUser(this, user);
     }
 }

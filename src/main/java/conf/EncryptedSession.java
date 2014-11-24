@@ -70,7 +70,7 @@ public class EncryptedSession extends ninja.session.SessionImpl{
         SecretKey key;
 
         public DESedeEncryption() throws Exception {
-            myEncryptionKey = "ThisIsSecretEncryptionYEK"; //TODO: Esto es de prueba en el mundo real no se puede poner acá
+            myEncryptionKey = "ThisIsSecretEncryptionYEK"; //TODO: Esto es de prueba en el mundo real no se puede poner aca
             myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
             keyAsBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
             myKeySpec = new DESedeKeySpec(keyAsBytes);

@@ -19,8 +19,6 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import conf.ObjectifyProvider;
-import dao.ArticleDao;
-import models.cosas_de_mas.Article;
 import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineEnvironment;
@@ -35,7 +33,7 @@ import java.util.Map;
 public class ApplicationController {
 
     @Inject
-    ArticleDao articleDao;
+
     
     public ApplicationController() {
 
@@ -54,19 +52,7 @@ public class ApplicationController {
     }
 
     public Result index() {
-
-        Article frontPost = articleDao.getFirstArticleForFrontPage();
-
-        List<Article> olderPosts = articleDao.getOlderArticlesForFrontPage();
-
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("frontArticle", frontPost);
-        map.put("olderArticles", olderPosts);
-
-        return Results
-                .html()
-                .render("frontArticle", frontPost)
-                .render("olderArticles", olderPosts);
+        return Results.json().render("Por el momento soy solo una API... muy pronto importantes cambios");
 
     }
 
