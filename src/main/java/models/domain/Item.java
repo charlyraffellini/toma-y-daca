@@ -1,11 +1,14 @@
 package models.domain;
 
-import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.Ref;
+import com.googlecode.objectify.annotation.*;
+import models.domain.exceptions.UserDoesntHaveItemException;
+
 
 /**
  * Created by Palumbo on 27/09/2014.
  */
-@Entity
+
 public class Item extends DomainObject {
 
     public User owner;
@@ -17,12 +20,18 @@ public class Item extends DomainObject {
         this.description = description;
         this.picture = picture;
     }
+    public Item (){ }
 
     public boolean hasOwner(User user) {
-        return owner == user;
+        return owner.id == user.id;
     }
 
     public void changeOwnerTo(User user) {
         this.owner = user;
+    }
+
+    public void validateOwner(User user) {
+        if (!this.hasOwner(user))
+            throw new UserDoesntHaveItemException(user, this);
     }
 }

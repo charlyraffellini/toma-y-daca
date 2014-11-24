@@ -5,4 +5,5 @@ package dtos;
  */
 public class TradeExecuteDTO {
     public String response;
+    public boolean wallPost;
 }

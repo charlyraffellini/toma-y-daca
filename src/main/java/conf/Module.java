@@ -50,42 +50,8 @@ public class Module extends AbstractModule {
     }
 
     private void bindHomes() {
-        List<User> users = this.createUsers();
-        List<Item> items = this.createItems(users);
-        List<TradeRequest> trades = this.createTrades(users, items);
-
-        bind(UserHome.class).toInstance(this.createHomeExample(new UserHome(), users));
-        bind(ItemHome.class).toInstance(this.createHomeExample(new ItemHome(), items));
-        bind(TradeRequestHome.class).toInstance(this.createHomeExample(new TradeRequestHome(), trades));
+        bind(UserHome.class).toInstance(new UserHome());
+        bind(ItemHome.class).toInstance(new ItemHome());
+        bind(TradeRequestHome.class).toInstance(new TradeRequestHome());
     }
-
-    private List<User> createUsers() {
-        User aUser = new User();
-        User otherUser = new User();
-        aUser.addFriend(otherUser);
-        otherUser.addFriend(aUser);
-
-        return Arrays.asList(aUser, otherUser);
-    }
-
-    private List<Item> createItems(List<User> users) {
-        Item item1 = new Item(users.get(0), "Item 1", "asd");
-        Item item2 = new Item(users.get(1), "Item 2", "dsa");
-
-        return Arrays.asList(item1, item2);
-    }
-
-    private List<TradeRequest> createTrades(List<User> users, List<Item> items) {
-        TradeRequest aTrade = users.get(1).sendTrade(items.get(1), users.get(0), items.get(0));
-        return Arrays.asList(aTrade);
-    }
-
-    private <THome extends Home<TEntity>, TEntity extends DomainObject> THome createHomeExample(THome home, List<TEntity> entities) {
-        for (TEntity entity : entities) {
-            home.create(entity);
-        }
-
-        return home;
-    }
-
 }

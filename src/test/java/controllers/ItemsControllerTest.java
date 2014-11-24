@@ -3,7 +3,6 @@ package controllers;
 import dtos.ItemCreateDTO;
 import homes.ItemHome;
 import ninja.NinjaTest;
-import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +13,7 @@ public class ItemsControllerTest extends NinjaTest {
 
     //@Test TODO: este test ya no anda porque no hay usuario logeado
     public void testPostAnItemReturnItsId() {
-        int nextId = ninjaTestServer.getInjector().getProvider(ItemHome.class).get().getNextId();
+        long nextId = ninjaTestServer.getInjector().getProvider(ItemHome.class).get().getNextId();
 
         ItemCreateDTO dto = new ItemCreateDTO();
         dto.meliId = "MLA524730552";

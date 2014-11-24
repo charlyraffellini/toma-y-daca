@@ -50,18 +50,21 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         router.POST().route("/items").with(ItemsController.class, "createItem");
         router.GET().route("/items").with(ItemsController.class, "getAllItems");
+        router.DELETE().route("/items/{itemId}").with(ItemsController.class, "deleteItem");
 
         ///////////////////////////////////////////////////////////////////////
         // Friends
         ///////////////////////////////////////////////////////////////////////
+        router.GET().route("/friends").with(UserController.class, "getFriends");
+        router.POST().route("/friends").with(UserController.class, "addFriend");
         router.GET().route("/friends/{friendId}/items").with(ItemsController.class, "getFriendItems");
-        router.GET().route("/users").with(UserController.class,"getAllUsers");
 
         ///////////////////////////////////////////////////////////////////////
         // Trades
         ///////////////////////////////////////////////////////////////////////
-        router.POST().route("/trade").with(TradesController.class, "sendTradeRequest");
-        router.PUT().route("/trade/{tradeId}").with(TradesController.class, "executeTradeRequest");
+        router.GET().route("/trades").with(TradesController.class, "listTradeRequests");
+        router.POST().route("/trades").with(TradesController.class, "sendTradeRequest");
+        router.PUT().route("/trades/{tradeId}").with(TradesController.class, "executeTradeRequest");
 
 
         ///////////////////////////////////////////////////////////////////////
@@ -70,9 +73,14 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/login").with(LoginLogoutController.class, "login");
         router.POST().route("/login").with(LoginLogoutController.class, "loginPost");
         router.GET().route("/logout").with(LoginLogoutController.class, "logout");
+        router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
+        router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
 
-		router.GET().route("/facelogin").with(LoginLogoutController.class, "faceLogin");
-		router.GET().route("/face").with(LoginLogoutController.class, "faceReturn");
+        ///////////////////////////////////////////////////////////////////////
+        // Users
+        ///////////////////////////////////////////////////////////////////////
+        router.GET().route("/users").with(UserController.class,"getAllUsers");
+        router.GET().route("/me").with(UserController.class,"getMe");
 
         router.GET().route("/spa").with(MainController.class, "spa");
             router.GET().route("/searchItem").with(MainController.class, "searchItem");

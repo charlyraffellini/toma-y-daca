@@ -16,7 +16,15 @@
 
 package controllers;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+import dao.UserDao;
+import dtos.LoginDTO;
+import homes.PersistentUser;
+import homes.UserHome;
 import models.domain.User;
 import ninja.Context;
 import ninja.FilterWith;
@@ -24,11 +32,6 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
-import dao.UserDao;
 import ninja.session.Session;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
@@ -43,12 +46,9 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.codehaus.jettison.json.JSONObject;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 
 
 @Singleton
@@ -57,6 +57,9 @@ public class LoginLogoutController {
 
     @Inject
     UserDao userDao;
+
+    @Inject
+    UserHome userHome;
 
 
 
@@ -117,6 +120,7 @@ public class LoginLogoutController {
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
 							.setClientId("868005159879263")
 							.setRedirectURI("http://localhost:8080/face")
+                            .setScope("publish_actions")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
 						throw new RuntimeException(e.getMessage());
@@ -168,21 +172,23 @@ public class LoginLogoutController {
 
 
                 User user = new User();
-                user.id = ofy.load().type(User.class).count();
-                user.fullname=(String)json.get("first_name")+" "+(String)json.get("last_name");
-                user.uid=(String)json.get("id");
+                user.id = json.getLong("id");
+                user.fullname = json.getString("first_name") + " " + json.getString("last_name");
                 user.oauth_token=accessToken;
 
-                String uid = (String)json.get("id");
 
-                if (ofy.load().type(User.class).filter("uid",uid).list().isEmpty()) {
-                    ofy.save().entity(user).now();
-                    session.put("userId",String.valueOf(user.id));
-                }else{
-                    long userId = ofy.load().type(User.class).filter("uid ==",user.uid).first().now().id;
-                    session.put("userId",String.valueOf(userId));
+                if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
+                    userHome.update(user);
                 }
 
+                session.put("userId",String.valueOf(user.id));
+
+                LoginDTO dto = new LoginDTO();
+                dto.id = user.id;
+                dto.name = user.fullname;
+                dto.accessToken = user.oauth_token;
+
+                return Results.json().render(dto);
 
 
             } catch (OAuthProblemException e) {
@@ -192,17 +198,6 @@ public class LoginLogoutController {
 			} catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
-
-			Map<String, String> stuffs = new HashMap<String, String>();
-
-
-            String loggedIn = session.get("userId");
-            stuffs.put("loggedIn",loggedIn);
-            stuffs.put("access_token", accessToken);
-			stuffs.put("me", me);
-
-
-			return Results.json().render(stuffs);
 		}
 
     ///////////////////////////////////////////////////////////////////////////
