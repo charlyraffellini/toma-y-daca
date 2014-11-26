@@ -5,6 +5,7 @@
 target
 target/*
 dependency-reduced-pom.xml
+src/main/java/assets/js
 
 # Eclipse
 .settings

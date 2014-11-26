@@ -1,8 +1,8 @@
 <#macro myLayout title="Layout example">
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
   <head>
-    <script src="/assets/webjars/jquery/1.9.0/jquery.js"></script>
+    <script src="/webjars/jquery/1.9.0/jquery.js"></script>
     <meta charset="utf-8">
     <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,9 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/assets/webjars/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webjars/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/assets/webjars/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.0.0/css/bootstrap-theme.min.css">
     
 
     <!-- Latest compiled and minified JavaScript -->
@@ -56,7 +56,16 @@
     </div> <!-- /container -->
     
     <script type="text/javascript" src="/assets/webjars/tinymce-jquery/3.4.9/jscripts/tiny_mce/tiny_mce.js" ></script>
-    <script src="/assets/webjars/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/webjars/angularjs/1.3.1/angular.js"></script>
+    <script src="/webjars/angular-ui-router/0.2.11/angular-ui-router.js"></script>
+    <script src="/webjars/angular-ui-bootstrap/0.12.0/ui-bootstrap.js"></script>
+    <script src="/webjars/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/search-item.list-items.js"></script>
+    <script src="/assets/js/search-item.define-item.js"></script>
+    <script src="/assets/js/meliApi.js"></script>
+    <script src="/assets/js/ownApi.js"></script>
 </body>
 </html>
 </#macro>
