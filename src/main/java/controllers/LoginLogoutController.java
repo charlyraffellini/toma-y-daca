@@ -119,7 +119,7 @@ public class LoginLogoutController {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
 							.setClientId("792253304175939")
-							.setRedirectURI("http://staging-toma-y-daca.appspot.com/")
+							.setRedirectURI("http://staging-toma-y-daca.appspot.com/facelogin")
                             .setScope("publish_actions")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
@@ -145,7 +145,7 @@ public class LoginLogoutController {
 					.setClientId("792253304175939")
 					.setClientSecret("4f5514458d7dbac21e6f66b10d7229be")
 					//.setRedirectURI("http://localhost:8080/face")
-					.setRedirectURI("http://staging-toma-y-daca.appspot.com/")
+					.setRedirectURI("http://staging-toma-y-daca.appspot.com/facelogin")
 					.setCode(code)
 					.buildQueryMessage();
 
