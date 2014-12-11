@@ -118,7 +118,7 @@ public class LoginLogoutController {
 				try {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
-							.setClientId("868005159879263")
+							.setClientId("792253304175939")
 							.setRedirectURI("http://localhost:8080/face")
                             .setScope("publish_actions")
 							.buildQueryMessage();
@@ -144,7 +144,7 @@ public class LoginLogoutController {
 					.setGrantType(GrantType.AUTHORIZATION_CODE)
 					.setClientId("792253304175939")
 					.setClientSecret("4f5514458d7dbac21e6f66b10d7229be")
-					.setRedirectURI("https://apps.facebook.com/792253304175939/")
+					.setRedirectURI("http://localhost:8080/face")
 					.setCode(code)
 					.buildQueryMessage();
 
