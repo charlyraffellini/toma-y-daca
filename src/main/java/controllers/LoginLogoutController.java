@@ -119,7 +119,7 @@ public class LoginLogoutController {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
 							.setClientId("792253304175939")
-							.setRedirectURI("http://localhost:8080/face")
+							.setRedirectURI("https://apps.facebook.com/792253304175939/")
                             .setScope("publish_actions")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
