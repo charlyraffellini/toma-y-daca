@@ -36,7 +36,7 @@ public class ApplicationControllerTest extends NinjaTest {
         // /redirect will send a location: redirect in the headers
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
 
-        assertEquals("\"Por el momento soy solo una API... muy pronto importantes cambios\"", result);
+        assertEquals("\"Por el momento soy solo una API... muy pronto importantes cambios.\"", result);
     }
 }
 
