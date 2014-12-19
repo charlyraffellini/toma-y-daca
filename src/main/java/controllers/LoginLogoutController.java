@@ -33,6 +33,7 @@ import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
 import ninja.session.Session;
+import ninja.utils.NinjaProperties;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthBearerClientRequest;
@@ -59,8 +60,11 @@ public class LoginLogoutController {
     UserDao userDao;
 
     @Inject
-    UserHome userHome;
+    NinjaProperties ninjaProperties;
 
+    @Inject
+    UserHome userHome;
+    private String redirectURI;
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -103,31 +107,32 @@ public class LoginLogoutController {
 		Provider<HttpServletResponse> httpServletResponseProvider;
 
 
-		/**
-		 * Start of oauth2 autentication
-		 * <p>
-		 * Redirect to facebook login url with
-		 * mandatory query string parameters
-		 * For more information see: https://cwiki.apache.org/confluence/display/OLTU/OAuth+2.0+Client+Quickstart
-		 * <p>
-		 *
-		 * @return Result
-		 */
-		public Result faceLogin(){
-				OAuthClientRequest request;
-				try {
-						request = OAuthClientRequest
-							.authorizationProvider(OAuthProviderType.FACEBOOK)
-							.setClientId("868005159879263")
-							.setRedirectURI("http://staging-toma-y-daca.appspot.com/face")
-                            .setScope("publish_actions")
-							.buildQueryMessage();
-				} catch (OAuthSystemException e) {
-						throw new RuntimeException(e.getMessage());
-				}
+    /**
+     * Start of oauth2 autentication
+     * <p/>
+     * Redirect to facebook login url with
+     * mandatory query string parameters
+     * For more information see: https://cwiki.apache.org/confluence/display/OLTU/OAuth+2.0+Client+Quickstart
+     * <p/>
+     *
+     * @return Result
+     */
+    public Result faceLogin() {
+        OAuthClientRequest request;
+        try {
 
-					return Results.redirect(request.getLocationUri());
-		}
+            request = OAuthClientRequest
+                    .authorizationProvider(OAuthProviderType.FACEBOOK)
+                    .setClientId("868005159879263")
+                    .setRedirectURI(this.getRedirectURI())
+                    .setScope("publish_actions")
+                    .buildQueryMessage();
+        } catch (OAuthSystemException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return Results.redirect(request.getLocationUri());
+    }
 
 		public Result faceReturn(Session session){
 
@@ -144,7 +149,7 @@ public class LoginLogoutController {
 					.setGrantType(GrantType.AUTHORIZATION_CODE)
 					.setClientId("868005159879263")
 					.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
-					.setRedirectURI("http://staging-toma-y-daca.appspot.com/face")
+					.setRedirectURI(this.getRedirectURI())
 					.setCode(code)
 					.buildQueryMessage();
 
@@ -213,5 +218,12 @@ public class LoginLogoutController {
 
     }
 
+
+    public String getRedirectURI() {
+        if (ninjaProperties.isProd()){
+            return "http://staging-toma-y-daca.appspot.com/face";
+        }
+        return "http://localhost:8080/face";
+    }
 
 }
