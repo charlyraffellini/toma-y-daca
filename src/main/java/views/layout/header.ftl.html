@@ -10,7 +10,8 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">${i18n("header.home")}</a></li>
+				<li class="active"><a href="/spa">${i18n("header.home")}</a></li>
+                <li class="active"><a href="/myItems">Items</a></li>
                 <li class="active"><a ui-sref="search-item">Nuevo Item</a></li>
 			</ul>
 			<ul class="navbar-right nav navbar-nav">
@@ -20,7 +21,7 @@
                 <li><a href="/logout">${i18n("header.logout")}</a></li>
             <#else>
                 
-                <li><a href="/login" id="login">${i18n("header.login")}</a></li>
+                <li><a href="/facelogin" id="login">${i18n("header.login")}</a></li>
             </#if>
 				
 			</ul>

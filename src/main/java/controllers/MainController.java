@@ -26,4 +26,12 @@ public class MainController {
     public Result defineItem(Context context){
         return Results.html();
     }
+
+    public Result myItems(Context context){
+        return Results.html();
+    }
+
+    public Result listItems(Context context){
+        return Results.html();
+    }
 }

@@ -193,7 +193,7 @@ public class LoginLogoutController {
                 dto.name = user.fullname;
                 dto.accessToken = user.oauth_token;
 
-                return Results.json().render(dto);
+                return Results.redirect("/spa");
 
 
             } catch (OAuthProblemException e) {
