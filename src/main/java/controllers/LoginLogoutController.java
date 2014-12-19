@@ -119,7 +119,7 @@ public class LoginLogoutController {
 						request = OAuthClientRequest
 							.authorizationProvider(OAuthProviderType.FACEBOOK)
 							.setClientId("868005159879263")
-							.setRedirectURI("http://toma-y-daca.appspot.com/face")
+							.setRedirectURI("http://staging-toma-y-daca.appspot.com/face")
                             .setScope("publish_actions")
 							.buildQueryMessage();
 				} catch (OAuthSystemException e) {
@@ -144,7 +144,7 @@ public class LoginLogoutController {
 					.setGrantType(GrantType.AUTHORIZATION_CODE)
 					.setClientId("868005159879263")
 					.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
-					.setRedirectURI("http://toma-y-daca.appspot.com/face")
+					.setRedirectURI("http://staging-toma-y-daca.appspot.com/face")
 					.setCode(code)
 					.buildQueryMessage();
 
