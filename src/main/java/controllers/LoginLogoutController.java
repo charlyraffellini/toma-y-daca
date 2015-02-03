@@ -111,11 +111,17 @@ public class LoginLogoutController {
 
     /**
      * Start of oauth2 autentication
-     * <p/>
+     *
      * Redirect to facebook login url with
      * mandatory query string parameters
      * For more information see: https://cwiki.apache.org/confluence/display/OLTU/OAuth+2.0+Client+Quickstart
-     * <p/>
+     *
+     * NOTA PARA QUIEN LEA:
+     *
+     * Para evitar separatismo y trabajar colaborativamente, armé una cuenta de Face Dev con un usuario
+     *  que podemos usar TODOS (como tendría que haber sido desde un ppio).
+     *  Me lo piden por algún medio y si les copa lo laburamos así.
+     *  Espero podamos hacer lo mismo con GAE.
      *
      * @return Result
      */
@@ -125,7 +131,11 @@ public class LoginLogoutController {
 
             request = OAuthClientRequest
                     .authorizationProvider(OAuthProviderType.FACEBOOK)
-                    .setClientId("868005159879263")
+                     // Fede App
+                    // .setClientId("868005159879263")
+
+                    // Javier App
+                    .setClientId("792253304175939")
                     .setRedirectURI(this.getRedirectURI())
                     .setScope("publish_actions")
                     .buildQueryMessage();
@@ -154,14 +164,6 @@ public class LoginLogoutController {
                     //.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
 
                     // Javier App
-                    /**
-                     *  NOTA PARA QUIEN LEA:
-                     *
-                     *  Para evitar separatismo y trabajar colaborativamente, armé una cuenta de Face Dev con un usuario
-                     *  que podemos usar TODOS (como tendría que haber sido desde un ppio).
-                     *  Me lo piden por algún medio y si les copa lo laburamos así.
-                     *  Espero podamos hacer lo mismo con GAE.
-                     */
                     .setClientId("792253304175939")
                     .setClientSecret("4f5514458d7dbac21e6f66b10d7229be")
                     .setRedirectURI(this.getRedirectURI())
