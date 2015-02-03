@@ -25,12 +25,14 @@ public abstract class WebApiController {
         this.userHome = userHome;
     }
 
-    protected User getUser(Session session) { //TODO: Poner este metodo en la Session.
+    protected User getUser(Session session)
+    { //TODO: Poner este metodo en la Session.
         long userId = Long.parseLong(session.get("userId"));
         return this.userHome.get(userId);
     }
 
-    protected Collection<User> getUsers() { //TODO: Poner este metodo en la Session.
+    protected Collection<User> getUsers()
+    { //TODO: Poner este metodo en la Session.
         Objectify ofy = ObjectifyService.ofy();
         return this.userHome.getAll();
     }

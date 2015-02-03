@@ -238,10 +238,10 @@ public class LoginLogoutController {
     public String getFacebookRedirectURI()
     {
         if (ninjaProperties.isProd()){
-            return "https://staging-toma-y-daca.appspot.com/face/";
+            return "https://staging-toma-y-daca.appspot.com/face?";
         }
         else{
-            return "http://localhost:8080/face/";
+            return "http://localhost:8080/face";
         }
     }
 

@@ -28,8 +28,8 @@ public class RoutesTest extends NinjaRouterTest {
         
         startServerInProdMode();
         //TODO: cuando tengamos vista volver a lo que esta comentado
-        aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
-        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "notFoundMessage");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "notFoundMessage");//.isHandledBy(ApplicationController.class, "index");
     }
     
     @Test
