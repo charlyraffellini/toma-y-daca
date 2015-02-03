@@ -144,6 +144,7 @@ public class LoginLogoutController {
 
     /**
      * Método que se encarga de validar la respuesta proporcionada por el Cliente de Facebook tras el redirect.
+     * Se accede mediante el endpoint "/face"
      *
      * @param session
      *
@@ -205,7 +206,7 @@ public class LoginLogoutController {
             dto.name = user.fullname;
             dto.accessToken = user.oauth_token;
 
-            return Results.redirect("/spa");
+            return Results.redirect("https://staging-toma-y-daca.appspot.com/spa");
 
 
         } catch (OAuthProblemException e) {
