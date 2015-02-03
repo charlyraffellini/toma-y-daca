@@ -131,12 +131,8 @@ public class LoginLogoutController {
 
             request = OAuthClientRequest
                     .authorizationProvider(OAuthProviderType.FACEBOOK)
-                     // Fede App
-                    // .setClientId("868005159879263")
-
-                    // Javier App
-                    .setClientId("792253304175939")
-                    .setRedirectURI(this.getRedirectURI())
+                    .setClientId(this.getFacebookClientId())
+                    .setRedirectURI(this.getFacebookRedirectURI())
                     .setScope("publish_actions")
                     .buildQueryMessage();
         } catch (OAuthSystemException e) {
@@ -146,6 +142,13 @@ public class LoginLogoutController {
         return Results.redirect(request.getLocationUri());
     }
 
+    /**
+     * Método que se encarga de validar la respuesta proporcionada por el Cliente de Facebook tras el redirect.
+     *
+     * @param session
+     *
+     * @return Result
+     */
     public Result faceReturn(Session session){
 
         OAuthAuthzResponse oar = null;
@@ -159,14 +162,9 @@ public class LoginLogoutController {
             OAuthClientRequest request = OAuthClientRequest
                     .tokenProvider(OAuthProviderType.FACEBOOK)
                     .setGrantType(GrantType.AUTHORIZATION_CODE)
-                    // Fede App
-                    //.setClientId("868005159879263")
-                    //.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
-
-                    // Javier App
-                    .setClientId("792253304175939")
-                    .setClientSecret("4f5514458d7dbac21e6f66b10d7229be")
-                    .setRedirectURI(this.getRedirectURI())
+                    .setClientId(this.getFacebookClientId())
+                    .setClientSecret(this.getFacebookClientSecret())
+                    .setRedirectURI(this.getFacebookRedirectURI())
                     .setCode(code)
                     .buildQueryMessage();
 
@@ -189,15 +187,12 @@ public class LoginLogoutController {
             me = resourceResponse.getBody();
             JSONObject json = new JSONObject(me);
 
-
             Objectify ofy = ObjectifyService.ofy();
-
 
             User user = new User();
             user.id = json.getLong("id");
             user.fullname = json.getString("first_name") + " " + json.getString("last_name");
             user.oauth_token=accessToken;
-
 
             if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
                 userHome.update(user);
@@ -225,8 +220,8 @@ public class LoginLogoutController {
     ///////////////////////////////////////////////////////////////////////////
     // Logout
     ///////////////////////////////////////////////////////////////////////////
-    public Result logout(Context context) {
-
+    public Result logout(Context context)
+    {
         // remove any user dependent information
         context.getSessionCookie().clear();
         context.getFlashCookie().success("login.logoutSuccessful");
@@ -235,12 +230,45 @@ public class LoginLogoutController {
 
     }
 
-
-    public String getRedirectURI() {
+    /**
+     * Devuelve la URL de Redirección para Facebook
+     *
+     * @return String
+     */
+    public String getFacebookRedirectURI()
+    {
         if (ninjaProperties.isProd()){
-            return "http://staging-toma-y-daca.appspot.com/face";
+            return "https://staging-toma-y-daca.appspot.com/face/";
         }
-        return "http://localhost:8080/face";
+        else{
+            return "http://localhost:8080/face/";
+        }
+    }
+
+    /**
+     * Devuelve el ID de Cliente de la App de Facebook
+     *
+     * @return String
+     */
+    private String getFacebookClientId()
+    {
+        String javierApp = "792253304175939";
+        String fedeApp = "868005159879263";
+
+        return javierApp;
+    }
+
+    /**
+     * Devuelve el Secret de Cliente de la App de Facebook
+     *
+     * @return String
+     */
+    private String getFacebookClientSecret()
+    {
+        String javierApp = "4f5514458d7dbac21e6f66b10d7229be";
+        String fedeApp = "11a46133e0fb96c203d1c61d64f589ac";
+
+        return javierApp;
     }
 
 }
