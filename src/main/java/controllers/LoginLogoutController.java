@@ -70,7 +70,8 @@ public class LoginLogoutController {
     ///////////////////////////////////////////////////////////////////////////
     // Login
     ///////////////////////////////////////////////////////////////////////////
-    public Result login(Context context) {
+    public Result login(Context context)
+    {
 
         return Results.html();
 
@@ -78,27 +79,28 @@ public class LoginLogoutController {
 
     public Result loginPost(@Param("username") String username,
                             @Param("password") String password,
-                            Context context) {
+                            Context context)
+    {
 
         boolean isUserNameAndPasswordValid = userDao.isUserAndPasswordValid(username, password);
-        
-        
+
+
         if (isUserNameAndPasswordValid) {
             context.getSessionCookie().put("username", username);
             context.getFlashCookie().success("login.loginSuccessful");
-            
+
             return Results.redirect("/");
-            
+
         } else {
-            
+
             // something is wrong with the input or password not found.
             context.getFlashCookie().put("username", username);
             context.getFlashCookie().error("login.errorLogin");
 
             return Results.redirect("/login");
-            
+
         }
-        
+
     }
 
 		@Inject
@@ -134,76 +136,89 @@ public class LoginLogoutController {
         return Results.redirect(request.getLocationUri());
     }
 
-		public Result faceReturn(Session session){
+    public Result faceReturn(Session session){
 
-			OAuthAuthzResponse oar = null;
-			String accessToken;
-			Long expiresIn;
-			String me;
+        OAuthAuthzResponse oar = null;
+        String accessToken;
+        Long expiresIn;
+        String me;
 
-			try {
-				oar = OAuthAuthzResponse.oauthCodeAuthzResponse(httpServletRequestProvider.get());
-				String code = oar.getCode();
-				OAuthClientRequest request = OAuthClientRequest
-					.tokenProvider(OAuthProviderType.FACEBOOK)
-					.setGrantType(GrantType.AUTHORIZATION_CODE)
-					.setClientId("868005159879263")
-					.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
-					.setRedirectURI(this.getRedirectURI())
-					.setCode(code)
-					.buildQueryMessage();
+        try {
+            oar = OAuthAuthzResponse.oauthCodeAuthzResponse(httpServletRequestProvider.get());
+            String code = oar.getCode();
+            OAuthClientRequest request = OAuthClientRequest
+                    .tokenProvider(OAuthProviderType.FACEBOOK)
+                    .setGrantType(GrantType.AUTHORIZATION_CODE)
+                    // Fede App
+                    //.setClientId("868005159879263")
+                    //.setClientSecret("11a46133e0fb96c203d1c61d64f589ac")
 
-				//create OAuth client that uses custom http client under the hood
-				OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+                    // Javier App
+                    /**
+                     *  NOTA PARA QUIEN LEA:
+                     *
+                     *  Para evitar separatismo y trabajar colaborativamente, armé una cuenta de Face Dev con un usuario
+                     *  que podemos usar TODOS (como tendría que haber sido desde un ppio).
+                     *  Me lo piden por algún medio y si les copa lo laburamos así.
+                     *  Espero podamos hacer lo mismo con GAE.
+                     */
+                    .setClientId("792253304175939")
+                    .setClientSecret("4f5514458d7dbac21e6f66b10d7229be")
+                    .setRedirectURI(this.getRedirectURI())
+                    .setCode(code)
+                    .buildQueryMessage();
 
-				//Facebook is not fully compatible with OAuth 2.0 draft 10, access token response is
-				//application/x-www-form-urlencoded, not json encoded so we use dedicated response class for that
-				//Custom response classes are an easy way to deal with oauth providers that introduce modifications to
-				//OAuth 2.0 specification
-				GitHubTokenResponse oAuthResponse = oAuthClient.accessToken(request, GitHubTokenResponse.class);
+            //create OAuth client that uses custom http client under the hood
+            OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
-				accessToken = oAuthResponse.getAccessToken();
-				expiresIn = oAuthResponse.getExpiresIn();
+            //Facebook is not fully compatible with OAuth 2.0 draft 10, access token response is
+            //application/x-www-form-urlencoded, not json encoded so we use dedicated response class for that
+            //Custom response classes are an easy way to deal with oauth providers that introduce modifications to
+            //OAuth 2.0 specification
+            GitHubTokenResponse oAuthResponse = oAuthClient.accessToken(request, GitHubTokenResponse.class);
 
-				OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me")
-					.setAccessToken(accessToken).buildQueryMessage();
+            accessToken = oAuthResponse.getAccessToken();
+            expiresIn = oAuthResponse.getExpiresIn();
 
-				OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
-				me = resourceResponse.getBody();
-                JSONObject json = new JSONObject(me);
+            OAuthClientRequest bearerClientRequest = new OAuthBearerClientRequest("https://graph.facebook.com/me")
+                    .setAccessToken(accessToken).buildQueryMessage();
 
-
-                Objectify ofy = ObjectifyService.ofy();
-
-
-                User user = new User();
-                user.id = json.getLong("id");
-                user.fullname = json.getString("first_name") + " " + json.getString("last_name");
-                user.oauth_token=accessToken;
-
-
-                if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
-                    userHome.update(user);
-                }
-
-                session.put("userId",String.valueOf(user.id));
-
-                LoginDTO dto = new LoginDTO();
-                dto.id = user.id;
-                dto.name = user.fullname;
-                dto.accessToken = user.oauth_token;
-
-                return Results.redirect("/spa");
+            OAuthResourceResponse resourceResponse = oAuthClient.resource(bearerClientRequest, OAuth.HttpMethod.GET, OAuthResourceResponse.class);
+            me = resourceResponse.getBody();
+            JSONObject json = new JSONObject(me);
 
 
-            } catch (OAuthProblemException e) {
-				throw new RuntimeException(e.getMessage());
-			} catch (OAuthSystemException e) {
-				throw new RuntimeException(e.getMessage());
-			} catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
+            Objectify ofy = ObjectifyService.ofy();
+
+
+            User user = new User();
+            user.id = json.getLong("id");
+            user.fullname = json.getString("first_name") + " " + json.getString("last_name");
+            user.oauth_token=accessToken;
+
+
+            if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
+                userHome.update(user);
             }
-		}
+
+            session.put("userId",String.valueOf(user.id));
+
+            LoginDTO dto = new LoginDTO();
+            dto.id = user.id;
+            dto.name = user.fullname;
+            dto.accessToken = user.oauth_token;
+
+            return Results.redirect("/spa");
+
+
+        } catch (OAuthProblemException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (OAuthSystemException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // Logout
