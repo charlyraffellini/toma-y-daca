@@ -206,7 +206,7 @@ public class LoginLogoutController {
             dto.name = user.fullname;
             dto.accessToken = user.oauth_token;
 
-            return Results.redirect("https://staging-toma-y-daca.appspot.com/spa");
+            return Results.redirect("/spa");
 
 
         } catch (OAuthProblemException e) {
