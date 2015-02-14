@@ -9,7 +9,8 @@ app.controller 'search-item.define-itemController', ($scope, $state, ownApi, ite
 	s.item = itemFound.item
 
 	s.saveItem = (item) =>
-		ownApi.createItem item.id
+		console.log item
+		ownApi.createItem item
 		$state.go "^"
 
 
