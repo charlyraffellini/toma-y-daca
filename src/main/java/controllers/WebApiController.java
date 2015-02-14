@@ -83,6 +83,7 @@ public abstract class WebApiController {
     protected TradeRequestDTO transform(TradeRequest trade) {
         TradeRequestDTO dto = new TradeRequestDTO();
 
+        dto.id = trade.id;
         dto.senderItem = this.transform(trade.senderItem);
         dto.receiverItem = this.transform(trade.receiverItem);
 
