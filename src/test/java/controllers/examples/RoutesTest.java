@@ -24,17 +24,17 @@ import org.junit.Test;
 public class RoutesTest extends NinjaRouterTest {
 
     @Test
-    public void testRouting() {
-        
+    public void testRouting()
+    {
         startServerInProdMode();
         //TODO: cuando tengamos vista volver a lo que esta comentado
-        aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
-        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "notFoundMessage");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "notFoundMessage");//.isHandledBy(ApplicationController.class, "index");
     }
     
     @Test
-    public void testThatSetupIsNotAccessibleInProd() {
-        
+    public void testThatSetupIsNotAccessibleInProd()
+    {
         startServerInProdMode();
         aRequestLike("GET", "/setup").isNotHandledBy(ApplicationController.class, "setup");
         

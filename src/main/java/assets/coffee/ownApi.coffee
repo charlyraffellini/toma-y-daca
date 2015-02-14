@@ -4,10 +4,7 @@ app.factory 'ownApi', ($http, $location) ->
 			$http.post "#{@_getBaseUrl()}/items",
 				meliId: meliId
 
-		getItems: =>
-			$http.get "#{@_getBaseUrl()}/items"
-
-		_getBaseUrl: =>
+		_getBaseUrl: ->
 			$location.protocol() + "://" + $location.host() + ":" + $location.port()
 
 	new OwnApi()

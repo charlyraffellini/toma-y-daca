@@ -9,29 +9,37 @@ import ninja.appengine.AppEngineFilter;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
-public class MainController {
+public class MainController
+{
 
-    public Result spa(Context context) {
+    public Result spa(Context context)
+    {
         return Results.html();
     }
 
-    public Result searchItem(Context context){
+    public Result searchItem(Context context)
+    {
         return Results.html();
     }
 
-    public Result selectItem(Context context){
+    public Result selectItem(Context context)
+    {
         return Results.html();
     }
 
-    public Result defineItem(Context context){
+    public Result defineItem(Context context)
+    {
         return Results.html();
     }
 
-    public Result myItems(Context context){
+
+    public Result myItems(Context context)
+    {
         return Results.html();
     }
 
-    public Result listItems(Context context){
+    public Result listItems(Context context)
+    {
         return Results.html();
     }
 }

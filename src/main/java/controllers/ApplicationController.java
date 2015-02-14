@@ -56,8 +56,8 @@ public class ApplicationController {
 
     }
 
-    public Result justAnApi(){
-        return Results.json().render("Por el momento soy solo una API... muy pronto importantes cambios.");
+    public Result notFoundMessage(){
+        return Results.json().render("404 : Recurso no encontrado / URI inválida");
     }
 
 }

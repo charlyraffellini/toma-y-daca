@@ -1,17 +1,18 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
+
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span> 
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/">${i18n("header.title")}</a>
+			<a class="navbar-brand" href="/spa">Toma y Daca</a>
 		</div>
+
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/spa">${i18n("header.home")}</a></li>
-                <li class="active"><a href="/myItems">Items</a></li>
+				<li class="active"><a href="/">${i18n("header.home")}</a></li>
                 <li class="active"><a ui-sref="search-item">Nuevo Item</a></li>
 			</ul>
 			<ul class="navbar-right nav navbar-nav">
@@ -21,7 +22,7 @@
                 <li><a href="/logout">${i18n("header.logout")}</a></li>
             <#else>
                 
-                <li><a href="/facelogin" id="login">${i18n("header.login")}</a></li>
+                <li><a href="/login" id="login">${i18n("header.login")}</a></li>
             </#if>
 				
 			</ul>
