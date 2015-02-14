@@ -73,7 +73,7 @@ public class FacebookAPI {
         Form form = new Form();
         form.add("template", message);
         form.add("href", item.picture);
-        form.add("access_token", trade.senderUser.oauth_token);
+        form.add("access_token", "868005159879263|Zuefww6tTzPmVlKPriPC8uLQQeg");
 
         ClientResponse response = resource.accept("application/json").post(ClientResponse.class, form);
 
