@@ -206,7 +206,6 @@ public class LoginLogoutController {
             dto.name = user.fullname;
             dto.accessToken = user.oauth_token;
 
-
             return Results.redirect("/spa");
 
 
