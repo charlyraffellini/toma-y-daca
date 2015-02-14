@@ -238,7 +238,7 @@ public class LoginLogoutController {
      */
     public String getFacebookRedirectURI()
     {
-        if (ninjaProperties.isProd()){
+        if (ninjaProperties.isDev() || 1==1){
             return "https://staging-toma-y-daca.appspot.com/face?";
         }
         else{
