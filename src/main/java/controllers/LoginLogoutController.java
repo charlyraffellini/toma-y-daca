@@ -195,9 +195,7 @@ public class LoginLogoutController {
             user.fullname = json.getString("first_name") + " " + json.getString("last_name");
             user.oauth_token=accessToken;
 
-            if (ofy.load().type(PersistentUser.class).filter("id", user.id).list().isEmpty()) {
-                userHome.update(user);
-            }
+            userHome.update(user);
 
             session.put("userId",String.valueOf(user.id));
 
