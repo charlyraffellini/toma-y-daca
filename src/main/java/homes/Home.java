@@ -52,7 +52,8 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public long getNextId() {
-        return this.transform(this.getLoader().order("-id").first().now()).id + 1;
+        // toma el ID más grande del tipo Item y le suma 1
+        return this.transform(this.getLoader().order("-__key__").first().now()).id + 1;
     }
 
     protected LoadType<TPersistent> getLoader(){
