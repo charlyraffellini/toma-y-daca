@@ -23,18 +23,18 @@
 
     <static-files>
         <include path="/assets/**">
-            <http-header name="X-Frame-Options" value="ALLOWALL" />
+            <http-header name="Access-Control-Allow-Origin" value="*" />
         </include>
     </static-files>
-    
+
     <threadsafe>true</threadsafe>
-    
+
     <!-- will be set to "prod" when runnin mvn with profile deployment -->
     <!-- eg: mvn install -Pdeployment -->
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
         <property name="ninja.mode" value="${ninja.mode}" />
     </system-properties>
-    
+
 </appengine-web-app>
 

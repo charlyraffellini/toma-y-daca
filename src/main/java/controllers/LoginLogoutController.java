@@ -121,7 +121,10 @@ public class LoginLogoutController {
      *
      * @return Result
      */
-    public Result faceLogin() {
+    public Result faceLogin(
+        @Param("redirectURI") String redirectURI
+        )
+    {
         OAuthClientRequest request;
         try {
 
@@ -135,11 +138,8 @@ public class LoginLogoutController {
             throw new RuntimeException(e.getMessage());
         }
 
-        Result result = Results.redirect(request.getLocationUri());
-
-        //Fix para que el redirect se cargue en el iframe del canvas
-        result.addHeader("X-Frame-Options","ALLOWALL");
-
+        Result result = Results.html();
+        result.render("redirectURI", request.getLocationUri());
         return result;
     }
 

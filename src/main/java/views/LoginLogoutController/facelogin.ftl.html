@@ -1,0 +1,9 @@
+<#import "../layout/defaultLayout.ftl.html" as layout><@layout.myLayout "Facelogin">
+
+    <#noescape>
+        <script type="text/javascript">
+            top.location.href =  "${redirectURI}";
+        </script>
+    </#noescape>
+
+</@layout.myLayout>
