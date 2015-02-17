@@ -52,7 +52,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public long getNextId() {
-        return this.getLoader().count() + 1;
+        return this.transform(this.getLoader().order("-id").first().now()).id + 1;
     }
 
     protected LoadType<TPersistent> getLoader(){
