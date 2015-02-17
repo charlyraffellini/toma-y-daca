@@ -17,6 +17,7 @@
 package controllers.examples;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import ninja.NinjaTest;
 
@@ -36,7 +37,7 @@ public class ApplicationControllerTest extends NinjaTest {
         // /redirect will send a location: redirect in the headers
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
 
-        assertEquals("\"404 : Recurso no encontrado / URI inválida\"", result);
+        assertNotEquals("\"404 : Recurso no encontrado / URI inválida\"", result);
     }
 }
 
