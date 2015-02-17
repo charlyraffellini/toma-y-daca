@@ -17,7 +17,7 @@ import models.domain.User;
  */
 public class FacebookAPI {
     public boolean postNewItem(User user, Item item) {
-        String message = "Ha publicado un nuevo item: " + item.description;
+        String message = "Ha publicado un nuevo item en Toma-y-Daca: " + item.description;
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
