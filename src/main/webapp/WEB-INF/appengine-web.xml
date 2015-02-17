@@ -22,7 +22,9 @@
     <version>${appengine.app.version}</version>
 
     <static-files>
-        <include path="/assets/**" />
+        <include path="/assets/**">
+            <http-header name="X-Frame-Options" value="ALLOWALL" />
+        </include>
     </static-files>
     
     <threadsafe>true</threadsafe>

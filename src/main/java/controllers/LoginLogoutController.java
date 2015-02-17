@@ -138,7 +138,7 @@ public class LoginLogoutController {
         Result result = Results.redirect(request.getLocationUri());
 
         //Fix para que el redirect se cargue en el iframe del canvas
-        result.addHeader("X-Frame-Options","SAMEORIGIN");
+        result.addHeader("X-Frame-Options","ALLOWALL");
 
         return result;
     }
