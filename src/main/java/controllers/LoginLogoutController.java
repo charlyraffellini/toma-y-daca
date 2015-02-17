@@ -32,6 +32,7 @@ import ninja.Result;
 import ninja.Results;
 import ninja.appengine.AppEngineFilter;
 import ninja.params.Param;
+import ninja.servlet.util.Response;
 import ninja.session.Session;
 import ninja.utils.NinjaProperties;
 import org.apache.oltu.oauth2.client.OAuthClient;
@@ -50,6 +51,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
 
 
 @Singleton
@@ -116,13 +119,6 @@ public class LoginLogoutController {
      * mandatory query string parameters
      * For more information see: https://cwiki.apache.org/confluence/display/OLTU/OAuth+2.0+Client+Quickstart
      *
-     * NOTA PARA QUIEN LEA:
-     *
-     * Para evitar separatismo y trabajar colaborativamente, armé una cuenta de Face Dev con un usuario
-     *  que podemos usar TODOS (como tendría que haber sido desde un ppio).
-     *  Me lo piden por algún medio y si les copa lo laburamos así.
-     *  Espero podamos hacer lo mismo con GAE.
-     *
      * @return Result
      */
     public Result faceLogin() {
@@ -139,7 +135,7 @@ public class LoginLogoutController {
             throw new RuntimeException(e.getMessage());
         }
 
-        return Results.redirect(request.getLocationUri());
+        return Results.redirect(request.getLocationUri()+"&output=embed");
     }
 
     /**
