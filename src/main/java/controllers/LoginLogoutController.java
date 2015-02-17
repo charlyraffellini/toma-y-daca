@@ -139,6 +139,7 @@ public class LoginLogoutController {
             throw new RuntimeException(e.getMessage());
         }
 
+        // La redirección la hago en un HTML ya que el Canvas de FB prohibe hacer redirecciones dentro de iframes
         Result result = Results.html();
         result.render("redirectURI", request.getLocationUri());
 
