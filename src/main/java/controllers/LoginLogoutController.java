@@ -122,7 +122,8 @@ public class LoginLogoutController {
      * @return Result
      */
     public Result faceLogin(
-        @Param("redirectURI") String redirectURI
+        @Param("redirectURI") String redirectURI,
+        Context context
         )
     {
         OAuthClientRequest request;
@@ -140,6 +141,7 @@ public class LoginLogoutController {
 
         Result result = Results.html();
         result.render("redirectURI", request.getLocationUri());
+
         return result;
     }
 
