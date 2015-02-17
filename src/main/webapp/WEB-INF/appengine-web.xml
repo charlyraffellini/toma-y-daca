@@ -22,9 +22,7 @@
     <version>${appengine.app.version}</version>
 
     <static-files>
-        <include path="/assets/**">
-            <http-header name="Access-Control-Allow-Origin" value="*" />
-        </include>
+        <include path="/assets/**" />
     </static-files>
 
     <threadsafe>true</threadsafe>
