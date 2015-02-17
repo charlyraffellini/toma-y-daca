@@ -1,9 +1,11 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout "Home page">
 
+<div class="container">
     <#noescape>
         <script type="text/javascript">
             top.location.href =  "${redirectURI}";
         </script>
     </#noescape>
+</div>
 
     </@layout.myLayout>
