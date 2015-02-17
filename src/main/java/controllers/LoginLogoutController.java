@@ -135,7 +135,12 @@ public class LoginLogoutController {
             throw new RuntimeException(e.getMessage());
         }
 
-        return Results.redirect(request.getLocationUri()+"&output=embed");
+        Result result = Results.redirect(request.getLocationUri());
+
+        //Fix para que el redirect se cargue en el iframe del canvas
+        result.addHeader("X-Frame-Options","SAMEORIGIN");
+
+        return result;
     }
 
     /**
