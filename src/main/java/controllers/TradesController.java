@@ -35,7 +35,12 @@ public class TradesController extends WebApiController{
         this.facebookAPI = facebookAPI;
     }
 
-    public Result sendTradeRequest(TradeCreateDTO tradeCreateDTO, Session session){
+    public Result sendTradeRequest(TradeCreateDTO tradeCreateDTO, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         User friend = this.userHome.get(tradeCreateDTO.friendId);
         Item friendItem = this.itemHome.get(tradeCreateDTO.friendItemId);
         Item userItem = this.itemHome.get(tradeCreateDTO.userItemId);
@@ -47,7 +52,12 @@ public class TradesController extends WebApiController{
         return Results.json().render(id);
     }
 
-    public Result executeTradeRequest(@PathParam("tradeId") int tradeId, TradeExecuteDTO tradeExecuteDTO, Session session){
+    public Result executeTradeRequest(@PathParam("tradeId") int tradeId, TradeExecuteDTO tradeExecuteDTO, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         TradeRequest trade = this.tradeHome.get(tradeId);
         trade.validateOwner(this.getUser(session));
 
@@ -68,7 +78,12 @@ public class TradesController extends WebApiController{
         return Results.json().render("ok");
     }
 
-    public Result listTradeRequests(Session session){
+    public Result listTradeRequests(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         User user = this.getUser(session);
         Collection<TradeRequest> trades = this.tradeHome.getAllTradesOf(user);
 

@@ -11,6 +11,8 @@ import homes.UserHome;
 import models.domain.Item;
 import models.domain.TradeRequest;
 import models.domain.User;
+import ninja.Result;
+import ninja.Results;
 import ninja.session.Session;
 
 import java.util.Collection;
@@ -21,7 +23,8 @@ import java.util.Collection;
 public abstract class WebApiController {
     protected UserHome userHome;
 
-    protected WebApiController(UserHome userHome) {
+    protected WebApiController(UserHome userHome)
+    {
         this.userHome = userHome;
     }
 
@@ -88,6 +91,26 @@ public abstract class WebApiController {
         dto.receiverItem = this.transform(trade.receiverItem);
 
         return dto;
+    }
+
+    /**
+     *  Valida la existencia de la sesión de usuario
+     *
+     *  @return Boolean
+     */
+    protected Boolean validateSessionExists(Session session)
+    {
+        return session.isEmpty();
+    }
+
+    /**
+     *  Carga el resultado para hacer redirect a /facelogin
+     *
+     *  @return Result
+     */
+    protected Result redirect()
+    {
+        return Results.redirect("/facelogin");
     }
 }
 
