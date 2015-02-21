@@ -27,7 +27,7 @@ public class MainController extends WebApiController
      *
      *  @return Result
      */
-    private Result validateResponse(Session session)
+    private Result getHtmlResult(Session session)
     {
         if(this.validateSessionExists(session)){
             return Results.redirect("/facelogin");
@@ -37,31 +37,31 @@ public class MainController extends WebApiController
 
     public Result spa(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 
     public Result searchItem(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 
     public Result selectItem(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 
     public Result defineItem(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 
     public Result myItems(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 
     public Result listItems(Session session)
     {
-        return this.validateResponse(session);
+        return this.getHtmlResult(session);
     }
 }

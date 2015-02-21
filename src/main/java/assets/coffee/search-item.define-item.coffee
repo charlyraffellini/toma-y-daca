@@ -15,12 +15,15 @@ app.controller 'search-item.define-itemController', ($scope, $state, ownApi, ite
 
 
 app.config ($stateProvider) ->
-  $stateProvider.state "me",
-    url: "/me"
-    templateUrl: "me"
-    controller: 'meController'
+	$stateProvider.state "my-items",
+		url: "/my-items"
+		templateUrl: "myItems"
+		controller: 'myItemsController'
+		###resolve:
+			ownApi: 'ownApi'
+			myItems: (ownApi) ->
+				ownApi.getMyItems()###
 
-app.controller 'meController', ($scope, $state, ownApi, itemFound) ->
-  $scope.user =
-    name: "rasta"
-    lastname: "palu"
+app.controller 'myItemsController', ($scope, $state, ownApi) ->
+	$scope.items = ownApi.getMyItems()
+

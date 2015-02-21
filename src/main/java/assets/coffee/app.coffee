@@ -6,7 +6,7 @@ app = angular.module 'app',[
 
 
 app.config ($stateProvider, $urlRouterProvider) ->
-	$urlRouterProvider.otherwise "/search-item"
+	$urlRouterProvider.when "/", "/search-item"
 	$urlRouterProvider.when "/search-item", "/search-item/list-items"
 
 	$stateProvider.state "search-item",

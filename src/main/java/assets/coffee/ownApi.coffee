@@ -1,5 +1,8 @@
 app.factory 'ownApi', ($http, $location) ->
 	class OwnApi
+		getMyItems: =>
+			$http.get "#{@_getBaseUrl()}/items"
+
 		createItem: (item) =>
 			body =
 				meliId: item.id

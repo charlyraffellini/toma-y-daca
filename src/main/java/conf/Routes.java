@@ -86,6 +86,7 @@ public class Routes implements ApplicationRoutes {
             router.GET().route("/searchItem").with(MainController.class, "searchItem");
                 router.GET().route("/selectItem").with(MainController.class, "selectItem");
                 router.GET().route("/defineItem").with(MainController.class, "defineItem");
+        router.GET().route("/myItems").with(MainController.class, "myItems");
 
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
