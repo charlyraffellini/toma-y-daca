@@ -1,7 +1,7 @@
 app.factory 'ownApi', ($http, $location) ->
 	class OwnApi
 		getMyItems: =>
-			($http.get "#{@_getBaseUrl()}/items").then result =>
+			($http.get "#{@_getBaseUrl()}/items").then (result) =>
 				result.data
 
 		createItem: (item) =>

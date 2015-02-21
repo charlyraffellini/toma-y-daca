@@ -9,5 +9,5 @@ app.config ($stateProvider) ->
 		ownApi.getMyItems()###
 
 app.controller 'myItemsController', ($scope, $state, ownApi) ->
-	ownApi.getMyItems().then data =>
+	ownApi.getMyItems().then (data) =>
 		$scope.items = data
