@@ -17,6 +17,7 @@
 package controllers.examples;
 
 import controllers.ApplicationController;
+import controllers.MainController;
 import ninja.NinjaRouterTest;
 
 import org.junit.Test;
@@ -28,8 +29,8 @@ public class RoutesTest extends NinjaRouterTest {
         
         startServerInProdMode();
         //TODO: cuando tengamos vista volver a lo que esta comentado
-        aRequestLike("GET", "/").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
-        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "justAnApi");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/").isHandledBy(MainController.class, "spa");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/index").isHandledBy(MainController.class, "spa");//.isHandledBy(ApplicationController.class, "index");
     }
     
     @Test
