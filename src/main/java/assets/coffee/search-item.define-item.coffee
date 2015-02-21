@@ -13,17 +13,3 @@ app.controller 'search-item.define-itemController', ($scope, $state, ownApi, ite
 		ownApi.createItem item
 		$state.go "^"
 
-
-app.config ($stateProvider) ->
-	$stateProvider.state "my-items",
-		url: "/my-items"
-		templateUrl: "myItems"
-		controller: 'myItemsController'
-		###resolve:
-			ownApi: 'ownApi'
-			myItems: (ownApi) ->
-				ownApi.getMyItems()###
-
-app.controller 'myItemsController', ($scope, $state, ownApi) ->
-	$scope.items = ownApi.getMyItems()
-
