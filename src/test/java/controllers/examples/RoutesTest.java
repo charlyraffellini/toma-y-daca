@@ -25,17 +25,16 @@ import org.junit.Test;
 public class RoutesTest extends NinjaRouterTest {
 
     @Test
-    public void testRouting()
-    {
+    public void testRouting() {
+        
         startServerInProdMode();
-
-        aRequestLike("GET", "/").isHandledBy(MainController.class, "spa");
-        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "notFoundMessage");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/").isHandledBy(MainController.class, "spa");//.isHandledBy(ApplicationController.class, "index");
+        aRequestLike("GET", "/index").isHandledBy(ApplicationController.class, "notFoundMessage");
     }
     
     @Test
-    public void testThatSetupIsNotAccessibleInProd()
-    {
+    public void testThatSetupIsNotAccessibleInProd() {
+        
         startServerInProdMode();
         aRequestLike("GET", "/setup").isNotHandledBy(ApplicationController.class, "setup");
         

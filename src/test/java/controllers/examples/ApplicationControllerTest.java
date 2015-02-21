@@ -16,13 +16,11 @@
 
 package controllers.examples;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import ninja.NinjaTest;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 public class ApplicationControllerTest extends NinjaTest {
     
@@ -37,7 +35,9 @@ public class ApplicationControllerTest extends NinjaTest {
         // /redirect will send a location: redirect in the headers
         String result = ninjaTestBrowser.makeRequest(getServerAddress() + "/");
 
-        assertNotEquals("\"404 : Recurso no encontrado / URI inválida\"", result);
+        //TODO ver la manera que sea fácil agregar más test de cosas importantes que querramos testear en el result
+        //TODO cosas dinamicas NO si no hay que cambiar este test a cada rato y no testearía nada
+        assertTrue(result.contains("<!DOCTYPE html>"));
     }
 }
 

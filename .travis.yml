@@ -15,7 +15,6 @@ fi
 "
 jdk:
     - oraclejdk7
-
 # whitelist
 branches:
   only:
