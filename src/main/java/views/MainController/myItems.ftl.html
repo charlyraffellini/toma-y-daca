@@ -1,0 +1,7 @@
+<h1>Mis Items</h1>
+<hr/>
+<li ng-repeat="item in items">
+    [{{$index + 1}}] <img ng-src="{{item.picture}}"/>  {{item.description}}
+    <br/>
+    <div>{{item.owner.fullname}}</div>
+</li>

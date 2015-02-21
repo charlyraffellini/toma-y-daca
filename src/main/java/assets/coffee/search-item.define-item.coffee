@@ -13,14 +13,3 @@ app.controller 'search-item.define-itemController', ($scope, $state, ownApi, ite
 		ownApi.createItem item
 		$state.go "^"
 
-
-app.config ($stateProvider) ->
-  $stateProvider.state "me",
-    url: "/me"
-    templateUrl: "me"
-    controller: 'meController'
-
-app.controller 'meController', ($scope, $state, ownApi, itemFound) ->
-  $scope.user =
-    name: "rasta"
-    lastname: "palu"
