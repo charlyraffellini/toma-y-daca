@@ -20,7 +20,11 @@ public class UserController extends WebApiController{
         super(userHome);
     }
 
-    public Result addFriend(AddFriendDTO addFriendDTO, Session session){
+    public Result addFriend(AddFriendDTO addFriendDTO, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
         User user = this.getUser(session);
         User friend = this.userHome.get(addFriendDTO.friendId);
 
@@ -30,7 +34,11 @@ public class UserController extends WebApiController{
         return Results.json().render("ok");
     }
 
-    public Result getFriends(Session session){
+    public Result getFriends(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
         User me = this.getUser(session);
         Collection<Long> friendIds = me.friendIds;
         Collection<User> friends = new ArrayList<>();
@@ -41,13 +49,20 @@ public class UserController extends WebApiController{
         return Results.json().render(this.transformUsers(friends));
     }
 
-    public Result getAllUsers(Session session){
+    public Result getAllUsers(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
         Collection<User> users = this.getUsers();
-
         return Results.json().render(this.transformUsers(users));
     }
 
-    public Result getMe(Session session){
+    public Result getMe(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
         return Results.json().render(this.transform(this.getUser(session)));
     }
 }

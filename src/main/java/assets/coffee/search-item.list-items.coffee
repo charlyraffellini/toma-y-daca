@@ -7,7 +7,7 @@ app.config ($stateProvider) ->
 app.factory "itemFound", ->
 	item: null
 
-app.controller 'search-item.list-itemsController', ($scope, meliApi, itemFound) ->
+app.controller 'search-item.list-itemsController', ($scope, meliApi, ownApi, itemFound) ->
 	s = $scope
 	s.totalItems = 0
 	s.itemsPerPage = 50
@@ -24,3 +24,5 @@ app.controller 'search-item.list-itemsController', ($scope, meliApi, itemFound) 
 
 	s.saveItem = (item) =>
 		itemFound.item = item
+
+	s.acceptYumboTrade = ownApi.acceptYumboTrade

@@ -14,22 +14,10 @@ public class ObjectifyProvider implements Provider<Objectify> {
         return ObjectifyService.ofy();
     }
 
-
-
-    static {
-        ObjectifyService.register(PersistentUser.class);
+    public static void setup() {
         ObjectifyService.register(PersistentItem.class);
         ObjectifyService.register(PersistentTrade.class);
-
-        setup();
-    }
-
-
-    public static void setup() {
-
-
-        Objectify ofy = ObjectifyService.ofy();
-
+        ObjectifyService.register(PersistentUser.class);
     }
 
 }

@@ -34,11 +34,11 @@ public class Routes implements ApplicationRoutes {
      * The second argument NinjaModuleDemoRouter contains all routes of a
      * submodule. By simply injecting it we activate the routes.
      * 
-     * @param router
-     *            The default router of this application
+     * @param router The default router of this application
      */
     @Override
-    public void init(Router router) {  
+    public void init(Router router)
+    {
         
         // puts test data into db:
         if (!ninjaProperties.isProd()) {
@@ -98,10 +98,10 @@ public class Routes implements ApplicationRoutes {
         ///////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
-        router.GET().route("/.*").with(MainController.class, "spa");//.with(ApplicationController.class, "index");
-
-
-
+        router.GET().route("/").with(MainController.class, "spa");
+        router.POST().route("/").with(MainController.class, "spa");
+        router.GET().route("/.*").with(ApplicationController.class, "notFoundMessage");
+        //.with(ApplicationController.class, "index");
 
     }
 

@@ -36,7 +36,12 @@ public class ItemsController extends WebApiController{
         this.facebookAPI = facebookAPI;
     }
 
-    public Result createItem(ItemCreateDTO itemCreateDTO, Session session) {
+    public Result createItem(ItemCreateDTO itemCreateDTO, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         User user = this.getUser(session);
 
         Listing listing = this.listingsApi.getListing(itemCreateDTO.meliId);
@@ -51,7 +56,12 @@ public class ItemsController extends WebApiController{
         return Results.json().render(id);
     }
 
-    public Result getAllItems(Session session) {
+    public Result getAllItems(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         User user = this.getUser(session);
 
         Collection<Item> items = this.itemHome.getAllItemsOf(user);
@@ -59,7 +69,12 @@ public class ItemsController extends WebApiController{
         return Results.json().render(this.transformItems(items));
     }
 
-    public Result getFriendItems(@PathParam("friendId") long friendId, Session session) {
+    public Result getFriendItems(@PathParam("friendId") long friendId, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
+
         User user = this.getUser(session);
         User friend = this.userHome.get(friendId);
 
@@ -70,7 +85,11 @@ public class ItemsController extends WebApiController{
         return Results.json().render(this.transformItems(items));
     }
 
-    public Result deleteItem(@PathParam("itemId") int itemId, Session session){
+    public Result deleteItem(@PathParam("itemId") int itemId, Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return this.redirect();
+        }
 
         Item item = itemHome.get(itemId);
         itemHome.delete(item);

@@ -20,13 +20,7 @@ public class StartupActions {
     
     @Start(order=100)
     public void generateDummyDataWhenInTest() {
-        
-        if (ninjaProperties.isDev()) {
-            
-            ObjectifyProvider.setup();
-            
-        }
-        
+        ObjectifyProvider.setup();
     }
 
 }

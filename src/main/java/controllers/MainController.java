@@ -1,7 +1,9 @@
 package controllers;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import ninja.Context;
+import homes.UserHome;
+import ninja.session.Session;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
@@ -9,21 +11,57 @@ import ninja.appengine.AppEngineFilter;
 
 @Singleton
 @FilterWith(AppEngineFilter.class)
-public class MainController {
+public class MainController extends WebApiController
+{
+    @Inject
+    public MainController(UserHome userHome)
+    {
+        super(userHome);
+    }
 
-    public Result spa(Context context) {
+    /**
+     *  Valida la existencia de la sesión de usuario
+     *
+     *  De existir la sesión, se renderiza el HTML correspondiente
+     *   De no existir, redirige a /facelogin
+     *
+     *  @return Result
+     */
+    private Result validateResponse(Session session)
+    {
+        if(this.validateSessionExists(session)){
+            return Results.redirect("/facelogin");
+        }
         return Results.html();
     }
 
-    public Result searchItem(Context context){
-        return Results.html();
+    public Result spa(Session session)
+    {
+        return this.validateResponse(session);
     }
 
-    public Result selectItem(Context context){
-        return Results.html();
+    public Result searchItem(Session session)
+    {
+        return this.validateResponse(session);
     }
 
-    public Result defineItem(Context context){
-        return Results.html();
+    public Result selectItem(Session session)
+    {
+        return this.validateResponse(session);
+    }
+
+    public Result defineItem(Session session)
+    {
+        return this.validateResponse(session);
+    }
+
+    public Result myItems(Session session)
+    {
+        return this.validateResponse(session);
+    }
+
+    public Result listItems(Session session)
+    {
+        return this.validateResponse(session);
     }
 }
