@@ -16,7 +16,7 @@ app.controller 'myItemsController', ($scope, $state, ownApi, itemFound) ->
 	s.deleteItem = (item) =>
 		console.log item
 		ownApi.deleteItem item
-		$state.go "^"
+		$state.reload();
 	
 	ownApi.getMyItems().then (data) =>
 		$scope.items = data
