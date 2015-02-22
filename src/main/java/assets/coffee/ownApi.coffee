@@ -15,9 +15,7 @@ app.factory 'ownApi', ($http, $location) ->
 			$http.post "#{@_getBaseUrl()}/items", body
 
 		deleteItem: (item) =>
-			body =
-				id: item.id
-			$http.delete "#{@_getBaseUrl()}/items", body
+			$http.delete "#{@_getBaseUrl()}/items/"+item.id, body
 
 		acceptYumboTrade: =>
 			body =

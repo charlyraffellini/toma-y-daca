@@ -13,3 +13,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
 		url: "/search-item"
 		templateUrl: "searchItem"
 
+app.factory "itemFound", ->
+	item: null
+
+
