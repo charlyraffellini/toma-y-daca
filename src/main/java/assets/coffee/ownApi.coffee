@@ -12,10 +12,13 @@ app.factory 'ownApi', ($http, $location) ->
 			body =
 				meliId: item.id
 				wallPost: item.wallPost
-			$http.post "#{@_getBaseUrl()}/items", body
+			($http.post("#{@_getBaseUrl()}/items", body)).then (result) =>
+                result.data
+
 
 		deleteItem: (item) =>
-			$http.delete("#{@_getBaseUrl()}/items/#{item.id}")
+			($http.delete "#{@_getBaseUrl()}/items/#{item.id}").then (result) =>
+                result.data
 
 		acceptYumboTrade: =>
 			body =
