@@ -17,7 +17,11 @@ app.controller 'myItemsController', ($scope, $state, ownApi, itemFound) ->
 	s.deleteItem = (item) =>
 		console.log item
 		ownApi.deleteItem(item).then (data) =>
-		    $state.reload()
+		.then ->
+			$timeout (->
+				$state.go '.', {}, reload: true
+				return
+			), 100
 
 	# carga todos mis items en pantalla
 	ownApi.getMyItems().then (data) =>
