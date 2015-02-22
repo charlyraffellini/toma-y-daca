@@ -4,7 +4,7 @@
     <a>[{{$index + 1}}]</a>
     <img ng-src="{{item.picture}}"/>
     <a>{{item.description}}</a>
-    <a ng-click="deleteItem(item)">
+    <a ui-sref="my-items" ng-click="deleteItem(item)">
         <img src="/assets/images/delete.gif"/>
     </a>
     <br/>
