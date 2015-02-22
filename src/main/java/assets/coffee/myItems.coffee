@@ -16,8 +16,7 @@ app.controller 'myItemsController', ($scope, $state, ownApi, itemFound) ->
 	# llama a DELETE /item/{item} y recarga la vista
 	s.deleteItem = (item) =>
 		console.log item
-		ownApi.deleteItem(item).then (data) =>
-		.then ->
+		ownApi.deleteItem(item).then ->
 			$timeout (->
 				$state.go '.', {}, reload: true
 				return
