@@ -4,6 +4,10 @@ app.factory 'ownApi', ($http, $location) ->
 			($http.get "#{@_getBaseUrl()}/items").then (result) =>
 				result.data
 
+		getMe: =>
+            		($http.get "#{@_getBaseUrl()}/me").then (result) =>
+                		result.data
+
 		createItem: (item) =>
 			body =
 				meliId: item.id

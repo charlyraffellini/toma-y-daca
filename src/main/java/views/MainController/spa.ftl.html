@@ -1,5 +1,10 @@
-<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout "Meli List">
+<#import "../layout/defaultLayout.ftl.html" as layout><@layout.myLayout "Home page">
 
-    <div ui-view></div>
+    <div ui-view>
+        <div id="welcomeMsg" ng-controller="spaController">
+            Bienvenido <span class="fullname">{{user.fullname}}</span> a Toma y Daca!
+        </div>
+    </div>
 
 </@layout.myLayout>
+
