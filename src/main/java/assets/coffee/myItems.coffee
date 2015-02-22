@@ -8,10 +8,11 @@ app.config ($stateProvider) ->
 	myItems: (ownApi) ->
 		ownApi.getMyItems()###
 
-app.controller 'myItemsController', ($scope, $state, ownApi) ->
+app.controller 'myItemsController', ($scope, $state, ownApi, itemFound) ->
 	
 	s = $scope
-
+	s.item = itemFound.item
+	
 	s.deleteItem = (item) =>
 		console.log item
 		ownApi.deleteItem item
