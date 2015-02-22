@@ -82,6 +82,9 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/users").with(UserController.class,"getAllUsers");
         router.GET().route("/me").with(UserController.class,"getMe");
 
+        ///////////////////////////////////////////////////////////////////////
+        // Views
+        ///////////////////////////////////////////////////////////////////////
         router.GET().route("/spa").with(MainController.class, "spa");
             router.GET().route("/searchItem").with(MainController.class, "searchItem");
                 router.GET().route("/selectItem").with(MainController.class, "selectItem");

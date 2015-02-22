@@ -3,11 +3,16 @@
 <div>
     <li >
         <img ng-src="{{item.thumbnail}}"/>
-
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-            <a ng-click="saveItem(item)">Guardar Item</a>
-        </button>
-        <input type="checkbox" ng-model="item.wallPost">
-        <span>Notificar en mi muro sobre mi nueva adquisición</span>
+        <div>
+            <div>
+                <input type="checkbox" ng-model="item.wallPost">
+                <span>Quiero notificar en mi muro sobre mi nueva adquisición</span>
+            </div>
+            <div>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <a ng-click="saveItem(item)">Guardar Item</a>
+                </button>
+            </div>
+        </div>
     </li>
 </div>
