@@ -8,7 +8,7 @@ app.config ($stateProvider) ->
 	myItems: (ownApi) ->
 		ownApi.getMyItems()###
 
-app.controller 'myItemsController', ($scope, $state, ownApi, itemFound) ->
+app.controller 'myItemsController', ($scope, $state, $timeout, ownApi, itemFound) ->
 	
 	s = $scope
 	s.item = itemFound.item
