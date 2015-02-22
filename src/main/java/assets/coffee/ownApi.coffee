@@ -14,6 +14,11 @@ app.factory 'ownApi', ($http, $location) ->
 				wallPost: item.wallPost
 			$http.post "#{@_getBaseUrl()}/items", body
 
+		deleteItem: (item) =>
+			body =
+				id: item.id
+			$http.delete "#{@_getBaseUrl()}/items", body
+
 		acceptYumboTrade: =>
 			body =
 				response: "accepted"
