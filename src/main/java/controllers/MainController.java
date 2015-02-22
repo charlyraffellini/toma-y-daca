@@ -55,10 +55,9 @@ public class MainController extends WebApiController
         return this.getHtmlResult(session);
     }
 
-    public Result myItems(Session session)
-    {
-        return this.getHtmlResult(session);
-    }
+    public Result myItems(Session session) { return this.getHtmlResult(session); }
+
+    public Result myFriends(Session session) { return this.getHtmlResult(session); }
 
     public Result listItems(Session session)
     {
