@@ -26,9 +26,17 @@ public class UserController extends WebApiController{
             return this.redirect();
         }
         User user = this.getUser(session);
-        User friend = this.userHome.get(addFriendDTO.friendId);
-
-        user.addFriend(friend.id);
+        
+        /**
+         *  Realmente hace falta ir a la base a buscar el mismo id que le estoy pasando por Post????
+         *  Refactorizar paraque haya alguna validación... sino no tiene sentido
+         * 
+         * User friend = this.userHome.get(addFriendDTO.friendId);
+         * user.addFriend(friend.id);
+         */
+        
+        user.addFriend(addFriendDTO.friendId);
+        
         this.userHome.update(user);
 
         return Results.json().render("ok");
