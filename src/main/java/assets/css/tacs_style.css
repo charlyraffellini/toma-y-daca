@@ -21,6 +21,8 @@ li	{
 .par	{background-color:#FFFFFF;}
 .impar	{background-color:#EFEFEF;}
 
+p.black	{font-weight:bold;}
+
 .list{
      padding: 5px;
 }
@@ -32,6 +34,7 @@ li	{
 
 .listWrapper {
     padding: 5px;
+    height: 200px;
 }
 
 .listWrapper > div{
@@ -45,8 +48,7 @@ li	{
 }
 
 .listButtonBox {
-    float: left;
-    width: 100px;
+    border: none;
     padding: 20px;
 }
 

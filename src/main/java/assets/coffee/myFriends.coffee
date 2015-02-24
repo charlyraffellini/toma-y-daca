@@ -9,15 +9,14 @@ app.config ($stateProvider) ->
 		ownApi.getMyItems()###
 
 app.controller 'myFriendsController', ($scope, $state, ownApi) ->
-    mixed  = {}
-    mixed.friends = []
-    mixed.users = []
     # carga todos mis amigos
     ownApi.getMyFriends().then (data) =>
-        mixed.friends.push(data)
+        $scope.friends = data
+
+app.controller 'myFriendsController', ($scope, $state, ownApi) ->
     # carga todos los usuarios del sistema
     ownApi.getUsers().then (data) =>
-        mixed.users.push(data)
-    $scope.mixed
+        $scope.users = data
+
 
 

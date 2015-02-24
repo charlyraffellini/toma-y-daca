@@ -14,8 +14,9 @@ app.factory 'ownApi', ($http, $location) ->
 			# no debería repetir código, pero JS me supera...
 			($http.get "#{@_getBaseUrl()}/friends").then (result) =>
 				friends = []
+				friend = {}
 				friends = result.data
-				console.debug(friends)
+				console.debug(result.data)
 				for friend of friends
 					($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
 						friend.items.push(result2.data)

@@ -6,13 +6,13 @@
             <p>[{{$index + 1}}]</p>
         </div>
         <div>
-            <p>{{trade.senderItem.owner.fullname}} te ofre este artículo:</p>
-            <img ng-src="{{trade.senderItem.picture}}"/>
-            <p>{{trade.senderItem.description}}</p>
+            <p>{{trade.senderItem.owner.fullname}} te ofrece este artículo:</p>
+            <img class="listImg" ng-src="{{trade.senderItem.picture}}"/>
+            <p class="black">{{trade.senderItem.description}}</p>
         </div>
         <div>
             <p>... a cambio de este artículo tuyo:</p>
-            <img ng-src="{{trade.receiverItem.picture}}"/>
+            <img class="listImg" ng-src="{{trade.receiverItem.picture}}"/>
             <p>{{trade.receiverItem.description}}</p>
         </div>
         <div class="listButtonBox">
