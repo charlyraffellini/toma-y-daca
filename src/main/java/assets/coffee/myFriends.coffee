@@ -13,7 +13,7 @@ app.controller 'myFriendsController', ($scope, $state, ownApi) ->
     ownApi.getMyFriends().then (data) =>
         $scope.friends = data
 
-app.controller 'myFriendsController', ($scope, $state, ownApi) ->
+app.controller 'usersController', ($scope, $state, ownApi) ->
     # carga todos los usuarios del sistema
     ownApi.getUsers().then (data) =>
         $scope.users = data
