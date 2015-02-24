@@ -21,8 +21,16 @@ li	{
 .par	{background-color:#FFFFFF;}
 .impar	{background-color:#EFEFEF;}
 
-.list > img  {
-    max-width: 150px;
-    max-height: 150px;
+.list{
+     padding: 5px;
+}
+
+.list > img ,  .list > div> img {
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.listWrapper {
+    padding: 5px;
 }
 

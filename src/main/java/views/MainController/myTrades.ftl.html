@@ -1,18 +1,27 @@
 <h1>Mis Solicitudes de Trueque</h1>
 <hr/>
 <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="trade in trades">
-    <div>
-        <a>[{{$index + 1}}]</a>
+    <div class="listWrapper">
+        <div>
+            <a>[{{$index + 1}}]</a>
+        </div>
+        <div>
+            <a>{{trade.senderItem.owner.fullname}} te ofre este artículo:</a>
+            <img ng-src="{{trade.senderItem.picture}}"/>
+            <a>{{trade.senderItem.description}}</a>
+        </div>
+        <div>
+            <a>... a cambio de este artículo tuyo:</a>
+            <img ng-src="{{trade.receiverItem.picture}}"/>
+            <a>{{trade.receiverItem.description}}</a>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+                <a ui-sref="search-item.define-item" ng-click="acceptYumboTrade()">Aceptar</a>
+            </button>
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+                <a ui-sref="search-item.define-item" ng-click="">Rechazar</a>
+            </button>
+        </div>
     </div>
-    <div>
-        <a>TOMA</a>
-        <img ng-src="{{trade.senderItem.picture}}"/>
-        <a>{{trade.senderItem.description}}</a>
-    </div>
-    <div>
-        <a>DACA</a>
-        <img ng-src="{{trade.receiverItem.picture}}"/>
-        <a>{{trade.receiverItem.description}}</a>
-    </div>
-    <br/>
 </li>

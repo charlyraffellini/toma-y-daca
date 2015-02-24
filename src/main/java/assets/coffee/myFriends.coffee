@@ -9,11 +9,13 @@ app.config ($stateProvider) ->
 		ownApi.getMyItems()###
 
 app.controller 'myFriendsController', ($scope, $state, ownApi) ->
-	# carga todos mis amigos en pantalla
-	ownApi.getMyFriends().then (data) =>
-		$scope.friends = data
+    mixed  = {}
+    # carga todos mis amigos
+    ownApi.getMyFriends().then (data) =>
+        mixed.friends = data
+    # carga todos los usuarios del sistema
+    ownApi.getUsers().then (data) =>
+        mixed.users = data
+    $scope.mixed
 
-app.controller 'usersController', ($scope, $state, ownApi) ->
-	# carga todos los usuarios del sistema en pantalla
-	ownApi.getUsers().then (data) =>
-		$scope.users = data
+

@@ -11,15 +11,14 @@ app.factory 'ownApi', ($http, $location) ->
 				result.data
 
 		getMyFriendsItems: =>
-		    # no debería repetir código, pero JS me supera...
-			friends = ($http.get "#{@_getBaseUrl()}/friends").then (result) =>
-                result.data
-            # fin código repetido
-
-			for friend of friends
-				($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result) =>
-					friend.items = result.data
-			friends
+			# no debería repetir código, pero JS me supera...
+			($http.get "#{@_getBaseUrl()}/friends").then (result) =>
+				friends = {}
+				friends = result.data
+				for friend of friends
+					($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
+						friend.items = result2.data
+				friends
 
 		getMyTrades: =>
 			($http.get "#{@_getBaseUrl()}/trades").then (result) =>
