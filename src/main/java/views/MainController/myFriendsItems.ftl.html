@@ -4,11 +4,11 @@
     <a>[{{$index + 1}}]</a>
     <a>{{friend.fullname}}</a>
 
-    <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in friend.items">
+    <div class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in friend.items">
         <img ng-src="{{item.picture}}"/>
         <a>{{item.description}}</a>
         <br/>
-    </li>
+    </div>
 
     <br/>
 </li>
