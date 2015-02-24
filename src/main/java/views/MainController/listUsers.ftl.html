@@ -5,7 +5,7 @@
     ser agregados como amigos.
 </p>
 
-<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="usersController" ng-repeat="user in users">
+<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="listUsersController" ng-repeat="user in users">
     <a>[{{$index + 1}}]</a>
     <a>{{user.fullname}}</a>
     <button type="button" class="btn btn-default" aria-label="Left Align">
