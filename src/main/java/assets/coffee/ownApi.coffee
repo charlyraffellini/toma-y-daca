@@ -16,7 +16,7 @@ app.factory 'ownApi', ($http, $location) ->
 				friends = []
 				friend = {}
 				friends = result.data
-				for friend of friends
+				friends.forEach (friend) ->
 					console.debug(friend)
 					friend.items = []
 					($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
