@@ -5,11 +5,13 @@
     ser agregados como amigos.
 </p>
 
-<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="listUsersController" ng-repeat="user in users">
-    <a>[{{$index + 1}}]</a>
-    <a>{{user.fullname}}</a>
-    <button type="button" class="btn btn-default" aria-label="Left Align">
+<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="user in users">
+    <span>[{{$index + 1}}]</span>
+    <span>{{user.fullname}}</span>
+
+    <button type="button" class="btn btn-default" ng-if="user.id != me.id" aria-label="Left Align">
         <a ui-sref="list-users" ng-click="addFriend(user)">Agregar a Amigos</a>
     </button>
+
     <br/>
 </li>

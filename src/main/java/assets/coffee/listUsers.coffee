@@ -20,6 +20,7 @@ app.controller 'listUsersController', ($scope, $state, ownApi, userFound) ->
 
 	# carga todos los usuarios del sistema
 	ownApi.getUsers().then (data) =>
+		console.log data
 		$scope.users = data
 
 

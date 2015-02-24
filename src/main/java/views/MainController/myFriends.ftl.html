@@ -1,8 +1,8 @@
 <h1>Mis Amigos</h1>
 <hr/>
 <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="friend in friends">
-    <p>[{{$index + 1}}]</p>
-    <p>{{friend.fullname}}</p>
+    <span>[{{$index + 1}}]</span>
+    <span>{{friend.fullname}}</span>
     <br/>
 </li>
 
