@@ -1,9 +1,9 @@
 <h1>Mis Items</h1>
 <hr/>
 <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in items">
-    <a>[{{$index + 1}}]</a>
+    <p>[{{$index + 1}}]</p>
     <img ng-src="{{item.picture}}"/>
-    <a>{{item.description}}</a>
+    <p class="description">{{item.description}}</p>
     <a ui-sref="my-items" ng-click="deleteItem(item)">
         <img src="/assets/images/delete.gif"/>
     </a>

@@ -67,4 +67,9 @@ public class MainController extends WebApiController
     {
         return this.getHtmlResult(session);
     }
+
+    public Result listUsers(Session session)
+    {
+        return this.getHtmlResult(session);
+    }
 }

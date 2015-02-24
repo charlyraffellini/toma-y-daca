@@ -5,7 +5,9 @@
 
 <div>
     <li ng-repeat="item in items">
-        [{{$index + 1}}] <img ng-src="{{item.thumbnail}}"/>  {{item.title}}
+        <p>[{{$index + 1}}]</p>
+        <img ng-src="{{item.thumbnail}}"/>
+        <p class="title">{{item.title}}</p>
         <button type="button" class="btn btn-default" aria-label="Left Align">
             <a ui-sref="search-item.define-item" ng-click="saveItem(item)">Seleccionar Item</a>
         </button>

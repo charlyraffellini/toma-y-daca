@@ -16,4 +16,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
 app.factory "itemFound", ->
 	item: null
 
+app.factory "userFound", ->
+	item: null
+
 

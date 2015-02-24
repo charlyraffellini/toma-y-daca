@@ -1,18 +1,8 @@
 <h1>Mis Amigos</h1>
 <hr/>
 <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="friend in friends">
-    <a>[{{$index + 1}}]</a>
-    <a>{{friend.fullname}}</a>
+    <p>[{{$index + 1}}]</p>
+    <p>{{friend.fullname}}</p>
     <br/>
 </li>
 
-<br/>
-<hr>
-<br/>
-<h2>Usuarios Registrados en el Sistema</h2>
-<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="usersController" ng-repeat="user in users">
-    <a>[{{$index + 1}}]</a>
-    <a>{{user.fullname}}</a>
-    <a>Añadir a Amigos</a>
-    <br/>
-</li>

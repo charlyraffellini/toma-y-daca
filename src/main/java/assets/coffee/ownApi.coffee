@@ -46,6 +46,11 @@ app.factory 'ownApi', ($http, $location) ->
 			($http.post("#{@_getBaseUrl()}/items", body)).then (result) =>
 				result.data
 
+		addFriend: (user) =>
+			body =
+				friendId: user.id
+			($http.post("#{@_getBaseUrl()}/friends", body)).then (result) =>
+				result.data
 
 		deleteItem: (item) =>
 			($http.delete "#{@_getBaseUrl()}/items/#{item.id}").then (result) =>
