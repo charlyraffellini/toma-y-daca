@@ -55,9 +55,20 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
         this.ofy.delete().entity(this.transform(entity)).now();
     }
 
+
+    /**
+     * toma el ID más grande del mismo tipo y le suma 1
+     *
+     * @return long
+     */
     public long getNextId() {
-        // toma el ID más grande del mismo tipo y le suma 1
-        return this.transform(this.getLoader().order("-__key__").first().now()).id + 1;
+        long maxId = 0;
+
+        if(this.getLoader().count() > 0 ){
+            maxId = this.transform(this.getLoader().order("-__key__").first().now()).id;
+        }
+
+        return  (maxId + 1);
     }
 
     protected LoadType<TPersistent> getLoader(){
