@@ -6,10 +6,10 @@
 </p>
 
 <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="usersController" ng-repeat="user in users">
-    <p>[{{$index + 1}}]</p>
-    <p>{{user.fullname}}</p>
+    <a>[{{$index + 1}}]</a>
+    <a>{{user.fullname}}</a>
     <button type="button" class="btn btn-default" aria-label="Left Align">
-        <a ui-sref="users" ng-click="addFriend(user)">Agregar a Amigos</a>
+        <a ui-sref="list-users" ng-click="addFriend(user)">Agregar a Amigos</a>
     </button>
     <br/>
 </li>

@@ -6,7 +6,7 @@
 
     <div class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in friend.items">
         <img ng-src="{{item.picture}}"/>
-        <p class="description">{{item.description}}</p>
+        <a class="description">{{item.description}}</a>
         <button type="button" class="btn btn-default" aria-label="Left Align">
             <a ng-click="">Solicitar Trueque</a>
         </button>
