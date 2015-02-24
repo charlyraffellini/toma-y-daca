@@ -15,8 +15,8 @@ app.factory 'ownApi', ($http, $location) ->
 			($http.get "#{@_getBaseUrl()}/friends").then (result) =>
 				friends = []
 				friends = result.data
+				console.debug(friends)
 				for friend of friends
-				    friend.items = []
 					($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
 						friend.items.push(result2.data)
 				friends
