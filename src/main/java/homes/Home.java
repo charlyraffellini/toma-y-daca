@@ -43,6 +43,10 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
         return this.transform(asdfgh);
     }
 
+    public boolean exists(long entityId) {
+        return (this.get(entityId) != null);
+    }
+
     public void update(TEntity entity) {
         this.ofy.save().entity(this.transform(entity)).now();
     }
@@ -52,7 +56,7 @@ public abstract class Home<TEntity extends DomainObject, TPersistent> {
     }
 
     public long getNextId() {
-        // toma el ID más grande del tipo Item y le suma 1
+        // toma el ID más grande del mismo tipo y le suma 1
         return this.transform(this.getLoader().order("-__key__").first().now()).id + 1;
     }
 

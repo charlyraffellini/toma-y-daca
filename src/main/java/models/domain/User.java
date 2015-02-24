@@ -2,7 +2,6 @@ package models.domain;
 
 import com.googlecode.objectify.annotation.*;
 import models.domain.exceptions.NotFriendUserException;
-import models.domain.exceptions.UserDoesntHaveItemException;
 
 import java.util.ArrayList;
 import java.util.Collection;

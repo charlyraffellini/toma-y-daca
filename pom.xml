@@ -145,7 +145,6 @@
                         <jvmFlag>-XX:+UseTLAB</jvmFlag>
                         <jvmFlag>-XX:+UseConcMarkSweepGC</jvmFlag>
                         <jvmFlag>-XX:+CMSClassUnloadingEnabled</jvmFlag>
-                        <jvmFlag>-XX:+CMSPermGenSweepingEnabled</jvmFlag>
                     </jvmFlags>
                 </configuration>
             </plugin>

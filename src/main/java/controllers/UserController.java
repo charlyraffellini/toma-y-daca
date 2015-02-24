@@ -10,6 +10,7 @@ import ninja.session.Session;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import models.domain.exceptions.UserDoesntExistsInDBException;
 
 /**
  * Created by Federico on 01/11/14.
@@ -27,16 +28,11 @@ public class UserController extends WebApiController{
         }
         User user = this.getUser(session);
         
-        /**
-         *  Realmente hace falta ir a la base a buscar el mismo id que le estoy pasando por Post????
-         *  Refactorizar paraque haya alguna validación... sino no tiene sentido
-         * 
-         * User friend = this.userHome.get(addFriendDTO.friendId);
-         * user.addFriend(friend.id);
-         */
+        //valido que exista el usuario como registrado en la base
+        if( !this.userHome.exists(addFriendDTO.friendId))
+            throw new UserDoesntExistsInDBException(addFriendDTO.friendId);
         
         user.addFriend(addFriendDTO.friendId);
-        
         this.userHome.update(user);
 
         return Results.json().render("ok");
