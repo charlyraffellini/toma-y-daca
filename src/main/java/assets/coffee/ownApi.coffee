@@ -11,14 +11,19 @@ app.factory 'ownApi', ($http, $location) ->
 				result.data
 
 		getMyFriendsItems: =>
-            friends = @getMyFriends()
-            ownApp = this
-            friends.forEach (friend) ->
-                console.debug(friend)
-                friend.items = []
-                ($http.get "#{ownApp._getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
-                    friend.items.push(result2.data)
-            friends
+			# no debería repetir código, pero JS me supera...
+			($http.get "#{@_getBaseUrl()}/friends").then (result) =>
+				friends = result.data
+				ownApp = this
+				friends.forEach (friend) ->
+					console.debug(friend)
+					friend.items = []
+					($http.get "#{ownApp._getBaseUrl()}/friends/#{friend.id}/items").then (result2) =>
+						friend.items.push(result2.data)
+				friends
+
+
+
 
 		getMyTrades: =>
 			($http.get "#{@_getBaseUrl()}/trades").then (result) =>
