@@ -12,10 +12,10 @@ app.controller 'myFriendsController', ($scope, $state, ownApi) ->
     mixed  = {}
     # carga todos mis amigos
     ownApi.getMyFriends().then (data) =>
-        mixed.friends = data
+        mixed.friends.push(data)
     # carga todos los usuarios del sistema
     ownApi.getUsers().then (data) =>
-        mixed.users = data
+        mixed.users.push(data)
     $scope.mixed
 
 

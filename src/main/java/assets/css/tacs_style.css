@@ -25,12 +25,28 @@ li	{
      padding: 5px;
 }
 
-.list > img ,  .list > div> img {
+.list > img ,  .listImg{
     max-width: 120px;
     max-height: 120px;
 }
 
 .listWrapper {
     padding: 5px;
+}
+
+.listWrapper > div{
+    float: left;
+    max-width: 350px;
+    border-color: navy;
+    border-width: 1px;
+    float: left;
+    border-right: 1px solid navy;
+    padding-right: 18px;
+}
+
+.listButtonBox {
+    float: left;
+    width: 100px;
+    padding: 20px;
 }
 
