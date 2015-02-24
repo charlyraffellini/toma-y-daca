@@ -22,7 +22,7 @@ public class TradeHome extends Home<TradeRequest,PersistentTrade> {
     protected PersistentTrade transform(TradeRequest trade) {
         PersistentTrade persTrade = new PersistentTrade();
 
-        persTrade.id=trade.id;
+        persTrade.id = trade.id;
 
         persTrade.receiverItemId = trade.receiverItem.id;
         persTrade.receiverUserId = trade.receiverUser.id;
@@ -37,13 +37,13 @@ public class TradeHome extends Home<TradeRequest,PersistentTrade> {
     protected TradeRequest transform(PersistentTrade persistentTrade) {
         TradeRequest trade = new TradeRequest();
 
-        trade.id=persistentTrade.id;
+        trade.id = persistentTrade.id;
 
         trade.receiverItem = itemHome.get(persistentTrade.receiverItemId);
-        trade.receiverUser=userHome.get(persistentTrade.receiverUserId);
+        trade.receiverUser = userHome.get(persistentTrade.receiverUserId);
 
         trade.senderItem = itemHome.get(persistentTrade.senderItemId);
-        trade.senderUser=userHome.get(persistentTrade.senderUserId);
+        trade.senderUser = userHome.get(persistentTrade.senderUserId);
 
         return trade;
     }

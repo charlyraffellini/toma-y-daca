@@ -23,9 +23,9 @@ public class UserHome extends Home<User,PersistentUser> {
     @Override
     protected User transform(PersistentUser persistentUser) {
         User user = new User();
-        user.id=persistentUser.id;
-        user.oauth_token=persistentUser.oauth_token;
-        user.fullname=persistentUser.fullname;
+        user.id = persistentUser.id;
+        user.oauth_token = persistentUser.oauth_token;
+        user.fullname = persistentUser.fullname;
         for (Long friendId : persistentUser.friendIds) {
             user.addFriend(friendId);
         }

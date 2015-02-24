@@ -5,3 +5,13 @@
     <a>{{friend.fullname}}</a>
     <br/>
 </li>
+
+<br/>
+<hr>
+<br/>
+<h2>Usuarios Registrados en el Sistema</h2>
+<li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-controller="usersController" ng-repeat="user in {{users}}">
+    <a>[{{$index + 1}}]</a>
+    <a>{{user.fullname}}</a>
+    <br/>
+</li>

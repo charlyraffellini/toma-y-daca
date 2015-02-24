@@ -1,3 +1,5 @@
+# Nuestra Propia API Local
+
 app.factory 'ownApi', ($http, $location) ->
 	class OwnApi
 		getMyItems: =>
@@ -8,21 +10,36 @@ app.factory 'ownApi', ($http, $location) ->
 			($http.get "#{@_getBaseUrl()}/friends").then (result) =>
 				result.data
 
+		getMyFriendsItems: =>
+			friends = this.getMyFriends()
+			for friend of friends
+				($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result) =>
+					friend.items = result.data
+			friends
+
+		getMyTrades: =>
+			($http.get "#{@_getBaseUrl()}/trades").then (result) =>
+				result.data
+
 		getMe: =>
-            		($http.get "#{@_getBaseUrl()}/me").then (result) =>
-                		result.data
+            ($http.get "#{@_getBaseUrl()}/me").then (result) =>
+                result.data
+
+        getUsers: =>
+            ($http.get "#{@_getBaseUrl()}/users").then (result) =>
+                result.data
 
 		createItem: (item) =>
 			body =
 				meliId: item.id
 				wallPost: item.wallPost
 			($http.post("#{@_getBaseUrl()}/items", body)).then (result) =>
-                result.data
+				result.data
 
 
 		deleteItem: (item) =>
 			($http.delete "#{@_getBaseUrl()}/items/#{item.id}").then (result) =>
-                result.data
+				result.data
 
 		acceptYumboTrade: =>
 			body =
