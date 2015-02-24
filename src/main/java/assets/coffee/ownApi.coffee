@@ -11,7 +11,7 @@ app.factory 'ownApi', ($http, $location) ->
 				result.data
 
 		getMyFriendsItems: =>
-			friends = this.getMyFriends()
+			friends = OwnApi.prototype.getMyFriends()
 			for friend of friends
 				($http.get "#{@_getBaseUrl()}/friends/#{friend.id}/items").then (result) =>
 					friend.items = result.data
