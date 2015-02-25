@@ -9,7 +9,7 @@
     <span>[{{$index + 1}}]</span>
     <span>{{user.fullname}}</span>
 
-    <button type="button" class="btn btn-default" ng-if="user.id != me.id" aria-label="Left Align">
+    <button type="button" class="btn btn-default" ng-if="(user.id != me.id) && user.canBeAdded">
         <a ui-sref="list-users" ng-click="addFriend(user)">Agregar a Amigos</a>
     </button>
 
