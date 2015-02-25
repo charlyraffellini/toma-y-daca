@@ -6,12 +6,16 @@ app = angular.module 'app',[
 
 
 app.config ($stateProvider, $urlRouterProvider) ->
-	$urlRouterProvider.when "/", "/search-item"
 	$urlRouterProvider.when "/search-item", "/search-item/list-items"
+	$urlRouterProvider.when "/my-friends-items", "/my-friends-items/list-items"
 
 	$stateProvider.state "search-item",
 		url: "/search-item"
 		templateUrl: "searchItem"
+
+	$stateProvider.state "my-friends-items",
+    	url: "/my-friends-items"
+    	templateUrl: "myFriendsItems"
 
 app.factory "itemFound", ->
 	item: null

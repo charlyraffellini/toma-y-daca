@@ -3,10 +3,7 @@ app.config ($stateProvider) ->
 		url: "/my-items"
 		templateUrl: "myItems"
 		controller: 'myItemsController'
-###resolve:
-	ownApi: 'ownApi'
-	myItems: (ownApi) ->
-		ownApi.getMyItems()###
+
 
 app.controller 'myItemsController', ($scope, $state, $timeout, ownApi, itemFound) ->
 	

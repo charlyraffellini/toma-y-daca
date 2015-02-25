@@ -3,10 +3,7 @@ app.config ($stateProvider) ->
 		url: "/list-users"
 		templateUrl: "listUsers"
 		controller: 'listUsersController'
-###resolve:
-	ownApi: 'ownApi'
-	myItems: (ownApi) ->
-		ownApi.getMyItems()###
+
 
 app.controller 'listUsersController', ($scope, $state, $timeout, ownApi) =>
 	
@@ -18,7 +15,7 @@ app.controller 'listUsersController', ($scope, $state, $timeout, ownApi) =>
 		$timeout (->
 			$state.go '.', {}, reload: true
 			return
-		), 1100
+		), 1000
 
 	# carga todos los usuarios del sistema
 	ownApi.getUsers().then (data) =>

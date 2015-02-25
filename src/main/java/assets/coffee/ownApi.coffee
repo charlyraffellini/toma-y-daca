@@ -24,26 +24,31 @@ app.factory 'ownApi', ($http, $location) ->
 				friends
 
 
-
-
-
 		getMyTrades: =>
 			($http.get "#{@_getBaseUrl()}/trades").then (result) =>
 				result.data
 
 		getMe: =>
-            ($http.get "#{@_getBaseUrl()}/me").then (result) =>
-                result.data
+			($http.get "#{@_getBaseUrl()}/me").then (result) =>
+				result.data
 
-        getUsers: =>
-            ($http.get "#{@_getBaseUrl()}/users").then (result) =>
-                result.data
+		getUsers: =>
+			($http.get "#{@_getBaseUrl()}/users").then (result) =>
+				result.data
 
 		createItem: (item) =>
 			body =
 				meliId: item.id
 				wallPost: item.wallPost
 			($http.post("#{@_getBaseUrl()}/items", body)).then (result) =>
+				result.data
+
+		createTrade: (item) =>
+			body =
+				friendId:item.id,
+				friendItemId:item.owner.id,
+				userItemId:'0'
+			($http.post("#{@_getBaseUrl()}/trades", body)).then (result) =>
 				result.data
 
 		addFriend: (user) =>

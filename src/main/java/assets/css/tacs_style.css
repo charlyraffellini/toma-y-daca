@@ -28,8 +28,8 @@ p.black	{font-weight:bold;}
 }
 
 .list > img ,  .listImg{
-    max-width: 120px;
-    max-height: 120px;
+    max-width: 90px;
+    max-height: 90px;
 }
 
 .listWrapper {

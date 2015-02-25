@@ -1,17 +1,3 @@
 <h1>Items de Mis Amigos</h1>
 <hr/>
-<li class="list" ng-repeat="friend in friends">
-    <span>[{{$index + 1}}]</span>
-    <span>{{friend.fullname}}</span>
-
-    <div class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in friend.items">
-        <img ng-src="{{item.picture}}"/>
-        <span class="description">{{item.description}}</span>
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-            <a ng-click="">Solicitar Trueque</a>
-        </button>
-        <br/>
-    </div>
-
-    <br/>
-</li>
+<div ui-view></div>

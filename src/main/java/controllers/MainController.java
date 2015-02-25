@@ -72,4 +72,14 @@ public class MainController extends WebApiController
     {
         return this.getHtmlResult(session);
     }
+
+    public Result tradeItem(Session session)
+    {
+        return this.getHtmlResult(session);
+    }
+
+    public Result listFriendsItems(Session session)
+{
+    return this.getHtmlResult(session);
+}
 }

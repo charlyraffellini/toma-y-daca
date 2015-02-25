@@ -4,12 +4,12 @@ app.config ($stateProvider) ->
 		templateUrl: "myTrades"
 		controller: 'myTradesController'
 
-###resolve:
-	ownApi: 'ownApi'
-	myItems: (ownApi) ->
-		ownApi.getMyItems()###
 
 app.controller 'myTradesController', ($scope, $state, ownApi) ->
+	s = $scope
+
 	# carga todos mis trueques en pantalla
 	ownApi.getMyTrades().then (data) =>
 		$scope.trades = data
+
+	s.acceptYumboTrade = ownApi.acceptYumboTrade

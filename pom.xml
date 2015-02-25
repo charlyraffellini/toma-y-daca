@@ -135,7 +135,7 @@
                     <jvmFlags>
                         <!-- see also: http://blog.cwill-dev.com/2011/11/22/grails-java-lang-outofmemoryerror-permgen-space/ -->
                         <jvmFlag>-Xms512m</jvmFlag>
-                        <jvmFlag>-Xmx1024m</jvmFlag>
+                        <jvmFlag>-Xmx512m</jvmFlag>
                         <jvmFlag>-XX:PermSize=256m</jvmFlag>
                         <jvmFlag>-XX:MaxPermSize=512m</jvmFlag>
                         <jvmFlag>-XX:+UseParNewGC</jvmFlag>
@@ -146,6 +146,8 @@
                         <jvmFlag>-XX:+UseConcMarkSweepGC</jvmFlag>
                         <jvmFlag>-XX:+CMSClassUnloadingEnabled</jvmFlag>
                     </jvmFlags>
+                    <address>0.0.0.0</address>
+                    <host>0.0.0.0</host>
                 </configuration>
             </plugin>
 

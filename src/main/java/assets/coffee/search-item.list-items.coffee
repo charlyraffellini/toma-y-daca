@@ -21,5 +21,3 @@ app.controller 'search-item.list-itemsController', ($scope, meliApi, ownApi, ite
 
 	s.saveItem = (item) =>
 		itemFound.item = item
-
-	s.acceptYumboTrade = ownApi.acceptYumboTrade

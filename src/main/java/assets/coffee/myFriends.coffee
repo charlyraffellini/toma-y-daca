@@ -3,10 +3,6 @@ app.config ($stateProvider) ->
 		url: "/my-friends"
 		templateUrl: "myFriends"
 		controller: 'myFriendsController'
-###resolve:
-	ownApi: 'ownApi'
-	myItems: (ownApi) ->
-		ownApi.getMyItems()###
 
 app.controller 'myFriendsController', ($scope, $state, ownApi) ->
     # carga todos mis amigos

@@ -86,14 +86,18 @@ public class Routes implements ApplicationRoutes {
         // Views
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/spa").with(MainController.class, "spa");
-            router.GET().route("/searchItem").with(MainController.class, "searchItem");
-                router.GET().route("/selectItem").with(MainController.class, "selectItem");
-                router.GET().route("/defineItem").with(MainController.class, "defineItem");
+        router.GET().route("/searchItem").with(MainController.class, "searchItem");
+            router.GET().route("/selectItem").with(MainController.class, "selectItem");
+            router.GET().route("/defineItem").with(MainController.class, "defineItem");
+        router.GET().route("/listUsers").with(MainController.class, "listUsers");
         router.GET().route("/myItems").with(MainController.class, "myItems");
         router.GET().route("/myFriends").with(MainController.class, "myFriends");
         router.GET().route("/myFriendsItems").with(MainController.class, "myFriendsItems");
+            router.GET().route("/listFriendsItems").with(MainController.class, "listFriendsItems");
+            router.GET().route("/tradeItem").with(MainController.class, "tradeItem");
         router.GET().route("/myTrades").with(MainController.class, "myTrades");
-        router.GET().route("/listUsers").with(MainController.class, "listUsers");
+
+
 
         ///////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
