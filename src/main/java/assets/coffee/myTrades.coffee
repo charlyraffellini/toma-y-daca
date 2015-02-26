@@ -11,12 +11,20 @@ app.controller 'myTradesController', ($scope, $state, ownApi) ->
 	s.responseTradeAccepted = (trade) =>
 		console.log trade
 		trade.response = "accepted"
-		ownApi.responseTrade trade
+		ownApi.responseTrade trade =>
+			$timeout (->
+				$state.go '.', {}, reload: true
+				return
+			), 900
 
 	s.responseTradeRejected = (trade) =>
 		console.log trade
 		trade.response = "rejected"
-		ownApi.responseTrade trade
+		ownApi.responseTrade trade =>
+			$timeout (->
+				$state.go '.', {}, reload: true
+				return
+			), 900
 
 	# carga todos mis trueques en pantalla
 	ownApi.getMyTrades().then (data) =>
