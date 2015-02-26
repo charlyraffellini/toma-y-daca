@@ -11,7 +11,7 @@ app.controller 'listUsersController', ($scope, $state, $timeout, ownApi) =>
 
 	# función que llama a POST /friend
 	s.addFriend = (user) =>
-		ownApi.addFriend user =>
+		ownApi.addFriend(user).then =>
             $timeout (->
                 $state.go '.', {}, reload: true
                 return
