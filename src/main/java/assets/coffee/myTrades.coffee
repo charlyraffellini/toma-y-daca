@@ -5,7 +5,7 @@ app.config ($stateProvider) ->
 		controller: 'myTradesController'
 
 
-app.controller 'myTradesController', ($scope, $state, ownApi) ->
+app.controller 'myTradesController', ($scope, $state, $timeout, ownApi) ->
 	s = $scope
 
 	s.responseTradeAccepted = (trade) =>
