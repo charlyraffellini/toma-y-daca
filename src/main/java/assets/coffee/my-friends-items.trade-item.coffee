@@ -4,11 +4,17 @@ app.config ($stateProvider) ->
 		templateUrl: "tradeItem"
 		controller: 'my-friends-items.trade-itemController'
 
-app.controller 'my-friends-items.trade-itemController', ($scope, $state, ownApi, itemFound) ->
-	s = $scope
-	s.item = itemFound.item
 
-	s.createTrade = (item) =>
+app.controller 'my-friends-items.trade-itemController', ($scope, $state, ownApi, itemTrade) ->
+	s = $scope
+	s.friendItem = itemTrade.item
+	console.log itemTrade
+
+	# carga todos mis items en pantalla
+	ownApi.getMyItems().then (data) =>
+		$scope.items = data
+
+	s.createTrade = (friendItem,item) =>
     	console.log item
-    	ownApi.createTrade item
+    	ownApi.createTrade(friendItem,item)
     	$state.go "^"

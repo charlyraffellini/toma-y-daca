@@ -17,7 +17,4 @@ app.config ($stateProvider, $urlRouterProvider) ->
     	url: "/my-friends-items"
     	templateUrl: "myFriendsItems"
 
-app.factory "itemFound", ->
-	item: null
-
 

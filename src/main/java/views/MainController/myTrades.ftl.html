@@ -16,11 +16,15 @@
             <p>{{trade.receiverItem.description}}</p>
         </div>
         <div class="listButtonBox">
-            <button type="button" class="btn btn-default" aria-label="Left Align">
-                <a ui-sref="search-item.define-item" ng-click="acceptYumboTrade()">Aceptar</a>
+            <div>
+                <input type="checkbox" ng-model="trade.wallPost">
+                <span>Quiero notificar en mi muro sobre mi nueva adquisición</span>
+            </div>
+            <button type="button" class="btn btn-default">
+                <a ui-sref="my-trades" ng-click="responseTradeAccepted(trade)">Aceptar</a>
             </button>
-            <button type="button" class="btn btn-default" aria-label="Left Align">
-                <a ui-sref="search-item.define-item" ng-click="">Rechazar</a>
+            <button type="button" class="btn btn-default">
+                <a ui-sref="my-trades" ng-click="responseTradeRejected(trade)">Rechazar</a>
             </button>
         </div>
     </div>

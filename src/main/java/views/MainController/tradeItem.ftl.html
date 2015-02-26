@@ -1,13 +1,20 @@
-<h3>Solicitar trueque de {{item.title}}</h3>
+<h3>Solicitar trueque de... </h3>
 <div>
-    <li >
-        <img ng-src="{{item.thumbnail}}"/>
+    <li class="list">
+        <span class="description">{{friendItem.description}}</span>
+        <img ng-src="{{friendItem.picture}}"/>
+        <span>... del usuario: {{friendItem.owner.fullname}} </span>
+    </li>
+    <span>... por:</span>
+    <li class="list {{$index % 2 == 0 ? 'impar' : 'par'}}" ng-repeat="item in items">
+        <span>[{{$index + 1}}]</span>
+        <img ng-src="{{item.picture}}"/>
+        <span class="description">{{item.description}}</span>
         <div>
-            <div>
-                <button type="button" class="btn btn-default">
-                    <a ng-click="createTrade(item)">Enviar Solicitud</a>
-                </button>
-            </div>
+            <button type="button" class="btn btn-default">
+                <a ng-click="createTrade(friendItem, item)">Enviar Solicitud</a>
+            </button>
         </div>
+        <br/>
     </li>
 </div>

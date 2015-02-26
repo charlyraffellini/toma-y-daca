@@ -4,6 +4,9 @@ app.config ($stateProvider) ->
 		templateUrl: "selectItem"
 		controller: 'search-item.list-itemsController'
 
+app.factory "itemFound", ->
+	item: null
+
 app.controller 'search-item.list-itemsController', ($scope, meliApi, ownApi, itemFound) ->
 	s = $scope
 	s.totalItems = 0

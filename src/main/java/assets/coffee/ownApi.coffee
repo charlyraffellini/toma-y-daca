@@ -43,11 +43,18 @@ app.factory 'ownApi', ($http, $location) ->
 			($http.post("#{@_getBaseUrl()}/items", body)).then (result) =>
 				result.data
 
-		createTrade: (item) =>
+		responseTrade: (trade) =>
 			body =
-				friendId:item.id,
-				friendItemId:item.owner.id,
-				userItemId:'0'
+				response: trade.response
+				wallPost: trade.wallPost
+			$http.put "#{@_getBaseUrl()}/trades/#{trade.id}", body
+
+		createTrade: (friendItem,item) =>
+			body =
+				friendId: friendItem.owner.id
+				friendItemId: friendItem.id
+				userItemId: item.id
+			console.debug(body)
 			($http.post("#{@_getBaseUrl()}/trades", body)).then (result) =>
 				result.data
 
@@ -60,12 +67,6 @@ app.factory 'ownApi', ($http, $location) ->
 		deleteItem: (item) =>
 			($http.delete "#{@_getBaseUrl()}/items/#{item.id}").then (result) =>
 				result.data
-
-		acceptYumboTrade: =>
-			body =
-				response: "accepted"
-				wallPost: true
-			$http.put "#{@_getBaseUrl()}/trades/1", body
 
 		_getBaseUrl: ->
 			$location.protocol() + "://" + $location.host() + ":" + $location.port()

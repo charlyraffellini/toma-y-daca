@@ -4,7 +4,10 @@ app.config ($stateProvider) ->
 		templateUrl: "listFriendsItems"
 		controller: 'my-friends-items.list-itemsController'
 
-app.controller 'my-friends-items.list-itemsController', ($scope, $state, ownApi, itemFound) ->
+app.factory "itemTrade", ->
+	item: null
+
+app.controller 'my-friends-items.list-itemsController', ($scope, $state, ownApi, itemTrade) ->
 	s = $scope
 
 	# carga todos mis amigos con sus items
@@ -12,5 +15,5 @@ app.controller 'my-friends-items.list-itemsController', ($scope, $state, ownApi,
 		$scope.friends = data
 
 	s.tradeItem = (item) =>
-    	itemFound.item = item
+		itemTrade.item = item
 

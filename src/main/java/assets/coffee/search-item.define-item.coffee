@@ -6,6 +6,7 @@ app.config ($stateProvider) ->
 
 app.controller 'search-item.define-itemController', ($scope, $state, ownApi, itemFound) ->
 	s = $scope
+	console.log itemFound
 	s.item = itemFound.item
 
 	s.saveItem = (item) =>
